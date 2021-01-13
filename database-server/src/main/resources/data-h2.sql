@@ -36,3 +36,10 @@ INSERT INTO product_category(category_id, category_name, category_description, c
 INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100002, 'Toys', 'an object for a child to play with', 'https://taiken.co/uploads/2019/05/Kawaii_Culture_001-1200x1047.jpg');
 
 ALTER sequence category_id_sequence restart with 100007;
+
+INSERT INTO cart VALUES (100001);
+INSERT INTO cart VALUES (100002);
+INSERT INTO cart VALUES (100003);
+INSERT INTO cart VALUES (100004);
+INSERT INTO cart VALUES (100005);
+INSERT INTO cart VALUES (100006);

@@ -13,9 +13,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -37,6 +39,7 @@ public class Cart {
   private Long cartId;
 
   @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "userDetailsId", referencedColumnName = "userDetails", foreignKey = @ForeignKey(name = "FK_cart_id"))
   @MapsId
   @JsonIgnore
   private UserDetails userDetails;
