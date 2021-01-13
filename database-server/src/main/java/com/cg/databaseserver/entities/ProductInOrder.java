@@ -28,14 +28,14 @@ public class ProductInOrder {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-//    @JoinColumn(name = "cart_id")
+    // @JoinColumn(name = "cart_id")
     @JsonIgnore
     private Cart cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     @JsonIgnore
-    private Order orderMain;
+    private OrderMain orderMain;
     private String productId;
     private String productName;
     private String productDescription;

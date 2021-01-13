@@ -30,16 +30,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Order  {
+public class OrderMain {
 
     @Id
     @SequenceGenerator(name = "order_id_sequence", initialValue = 100000, allocationSize = 1)
     @GeneratedValue(generator = "order_id_sequence", strategy = GenerationType.SEQUENCE)
     private Long orderId;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderMain")
     private Set<ProductInOrder> products = new HashSet<>();
 
     private String buyerEmail;
