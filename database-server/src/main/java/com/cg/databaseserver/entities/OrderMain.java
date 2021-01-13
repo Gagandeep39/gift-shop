@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.cg.databaseserver.enums.OrderStatus;
+import com.cg.databaseserver.enums.PaymentType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,9 +49,17 @@ public class OrderMain {
     private String buyerName;
     private String buyerPhone;
     private String buyerAddress;
+    private String buyerState;
+    private String buyerCity;
+    private String buyerPincode;
     private BigDecimal orderAmount;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
+
+    private Long paymentId;
 
 }
