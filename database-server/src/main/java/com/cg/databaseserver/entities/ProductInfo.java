@@ -40,7 +40,7 @@ public class ProductInfo {
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
     @ManyToOne
-    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId", foreignKey = @ForeignKey(name = "FK_category_ID"))
+    @JoinColumn(name = "product_category", referencedColumnName = "categoryId", foreignKey = @ForeignKey(name = "FK_category_ID"))
     private ProductCategory productCategory;
 
 }
