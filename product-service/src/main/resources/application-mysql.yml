@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/drinkanddelight
+    url: jdbc:mysql://localhost:3306/giftshop
     username: root
     password: root
     # Enables execution of data-mysql.sql script
