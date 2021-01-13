@@ -1,3 +1,10 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-13 22:34:14
+ * @modify date 2021-01-13 22:34:14
+ * @desc [description]
+ */
 package com.cg.productservice.services;
 
 import java.util.List;
@@ -10,7 +17,7 @@ public interface ProductInfoService {
 
   public List<ProductInfo> fetchAll();
 
-  public List<ProductInfo> fetchByCategory();
+  public List<ProductInfo> fetchByCategory(String category);
 
   public ProductInfo fetchById();
 
@@ -23,5 +30,5 @@ public interface ProductInfoService {
   public ProductInfo add(ProductInfoDto productInfoDto);
 
   public ProductInfo update(ProductInfoDto productInfoDto);
-  
+
 }
