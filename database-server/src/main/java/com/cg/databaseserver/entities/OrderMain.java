@@ -62,4 +62,6 @@ public class OrderMain {
 
     private Long paymentId;
 
+    private Long userId;
+
 }

@@ -5,7 +5,7 @@
  * @modify date 2021-01-13 17:47:37
  * @desc [description]
  */
-package com.cg.cartservice.entities;
+package com.cg.orderservice.entities;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -22,8 +22,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
-import com.cg.cartservice.enums.OrderStatus;
-import com.cg.cartservice.enums.PaymentType;
+import com.cg.orderservice.enums.OrderStatus;
+import com.cg.orderservice.enums.PaymentType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -63,5 +63,4 @@ public class OrderMain {
     private Long paymentId;
 
     private Long userId;
-
 }

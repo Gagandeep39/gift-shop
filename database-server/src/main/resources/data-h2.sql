@@ -55,7 +55,7 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 ALTER sequence product_id_sequence restart with 100026;
 
 -- ORDER Table
-INSERT INTO ORDER_MAIN (order_id, buyer_address, buyer_city, buyer_email, buyer_pincode, buyer_state, buyer_name, buyer_phone, order_amount, order_status, payment_type, payment_id) VALUES (100001, 'Powai, near D-Mart', 'Mumbai', 'gagandeep@mail.com', '400072', 'Maharashtra', 'Gagandeep Singh', '8419969059', 4000, 'DELIVERED', 'ONLINE', '100001');
+INSERT INTO ORDER_MAIN (order_id, buyer_address, buyer_city, buyer_email, buyer_pincode, buyer_state, buyer_name, buyer_phone, order_amount, order_status, payment_type, payment_id, user_id) VALUES (100001, 'Powai, near D-Mart', 'Mumbai', 'gagandeep@mail.com', '400072', 'Maharashtra', 'Gagandeep Singh', '8419969059', 4000, 'DELIVERED', 'ONLINE', '100001', 100001);
 -- TODO Add 4 more items
 
 -- To be purchased product
