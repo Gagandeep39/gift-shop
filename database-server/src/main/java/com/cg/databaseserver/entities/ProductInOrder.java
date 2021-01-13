@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class ProductInOrder {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    // @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "cartId", referencedColumnName = "userDetailsId", foreignKey = @ForeignKey(name = "FK_product_cart_ID"))
     @JsonIgnore
     private Cart cart;
 
