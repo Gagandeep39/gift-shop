@@ -37,7 +37,7 @@ public class ProductInOrder {
     @Id
     @SequenceGenerator(name = "product_order_id_sequence", initialValue = 100000, allocationSize = 1)
     @GeneratedValue(generator = "product_order_id_sequence", strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long productInOrderId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "cartId", referencedColumnName = "userDetailsId", foreignKey = @ForeignKey(name = "FK_product_cart_ID"))

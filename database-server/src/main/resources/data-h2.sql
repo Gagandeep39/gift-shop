@@ -53,3 +53,6 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 -- TODO Add 9 more items
 
 ALTER sequence category_id_sequence restart with 1000011;
+
+INSERT INTO product_in_order (product_in_order_id, cart_id, order_id, product_id, product_name, product_description, product_icon, product_category, product_price, product_stock) VALUES (100001, 100001, null, 100001, 'Teddy Bear', 'A stuffed toy is a toy doll with an outer fabric sewn from a textile and stuffed with flexible material', 'https://www.wellandgood.com/wp-content/uploads/2019/01/Stocksy-Teddy-Bear-Marta-Locklear.jpg', 'Toys', 1200, 1);
+
