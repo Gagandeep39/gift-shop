@@ -37,7 +37,7 @@ public class ProductInfo {
     @Id
     @SequenceGenerator(name = "product_id_sequence", initialValue = 100000, allocationSize = 1)
     @GeneratedValue(generator = "product_id_sequence", strategy = GenerationType.SEQUENCE)
-    private String productId;
+    private Long productId;
     private String productName;
     private BigDecimal productPrice;
     private Integer productStock;

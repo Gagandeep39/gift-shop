@@ -28,7 +28,7 @@ public class ProductCategory  {
     @Id
     @SequenceGenerator(name = "category_id_sequence", initialValue = 100000, allocationSize = 1)
     @GeneratedValue(generator = "category_id_sequence", strategy = GenerationType.SEQUENCE)
-    private Integer categoryId;
+    private Long categoryId;
     private String categoryName;
     private String categoryDescription;
     private String categoryImageUrl;
