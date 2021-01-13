@@ -1,3 +1,10 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-13 19:18:26
+ * @modify date 2021-01-13 19:18:26
+ * @desc [description]
+ */
 package com.cg.databaseserver.entities;
 
 import java.math.BigDecimal;

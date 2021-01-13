@@ -1,3 +1,10 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-13 19:18:34
+ * @modify date 2021-01-13 19:18:34
+ * @desc [description]
+ */
 package com.cg.databaseserver.entities;
 
 import javax.persistence.CascadeType;
