@@ -39,7 +39,7 @@ public class Cart {
   @OneToOne(fetch = FetchType.LAZY)
   @MapsId
   @JsonIgnore
-  private User user;
+  private UserDetails userDetails;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "cart")
   private Set<ProductInOrder> products = new HashSet<>();

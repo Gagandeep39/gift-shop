@@ -48,7 +48,7 @@ public class UserDetails {
   @MapsId
   private User user;
 
-  @OneToOne(mappedBy = "user_details", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToOne(mappedBy = "userDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   @JsonIgnore // fix bi-direction toString() recursion problem
   private Cart cart;
 
