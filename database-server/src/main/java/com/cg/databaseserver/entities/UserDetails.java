@@ -1,12 +1,16 @@
 package com.cg.databaseserver.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,12 +33,12 @@ public class UserDetails {
   private String emailId;
   @Column(length = 10)
   private String phoneNo;
-  
+
   @Column(length = 80)
   private String securityQuestion;
   @Column(length = 10)
   private String securityAnswer;
-  
+
   @OneToOne
   @JoinColumn(name = "addressId", referencedColumnName = "addressId", foreignKey = @ForeignKey(name = "FK_ADDR_ID"))
   private Address address;
@@ -43,5 +47,9 @@ public class UserDetails {
   @JoinColumn(name = "userDetailsId", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "FK_USER_ID"))
   @MapsId
   private User user;
+
+  @OneToOne(mappedBy = "user_details", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JsonIgnore // fix bi-direction toString() recursion problem
+  private Cart cart;
 
 }
