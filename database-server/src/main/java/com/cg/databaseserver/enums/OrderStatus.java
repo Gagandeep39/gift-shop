@@ -9,5 +9,5 @@ package com.cg.databaseserver.enums;
 
 public enum OrderStatus {
 
-  NEW, FINISHED, CANCELLED;
+  NEW, DELIVERED, CANCELLED;
 }
