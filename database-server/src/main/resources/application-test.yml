@@ -20,7 +20,7 @@ logging:
   level:
     # Info level for all java logs
     ROOT: info
-    # debug leavel for all user defined classes log
+    # Switch to debug level to view custom logs
     com.cg: info
 # Disables discovery CLient eatures - Use this or Confi file
 eureka:

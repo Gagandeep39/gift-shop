@@ -21,6 +21,7 @@ spring:
 logging:
   level:
     ROOT: info
+    # Switch to debug level to view custom logs
     com.cg: info
 # Disables discovery CLient eatures - Use this or Confi file
 eureka:
