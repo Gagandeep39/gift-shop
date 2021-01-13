@@ -8,6 +8,6 @@
 package com.cg.databaseserver.enums;
 
 public enum ProductStatus {
-  UP, DOWN;
+  ENABLED, DISABLED;
 
 }
