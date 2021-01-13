@@ -45,7 +45,6 @@ public class CartController {
   }
 
   // Merge local cart with Server cart
-  // Can be done later
   @PostMapping("/merge")
   public Cart mergeCart(CartDto cartDto) {
     return null;
