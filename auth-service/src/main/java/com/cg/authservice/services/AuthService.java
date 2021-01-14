@@ -7,10 +7,17 @@
  */
 package com.cg.authservice.services;
 
+import java.util.Map;
+
+import com.cg.authservice.dto.ForgotPasswordRequest;
 import com.cg.authservice.dto.LoginRequest;
 import com.cg.authservice.dto.LoginResponse;
 
 public interface AuthService {
   LoginResponse login(LoginRequest loginRequest);
+
+  Map<String, String> fetchSecurityQuestionForUser(String username);
+
+  Map<String, String> validateAnswerAndUpdate(ForgotPasswordRequest forgotPasswordRequest);
 
 }
