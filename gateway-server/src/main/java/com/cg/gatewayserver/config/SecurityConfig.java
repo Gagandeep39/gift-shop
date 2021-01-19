@@ -1,3 +1,10 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-19 23:10:56
+ * @modify date 2021-01-19 23:10:56
+ * @desc Security Configuration
+ */
 package com.cg.gatewayserver.config;
 
 import com.cg.gatewayserver.security.CustomAuthenticationEntryPoint;
