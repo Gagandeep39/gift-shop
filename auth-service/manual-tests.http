@@ -1,3 +1,6 @@
+GET http://localhost:9100/
+Authorization: Bearer [Fetch Token from login]
+
 ################## Login Endpoint Tests ##################
 
 ### Login Valid
