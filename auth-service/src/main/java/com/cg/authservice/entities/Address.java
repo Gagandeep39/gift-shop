@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,12 +35,20 @@ public class Address {
   @GeneratedValue(generator = "address_id_sequence", strategy = GenerationType.SEQUENCE)
   private Long addressId;
   @Column(length = 50)
+  @Size(min = 3, max = 50)
+  @NotBlank
   private String city;
   @Column(length = 50)
+  @Size(min = 3, max = 50)
+  @NotBlank
   private String state;
   @Column(length = 50)
+  @Size(min = 3, max = 50)
+  @NotBlank
   private String area;
+  @Size(min = 6, max = 6, message = "Must be 6 digits only")
   @Column(length = 6)
+  @NotBlank
   private String pincode;
 
 }
