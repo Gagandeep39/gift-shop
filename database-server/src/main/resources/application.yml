@@ -4,7 +4,7 @@ spring:
   application:
     name: database-server
   profiles:
-    active: test
+    active: dev
 
 eureka:
   client:
