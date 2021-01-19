@@ -9,18 +9,28 @@ package com.cg.authservice.services.implementation;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.cg.authservice.dto.ForgotPasswordRequest;
 import com.cg.authservice.dto.LoginRequest;
 import com.cg.authservice.dto.LoginResponse;
+import com.cg.authservice.dto.RegisterRequest;
+import com.cg.authservice.dto.UpdateRequest;
+import com.cg.authservice.dto.UserDetailsDto;
+import com.cg.authservice.entities.Cart;
 import com.cg.authservice.entities.User;
 import com.cg.authservice.entities.UserDetails;
 import com.cg.authservice.exceptions.InvalidCredentialException;
+import com.cg.authservice.exceptions.UserNotFoundException;
+import com.cg.authservice.repositories.AddressRepository;
+import com.cg.authservice.repositories.CartRepository;
 import com.cg.authservice.repositories.UserDetailsRepository;
 import com.cg.authservice.repositories.UserRepository;
 import com.cg.authservice.security.JwtProvider;
 import com.cg.authservice.services.AuthService;
+import com.cg.authservice.util.UserDetailsMapper;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,9 +43,11 @@ import lombok.AllArgsConstructor;
 public class AuthServiceImpl implements AuthService {
 
   private final UserRepository userRepository;
+  private final AddressRepository addressRepository;
   private final UserDetailsRepository userDetailsRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtProvider jwtProvider;
+  private final CartRepository cartRepository;
 
   @Override
   public LoginResponse login(LoginRequest loginRequest) {
@@ -84,6 +96,57 @@ public class AuthServiceImpl implements AuthService {
 
   private String encodePassword(String password) {
     return passwordEncoder.encode(password);
+  }
+
+  @Override
+  public UserDetailsDto register(RegisterRequest registerRequest) {
+    checkIfUsernameExists(registerRequest.getUsername());
+    registerRequest.setPassword(encodePassword(registerRequest.getPassword()));
+    registerRequest.setAddress(addressRepository.save(registerRequest.getAddress()));
+    UserDetails userDetails = userDetailsRepository.save(UserDetailsMapper.registerToUserDetails(registerRequest));
+    userDetails.setCart(createCartForUser(userDetails));
+    return UserDetailsMapper.userDetailsToDto(userDetailsRepository.save(userDetails));
+  }
+
+  private Cart createCartForUser(UserDetails userDetails) {
+    Cart cart  = new Cart();
+    cart.setUserDetails(userDetails);
+    return cartRepository.save(cart);
+  }
+
+  @Transactional(readOnly = true)
+  public boolean checkIfUsernameExists(String username) {
+    if (!userRepository.existsByUsername(username)) return false;
+    else throw new InvalidCredentialException("username", "Username already exists");
+  }
+
+  @Override
+  public Map<String, String> updateUser(UpdateRequest updateRequest) {
+    UserDetails details = userDetailsRepository.findById(updateRequest.getUserId()).orElseThrow(() -> new UserNotFoundException());
+    updateRequest.getAddress().setAddressId(details.getAddress().getAddressId());
+    addressRepository.save(updateRequest.getAddress());
+    userDetailsRepository.save(UserDetailsMapper.updateRequestToUserDetails(updateRequest));
+    return Collections.singletonMap("userId", updateRequest.getUserId().toString());
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<UserDetailsDto> fetchAllUsers() {
+    return userDetailsRepository
+      .findAll()
+      .stream()
+      .map(UserDetailsMapper::userDetailsToDto)
+      .collect(Collectors.toList());
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public UserDetailsDto fetchUserById(Long id) {
+    return UserDetailsMapper.userDetailsToDto(
+      userDetailsRepository
+        .findById(id)
+        .orElseThrow(() -> new InvalidCredentialException("userId", "ID " + id + " doesn't exist"))
+    );
   }
 
 }
