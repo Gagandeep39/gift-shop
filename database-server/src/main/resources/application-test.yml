@@ -22,6 +22,9 @@ logging:
     ROOT: info
     # Switch to debug level to view custom logs
     com.cg: info
+    org.hibernate.SQL: debug
+  file:
+    name: ./src/main/resources/logfile-test.log
 # Disables discovery CLient eatures - Use this or Confi file
 eureka:
   client:
