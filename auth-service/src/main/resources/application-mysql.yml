@@ -18,6 +18,9 @@ logging:
     ROOT: info
     # debug level for all use defined code logs
     com.cg: info
+    org.hibernate.SQL: debug
+  file:
+    name: ./src/main/resources/logfile-mysql.log
 # Enables discovery CLient eatures - Use this or Confi file
 eureka:
   client:

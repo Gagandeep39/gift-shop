@@ -20,6 +20,9 @@ logging:
     ROOT: info
     # debug leavel for all user defined classes log
     com.cg: info
+    org.hibernate.SQL: debug
+  file:
+    name: ./src/main/resources/logfile-dev.log
 
 # Enables discovery CLient eatures
 eureka:
