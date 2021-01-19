@@ -45,3 +45,6 @@ build/
 **/.aws
 **/dist
 **/.metadata
+
+### Others ###
+*.log
