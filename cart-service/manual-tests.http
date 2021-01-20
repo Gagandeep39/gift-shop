@@ -15,6 +15,40 @@ PUT http://localhost:9300/cart/100001
 Content-Type: application/json
 
 {
-  "productId": "100001",
+  "productId": "100002",
   "quantity": 9
+}
+
+### Delete from cart
+DELETE http://localhost:9300/cart/delete/100001/100001
+
+### Merge - Invalid data
+POST http://localhost:9300/cart/merge/100001
+Content-Type: application/json
+
+{
+  "itemDtoList": [
+    {
+      "productId": "100009",
+      "quantity": 9
+    }
+  ]
+}
+
+
+### Merge 
+POST http://localhost:9300/cart/merge/100001
+Content-Type: application/json
+
+{
+  "itemDtoList": [
+    {
+      "productId": "100002",
+      "quantity": 9
+    },
+    {
+      "productId": "100001",
+      "quantity": 9
+    }
+  ]
 }
