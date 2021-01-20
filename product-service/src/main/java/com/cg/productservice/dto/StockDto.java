@@ -7,7 +7,7 @@
  */
 package com.cg.productservice.dto;
 
-import java.math.BigDecimal;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class StockDto {
 
-  private Long productId;
-  private BigDecimal quantity;
-  
+	@NotNull
+	private Long productId;
+	
+	@NotNull
+	private Integer quantity;
+
 }
