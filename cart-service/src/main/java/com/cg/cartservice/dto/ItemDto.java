@@ -7,7 +7,7 @@
  */
 package com.cg.cartservice.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import lombok.AllArgsConstructor;
@@ -21,10 +21,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class ItemDto {
 
-	@NotBlank
+	@NotNull
 	private Long productId;
 	@PositiveOrZero
-	@NotBlank
+	@NotNull
 	private int quantity;
 
 }
