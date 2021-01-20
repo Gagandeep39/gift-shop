@@ -68,4 +68,9 @@ public class CartController {
     return cart;
   }
 
+  @GetMapping("/user/{userId}")
+  public Cart fetchCartByUserId(@PathVariable Long userId) {
+    return cartService.fetchByUserId(userId);
+  }
+
 }

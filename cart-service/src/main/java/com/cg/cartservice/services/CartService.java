@@ -23,4 +23,6 @@ public interface CartService {
   // Can be done later
   Cart mergeCart(CartDto cartDto,Long id);
 
+  Cart fetchByUserId(Long userId);
+
 }

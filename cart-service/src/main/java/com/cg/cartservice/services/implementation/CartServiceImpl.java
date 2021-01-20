@@ -216,4 +216,9 @@ public class CartServiceImpl implements CartService {
 		return userCart;
 	}
 
+	@Override
+	public Cart fetchByUserId(Long userId) {
+		return cartRepo.findByUserDetails_UserDetailsId(userId).orElseThrow(() -> new RuntimeException());
+	}
+
 }
