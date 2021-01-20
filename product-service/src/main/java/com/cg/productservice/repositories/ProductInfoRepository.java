@@ -14,5 +14,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductInfoRepository extends JpaRepository<ProductInfo, Long> {
-  
+
+	// List<ProductInfo> fetchProductByCategory(String category);
 }
