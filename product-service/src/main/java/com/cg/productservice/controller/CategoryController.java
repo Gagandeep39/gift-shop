@@ -17,7 +17,7 @@ import com.cg.productservice.services.ProductCategoryService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 @AllArgsConstructor
 public class CategoryController {
 	
