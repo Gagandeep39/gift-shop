@@ -51,17 +51,17 @@ public class ProductController {
   }
 
   @PutMapping("/stock")
-  public ProductInfo updateStock(@RequestBody StockDto stockDto) {
+  public ProductInfo updateStock(@Valid @RequestBody StockDto stockDto) {
     return productInfoService.updateStock(stockDto);
   }
 
   @PutMapping("/increment")
-  public ProductInfo increaseStock(StockDto stockDto) {
+  public ProductInfo increaseStock(@Valid @RequestBody StockDto stockDto) {
     return null;
   }
 
   @PostMapping("/decrement")
-  public ProductInfo reduceStock(StockDto stockDto) {
+  public ProductInfo reduceStock(@Valid @RequestBody StockDto stockDto) {
     return null;
   }
 
