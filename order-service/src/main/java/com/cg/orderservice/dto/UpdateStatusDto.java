@@ -21,7 +21,7 @@ public class UpdateStatusDto {
   private Long orderId;
 
   @NotNull
-  @Pattern(regexp = "^(DELIVERED,CANCELLED,OUT_FOR_DELIVERY,DISPATCHED)$", message = "Invalid Order Status")
+  @Pattern(regexp = "^(DELIVERED|CANCELLED|OUT_FOR_DELIVERY|DISPATCHED)$", message = "Invalid Order Status")
   private String status;
 
 }
