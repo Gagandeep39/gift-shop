@@ -7,6 +7,9 @@
  */
 package com.cg.orderservice.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +19,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateStatusDto {
   private Long orderId;
+
+  @NotNull
+  @Pattern(regexp = "^(DELIVERED,CANCELLED,OUT_FOR_DELIVERY,DISPATCHED)$", message = "Invalid Order Status")
   private String status;
+
 }
