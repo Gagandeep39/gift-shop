@@ -7,6 +7,8 @@
  */
 package com.cg.cartservice.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import com.cg.cartservice.dto.CartDto;
@@ -47,7 +49,7 @@ public class CartController {
   }
 
   @PostMapping("/checkout/{id}") // working
-  public OrderMain checkOut(@PathVariable Long id) {
+  public Map<String, String> checkOut(@PathVariable Long id) {
     return order.checkOut(id);
   }
 
