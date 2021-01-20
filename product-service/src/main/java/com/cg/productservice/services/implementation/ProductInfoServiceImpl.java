@@ -10,14 +10,17 @@ package com.cg.productservice.services.implementation;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.cg.productservice.dto.ProductInfoDto;
+import com.cg.productservice.dto.ProductInfoRequest;
 import com.cg.productservice.dto.StockDto;
+import com.cg.productservice.entities.ProductCategory;
 import com.cg.productservice.entities.ProductInfo;
-import com.cg.productservice.exception.ProductIdNotFoundException;
+import com.cg.productservice.exception.CategoryNotFoundException;
+import com.cg.productservice.exception.ProductNotFoundException;
 import com.cg.productservice.repositories.ProductInfoRepository;
+import com.cg.productservice.services.ProductCategoryService;
 import com.cg.productservice.services.ProductInfoService;
 import com.cg.productservice.util.ProductMapper;
 
@@ -29,6 +32,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
 	@Autowired
 	private ProductInfoRepository productInfoRepository;
+	@Autowired
+	private ProductCategoryService categoryService;
 
 	@Override
 	public List<ProductInfo> fetchAll() {
@@ -37,13 +42,14 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
 	@Override
 	public List<ProductInfo> fetchByCategory(String category) {
-		List<ProductInfo> allProducts = this.productInfoRepository.findAll();
-		return allProducts.stream().filter(c -> c.getProductCategory().getCategoryName().equals(category)).collect(Collectors.toList());
+		List<ProductInfo> products =  productInfoRepository.findAll().stream().filter(c -> c.getProductCategory().getCategoryName().equals(category)).collect(Collectors.toList());
+		if (products.size() == 0) throw new CategoryNotFoundException("category", "Invalid category");
+		return products;
 	}
 
 	@Override
 	public ProductInfo fetchById(Long id) {
-		return this.productInfoRepository.findById(id).orElseThrow(() ->  new ProductIdNotFoundException("Product id", "Not Found"));
+		return this.productInfoRepository.findById(id).orElseThrow(() ->  new ProductNotFoundException("product", "Not Found"));
 	}
 	
 	@Override
@@ -51,29 +57,27 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		this.productInfoRepository.deleteById(productId);
 		return true;
 	}
-	
+
 	@Override
-	public ProductInfoDto update(ProductInfoDto productInfoDto) {
-		productInfoRepository.save(ProductMapper.DtoToEntity(productInfoDto));
-		return productInfoDto;
+	public ProductInfoDto update(ProductInfoRequest productInfoDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	@Override
+	public ProductInfoDto add(ProductInfoRequest request) {
+		ProductInfo info = ProductMapper.DtoToEntity(request);
+		ProductCategory category = categoryService.findById(request.getCategoryId());
+		info.setProductCategory(category);
+		return ProductMapper.EntityToDto(productInfoRepository.save(info));
 	}
 
-	
-//   ****** NOT WORKING Category null*********
-	@Override
-	public Map<String, String> add(ProductInfoDto productInfoDto) {
-		System.out.println(productInfoDto);
-		return Collections.singletonMap("productId",
-				productInfoRepository.save(ProductMapper.DtoToEntity(productInfoDto)).getProductId().toString());
-	}
-
-	
-	//            ****************     NOT WORKING         ********************
 	@Override
 	public ProductInfo updateStock(StockDto stockDto) {
-		productInfoRepository.save(ProductMapper.stockDtoToEntity(stockDto));
-		return productInfoRepository.findById(stockDto.getProductId()).orElseThrow(() ->  new RuntimeException("error"));
-		 
+		ProductInfo productInfo = productInfoRepository.findById(stockDto.getProductId()).orElseThrow(() ->  new ProductNotFoundException("product", "Not Found"));
+		productInfo.setProductStock(stockDto.getQuantity());
+		return productInfoRepository.save(productInfo);
 	}
 
 	@Override

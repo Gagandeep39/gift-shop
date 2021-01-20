@@ -8,9 +8,9 @@
 package com.cg.productservice.services;
 
 import java.util.List;
-import java.util.Map;
 
 import com.cg.productservice.dto.ProductInfoDto;
+import com.cg.productservice.dto.ProductInfoRequest;
 import com.cg.productservice.dto.StockDto;
 import com.cg.productservice.entities.ProductInfo;
 
@@ -30,8 +30,8 @@ public interface ProductInfoService {
 
   public boolean removeProduct(Long productId);
 
-  public Map<String, String> add(ProductInfoDto productInfoDto);
+  public ProductInfoDto add(ProductInfoRequest productInfoDto);
 
-  public ProductInfoDto update(ProductInfoDto productInfoDto);
+  public ProductInfoDto update(ProductInfoRequest productInfoDto);
 
 }
