@@ -19,7 +19,13 @@ public interface OrderService {
   List<OrderMain> fetchAll();
 
   OrderMain findByOrderId(Long orderId);
+  
+  OrderMain addOrderMain(OrderMain order);
+  
+  OrderMain deleteByOrderId(UpdateStatusDto updateStatusDto);
 
-  OrderMain updateStatus(UpdateStatusDto updateStatusDto);
+  OrderMain OrderStatus(UpdateStatusDto updateStatusDto);
+
+  
 
 }
