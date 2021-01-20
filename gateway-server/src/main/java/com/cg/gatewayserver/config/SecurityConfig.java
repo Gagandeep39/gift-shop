@@ -13,6 +13,7 @@ import com.cg.gatewayserver.security.JwtProvider;
 import com.cg.gatewayserver.services.implementation.JwtUserDetailsServiceImpl;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
       .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and() // Required for accessing prpotected routes
       .csrf().disable()
       .authorizeRequests().antMatchers("/auth-service/**", "/actuator/**", "/**/h2/**", "/**/swagger*/**", "/**/v2/api-docs").permitAll()
+      .antMatchers(HttpMethod.GET, "/product-service/**").permitAll()
       .anyRequest().authenticated()
       .and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
