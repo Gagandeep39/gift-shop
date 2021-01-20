@@ -54,13 +54,13 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public Cart addToCart(ItemDto itemDto, Long userId) {
 
+		Cart cart = userRepo.findById(userId).orElseThrow(() -> new CustomException("user", "Invalid User ID")).getCart();
 		ProductInfo productInfo = productInfoRepo.findByproductId(itemDto.getProductId())
 			.orElseThrow(() -> new CustomException("productInfo", "Invalid Product ID"));
 		if (productInfo.getProductStock() < itemDto.getQuantity())
 			throw new CustomException("cart", "Insufficient product stock for product ID: " + itemDto.getProductId());
 
 		ProductInOrder productInOrder;
-		Cart cart = userRepo.findById(userId).orElseThrow(() -> new CustomException("user", "Invalid User ID")).getCart();
 		Optional<ProductInOrder> old = cart.getProducts().stream().filter(e -> e.getProductId().equals(itemDto.getProductId())).findFirst();
 		if (old.isPresent()){
 			productInOrder = old.get();
