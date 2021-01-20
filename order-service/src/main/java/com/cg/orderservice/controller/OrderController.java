@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class OrderController {
   @Autowired
-  OrderService service;
+  private OrderService service;
 
-  @GetMapping("/user/{id}")
+  @GetMapping("/user/{userId}")
   List<OrderMain> fetchByUserId(@PathVariable Long userId) {
     return service.fetchByUserId(userId);
   }
@@ -39,13 +39,13 @@ public class OrderController {
   }
 
   @GetMapping("/{id}")
-  OrderMain findByOrderId(@PathVariable Long orderId) {
-    return service.findByOrderId(orderId);
+  OrderMain findByOrderId(@PathVariable Long id) {
+    return service.findByOrderId(id);
   }
 
   @PostMapping
   OrderMain updateOrderStatus(UpdateStatusDto updateStatusDto) {
-    return service.OrderStatus(updateStatusDto);
+    return service.updateOrderStatus(updateStatusDto);
   }
 
 }
