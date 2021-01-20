@@ -27,10 +27,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
 @NoArgsConstructor
+@ToString(exclude = { "userDetails", "products" })  // Fixes stack overflow
 public class Cart {
 
   @Id
