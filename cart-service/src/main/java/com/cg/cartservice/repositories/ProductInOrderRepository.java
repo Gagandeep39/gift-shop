@@ -14,5 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductInOrderRepository extends JpaRepository<ProductInOrder, Long> {
+	
+	public ProductInOrder findByProductId(long productId);
   
 }
