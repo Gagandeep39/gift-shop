@@ -1,13 +1,11 @@
 /**
  * @author Gagandeep Singh
  * @email singh.gagandeep3911@gmail.com
- * @create date 2021-01-09 11:59:11
- * @modify date 2021-01-09 11:59:11
+ * @create date 2021-01-09 11:59:42
+ * @modify date 2021-01-09 11:59:42
  * @desc [description]
  */
 package com.cg.cartservice.exception;
-
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,10 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ErrorResponse {
-
-	private int status;
-	private String message;
-	private long timeStamp;
-	private List<FieldErrorResponse> errors;
+public class FieldErrorResponse {
+  private String field;
+  private String message;
 }
