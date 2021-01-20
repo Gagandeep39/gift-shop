@@ -32,7 +32,7 @@ public class DeliveryHistoryScheduledService {
   private final DeliveryHistoryRepository deliveryRepository;
   private final OrderMainRepository orderRepository;
 
-  @Scheduled(cron = "10 * * * * *")
+  @Scheduled(cron = "60 * * * * *")
   public void autoApproveLeave() {
     // leaveService.scheduledUpdate();
     log.info("Executed at " + new Date());
