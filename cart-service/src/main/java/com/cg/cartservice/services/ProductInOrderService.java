@@ -10,7 +10,7 @@ public interface ProductInOrderService {
 
   ProductInOrder update(ProductInOrder productInOrder);
 
-  ProductInOrder delete(Long id);
+  Long delete(Long id);
 
   List<ProductInOrder> fetchByOrderId(Long id);
 

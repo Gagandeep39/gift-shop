@@ -17,10 +17,10 @@ public interface CartService {
 
   Cart addToCart(ItemDto itemDto, Long id);
 
-  Cart deleteFromCart(ItemDto itemDto, Long id);
+  Cart deleteFromCart(Long productId, Long id);
 
   // Merge local cart with Server cart
   // Can be done later
-  public Cart mergeCart(CartDto cartDto);
+  Cart mergeCart(CartDto cartDto,Long id);
 
 }
