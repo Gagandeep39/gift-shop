@@ -28,7 +28,7 @@ public class SwaggerConfig {
       .title("Gift Shop - Auth Service")
       .description("Perform Auth operation such as login, register, change password etc.")
       .license("Apache 2.0")
-      .licenseUrl("https://github.com/Gagandeep39/drink-and-delight")
+      .licenseUrl("https://github.com/Gagandeep39/gift-shop")
       .version("1.0")
       .contact(
         new Contact(
