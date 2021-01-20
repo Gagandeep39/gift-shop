@@ -1,0 +1,188 @@
+### Fetch all products
+GET http://localhost:9200/products
+
+### Fetch Products by Category 
+GET http://localhost:9200/products/category/Toys
+
+### Fetch Products by Category - Invalid
+GET http://localhost:9200/products/category/test
+
+### Fetch Product by ID
+GET http://localhost:9200/products/100001
+
+### Fetch Product by ID - Invalid
+GET http://localhost:9200/products/999
+
+### Update Stocks - Invalid
+PUT http://localhost:9200/products/stock
+Content-Type: application/json
+
+{
+  "productId": "100001",
+  "quantity": 999
+}
+
+### Create Product - Invalid
+POST http://localhost:9200/products
+Content-Type: application/json
+
+{
+  "productName": "Dummy Product",
+  "productDescription": "This is a product description",
+  "productPrice": 1999,
+  "productStock": 888,
+  "productIcon": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg"
+}
+
+### Create Product - Invalid
+POST http://localhost:9200/products
+Content-Type: application/json
+
+{
+  "productName": "Dummy Product",
+  "productDescription": "This is a product description",
+  "productPrice": 1999,
+  "productStock": 888,
+  "productIcon": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg",
+  "categoryId": 100999,
+  "productStatus": "ENABLED"
+}
+
+### Create Product - Valid
+POST http://localhost:9200/products
+Content-Type: application/json
+
+{
+  "productName": "Dummy Product",
+  "productDescription": "This is a product description",
+  "productPrice": 1999,
+  "productStock": 888,
+  "productIcon": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg",
+  "categoryId": 100001,
+  "productStatus": "ENABLED"
+}
+
+### Update Product - Null id
+PUT http://localhost:9200/products
+Content-Type: application/json
+
+{
+  "productName": "Dummy Product",
+  "productDescription": "This is a product description",
+  "productPrice": 1999,
+  "productStock": 888,
+  "productIcon": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg",
+  "categoryId": 100001,
+  "productStatus": "ENABLED"
+}
+
+### Update Product - InValid id
+PUT http://localhost:9200/products
+Content-Type: application/json
+
+{
+  "productId": 100099,
+  "productName": "Dummy Product",
+  "productDescription": "This is a product description",
+  "productPrice": 1999,
+  "productStock": 888,
+  "productIcon": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg",
+  "categoryId": 100001,
+  "productStatus": "ENABLED"
+}
+
+### Update Product - InValid id
+PUT http://localhost:9200/products
+Content-Type: application/json
+
+{
+  "productId": 100001,
+  "productName": "Dummy Product",
+  "productDescription": "This is a product description",
+  "productPrice": 1999,
+  "productStock": 88,
+  "productIcon": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg",
+  "categoryId": 100001,
+  "productStatus": "ENABLED"
+}
+
+### Increment Stock - Invalid
+PUT http://localhost:9200/products/increment
+Content-Type: application/json
+
+{
+  "productId": 100099,
+  "quantity": 122
+}
+
+### Increment Stock - InValid
+PUT http://localhost:9200/products/increment
+Content-Type: application/json
+
+{
+  "productId": 100001,
+  "quantity": -3
+}
+
+
+### Increment Stock - Valid
+PUT http://localhost:9200/products/increment
+Content-Type: application/json
+
+{
+  "productId": 100001,
+  "quantity": 12
+}
+
+### Decrement stock - Very high value
+PUT http://localhost:9200/products/decrement
+Content-Type: application/json
+
+{
+  "productId": 100001,
+  "quantity": 2000
+}
+
+### Decrement stock
+PUT http://localhost:9200/products/decrement
+Content-Type: application/json
+
+{
+  "productId": 100001,
+  "quantity": 12
+}
+
+
+### Fetch All categories
+
+GET http://localhost:9200/categories
+
+### Create Category - Invalid data
+POST http://localhost:9200/categories
+Content-Type: application/json
+
+{
+  "categoryDescription": "This is a dummy category description",
+  "categoryImageUrl": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg"
+}
+
+### Create category - Valid Data
+POST http://localhost:9200/categories
+Content-Type: application/json
+
+{
+  "categoryName": "",
+  "categoryDescription": "This is a dummy category description",
+  "categoryImageUrl": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg"
+}
+
+
+### Create category - Valid Data
+POST http://localhost:9200/categories
+Content-Type: application/json
+
+{
+  "categoryName": "Dummy Category",
+  "categoryDescription": "This is a dummy category description",
+  "categoryImageUrl": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg"
+}
