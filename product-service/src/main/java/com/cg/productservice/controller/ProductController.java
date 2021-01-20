@@ -8,7 +8,6 @@
 package com.cg.productservice.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -18,6 +17,7 @@ import com.cg.productservice.dto.StockDto;
 import com.cg.productservice.entities.ProductInfo;
 import com.cg.productservice.services.ProductInfoService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +32,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/products")
 @AllArgsConstructor
+@CrossOrigin
 public class ProductController {
 
   private final ProductInfoService productInfoService;
@@ -57,13 +58,13 @@ public class ProductController {
   }
 
   @PutMapping("/increment")
-  public ProductInfo increaseStock(@Valid @RequestBody StockDto stockDto) {
-    return null;
+  public ProductInfoDto increaseStock(@Valid @RequestBody StockDto stockDto) {
+    return productInfoService.increaseStock(stockDto);
   }
 
-  @PostMapping("/decrement")
-  public ProductInfo reduceStock(@Valid @RequestBody StockDto stockDto) {
-    return null;
+  @PutMapping("/decrement")
+  public ProductInfoDto reduceStock(@Valid @RequestBody StockDto stockDto) {
+    return productInfoService.reduceStock(stockDto);
   }
 
   @DeleteMapping("/{productId}")
