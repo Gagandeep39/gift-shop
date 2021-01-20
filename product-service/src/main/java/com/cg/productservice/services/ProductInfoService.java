@@ -22,9 +22,9 @@ public interface ProductInfoService {
 
   public ProductInfo fetchById(Long id);
 
-  public ProductInfo increaseStock(StockDto stockDto);
+  public ProductInfoDto increaseStock(StockDto stockDto);
 
-  public ProductInfo reduceStock(StockDto stockDto);
+  public ProductInfoDto reduceStock(StockDto stockDto);
   
   public ProductInfo updateStock(StockDto stockDto);
 

@@ -83,15 +83,20 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	}
 
 	@Override
-	public ProductInfo increaseStock(StockDto stockDto) {
-		// Auto-generated method stub
-		return null;
+	public ProductInfoDto increaseStock(StockDto stockDto) {
+		ProductInfo productInfo = productInfoRepository.findById(stockDto.getProductId()).orElseThrow(() ->  new ProductNotFoundException("product", "Not Found"));
+		productInfo.setProductStock(stockDto.getQuantity() + productInfo.getProductStock());
+		return ProductMapper.EntityToDto(productInfoRepository.save(productInfo));
 	}
 
 	@Override
-	public ProductInfo reduceStock(StockDto stockDto) {
-		//  Auto-generated method stub
-		return null;
+	public ProductInfoDto reduceStock(StockDto stockDto) {
+		ProductInfo productInfo = productInfoRepository.findById(stockDto.getProductId()).orElseThrow(() ->  new ProductNotFoundException("product", "Not Found"));
+		if (stockDto.getQuantity() > productInfo.getProductStock())
+			throw new ProductNotFoundException("product", "Insfficient products");
+		else
+			productInfo.setProductStock(productInfo.getProductStock() - stockDto.getQuantity());
+		return ProductMapper.EntityToDto(productInfoRepository.save(productInfo));
 	}
 
 }
