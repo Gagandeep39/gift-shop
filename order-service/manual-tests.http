@@ -41,3 +41,9 @@ Content-Type: application/json
   "orderId": 100001,
   "status": "DELIVERED"
 }
+
+### Fetch all deliveries for an order - Invalid
+GET http://localhost:9400/delivery/100099
+
+### Fetch all deliveries for an order
+GET http://localhost:9400/delivery/100001
