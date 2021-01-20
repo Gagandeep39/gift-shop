@@ -12,21 +12,20 @@ import java.util.List;
 import com.cg.productservice.dto.ProductInfoDto;
 import com.cg.productservice.dto.ProductInfoRequest;
 import com.cg.productservice.dto.StockDto;
-import com.cg.productservice.entities.ProductInfo;
 
 public interface ProductInfoService {
 
-  public List<ProductInfo> fetchAll();
+  public List<ProductInfoDto> fetchAll();
 
-  public List<ProductInfo> fetchByCategory(String category);
+  public List<ProductInfoDto> fetchByCategory(String category);
 
-  public ProductInfo fetchById(Long id);
+  public ProductInfoDto fetchById(Long id);
 
   public ProductInfoDto increaseStock(StockDto stockDto);
 
   public ProductInfoDto reduceStock(StockDto stockDto);
   
-  public ProductInfo updateStock(StockDto stockDto);
+  public ProductInfoDto updateStock(StockDto stockDto);
 
   public boolean removeProduct(Long productId);
 

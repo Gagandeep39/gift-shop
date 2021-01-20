@@ -14,7 +14,6 @@ import javax.validation.Valid;
 import com.cg.productservice.dto.ProductInfoDto;
 import com.cg.productservice.dto.ProductInfoRequest;
 import com.cg.productservice.dto.StockDto;
-import com.cg.productservice.entities.ProductInfo;
 import com.cg.productservice.services.ProductInfoService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,22 +37,22 @@ public class ProductController {
   private final ProductInfoService productInfoService;
 
   @GetMapping
-  public List<ProductInfo> fetchAllProducts() {
+  public List<ProductInfoDto> fetchAllProducts() {
     return productInfoService.fetchAll();
   }
 
   @GetMapping("/category/{category}")
-  public List<ProductInfo> fetchByCategory(@PathVariable String category) {
+  public List<ProductInfoDto> fetchByCategory(@PathVariable String category) {
     return productInfoService.fetchByCategory(category);
   }
 
   @GetMapping("/{productId}")
-  public ProductInfo fetchById(@PathVariable Long productId) {
+  public ProductInfoDto fetchById(@PathVariable Long productId) {
     return productInfoService.fetchById(productId);
   }
 
   @PutMapping("/stock")
-  public ProductInfo updateStock(@Valid @RequestBody StockDto stockDto) {
+  public ProductInfoDto updateStock(@Valid @RequestBody StockDto stockDto) {
     return productInfoService.updateStock(stockDto);
   }
 

@@ -34,20 +34,21 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	private ProductCategoryService categoryService;
 
 	@Override
-	public List<ProductInfo> fetchAll() {
-		return this.productInfoRepository.findAll();
+	public List<ProductInfoDto> fetchAll() {
+		return this.productInfoRepository.findAll().stream().map(p -> ProductMapper.EntityToDto(p)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<ProductInfo> fetchByCategory(String category) {
+	public List<ProductInfoDto> fetchByCategory(String category) {
 		List<ProductInfo> products =  productInfoRepository.findAll().stream().filter(c -> c.getProductCategory().getCategoryName().equals(category)).collect(Collectors.toList());
 		if (products.size() == 0) throw new CategoryNotFoundException("category", "Invalid category");
-		return products;
+		return products.stream().map(p -> ProductMapper.EntityToDto(p)).collect(Collectors.toList());
 	}
 
 	@Override
-	public ProductInfo fetchById(Long id) {
-		return this.productInfoRepository.findById(id).orElseThrow(() ->  new ProductNotFoundException("product", "Not Found"));
+	public ProductInfoDto fetchById(Long id) {
+		ProductInfo info = this.productInfoRepository.findById(id).orElseThrow(() ->  new ProductNotFoundException("product", "Not Found"));
+		return ProductMapper.EntityToDto(productInfoRepository.save(info));
 	}
 	
 	@Override
@@ -76,10 +77,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	}
 
 	@Override
-	public ProductInfo updateStock(StockDto stockDto) {
+	public ProductInfoDto updateStock(StockDto stockDto) {
 		ProductInfo productInfo = productInfoRepository.findById(stockDto.getProductId()).orElseThrow(() ->  new ProductNotFoundException("product", "Not Found"));
 		productInfo.setProductStock(stockDto.getQuantity());
-		return productInfoRepository.save(productInfo);
+		return ProductMapper.EntityToDto(productInfoRepository.save(productInfo));
 	}
 
 	@Override
