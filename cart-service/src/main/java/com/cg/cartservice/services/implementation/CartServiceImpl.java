@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +40,9 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	UserDetailsRepository userRepo;
+
+	@Autowired
+	private ProductInfoRepository productRepository;
 
 	@Override
 	public Cart fetchCartById(Long cartId) {
@@ -96,73 +99,47 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Cart mergeCart(CartDto cartDto, Long id) {
+		Cart finalCart = userRepo.findById(id).orElseThrow(() -> new RuntimeException("User ot found")).getCart();
+		List<ProductInOrder> productInOrders = new ArrayList<>();
 
-		System.out.println("in cart service :");
 
-		Cart userCart = this.userRepo.findById(id).get().getCart();// get user cart
-
-		System.out.println("User cart: " + userCart);
-
-		List<ProductInOrder> products = new ArrayList<>();
-		ProductInOrder prod = null;
-		// List<CartDto> products1=new ArrayList<>();
-
-		products = userCart.getProducts().stream().collect(Collectors.toList());
-
-		System.out.println("Products which r already in user cart: " + products);
-
-		for (ItemDto itemDto : cartDto.getItemDtoList()) {
-
-			long id1 = itemDto.getProductId();
-
-			products.add(this.productInOrderRepository.findByProductId(id1));
-
-			// ItemDto id1=cartDto.getItemDtoList().stream().filter(e ->
-			// e.getProductId().equals(productInOrder.getProductId()));
-
+		// Create ProfuctPrderList for local items
+		for (ItemDto item : cartDto.getItemDtoList()) {
+			ProductInfo newProduct = productRepository.findById(item.getProductId()).orElseThrow(() -> new RuntimeException("Invalid product id"));
+			ProductInOrder productInOrder = new ProductInOrder();
+			productInOrder.setProductCategory(newProduct.getProductCategory().getCategoryDescription());
+			productInOrder.setProductId(newProduct.getProductId());
+			productInOrder.setProductName(newProduct.getProductName());
+			productInOrder.setProductDescription(newProduct.getProductDescription());
+			productInOrder.setProductIcon(newProduct.getProductIcon());
+			productInOrder.setProductStock(item.getQuantity());
+			productInOrder.setProductPrice(newProduct.getProductPrice());
+			;
+			productInOrders.add(productInOrder);
 		}
 
-		System.out.println("All user products in cart: " + products);
-
-		userCart.setProducts(products.stream().collect(Collectors.toSet()));
-		// prod.setCart(userCart);
-
-		System.out.println("now user cart: " + userCart);
-
-		// cartDto.getItemDtoList().forEach(productInOrder -> {//for each product in
-		// cartDto
-		// Set<ProductInOrder> set = userCart.getProducts();
-		// Optional<ProductInOrder> old = set.stream().filter(e ->
-		// e.getProductId().equals(productInOrder.getProductId())).findFirst();
-		//
-		// // if (old.isPresent()) {
-		// prod = old.get();
-		// System.out.println("product in order before new addition: "+prod);
-		// productInfo=this.productInfoRepo.findByproductId(productInOrder.getProductId());
-		//
-		// prod.setProductCategory(productInfo.getProductCategory().getCategoryDescription());
-		// prod.setProductId(productInfo.getProductId().toString());
-		// prod.setProductName(productInfo.getProductName());
-		// prod.setProductDescription(productInfo.getProductDescription());
-		// prod.setProductIcon(productInfo.getProductIcon());
-		// prod.setProductPrice(productInfo.getProductPrice());
-		// prod.setProductStock(productInfo.getProductStock());
-		//
-		// prod.setCart(userCart);
-		//
-		//
-		//// } else {
-		//// addToCart(itemDto, id);
-		//// }
-		// System.out.println("product in order after new addition: "+prod);
-		// productInOrderRepository.save(prod);
-		// });
-		return userCart;
+		// Merge
+    productInOrders.forEach(productInOrder -> {
+        Set<ProductInOrder> set = finalCart.getProducts();
+        Optional<ProductInOrder> old = set.stream().filter(e -> e.getProductId().equals(productInOrder.getProductId())).findFirst();
+            ProductInOrder prod;
+        if (old.isPresent()) {
+            prod = old.get();
+            prod.setProductStock(productInOrder.getProductStock() + prod.getProductStock());
+        } else {
+            prod = productInOrder;
+            prod.setCart(finalCart);
+            finalCart.getProducts().add(prod);
+        }
+        productInOrderRepository.save(prod);
+    });
+    cartRepo.save(finalCart);
+		return finalCart;
 	}
 
 	@Override
 	public Cart fetchByUserId(Long userId) {
-		return cartRepo.findByUserDetails_UserDetailsId(userId).orElseThrow(() -> new RuntimeException());
+		return cartRepo.findByUserDetails_UserDetailsId(userId).orElseThrow(() -> new RuntimeException("User not found"));
 	}
 
 }
