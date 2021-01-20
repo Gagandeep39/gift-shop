@@ -22,8 +22,8 @@ import lombok.AllArgsConstructor;
 public class CategoryController {
 	
 	@Autowired
-	private final ProductCategoryService productCategoryService;
-	
+	private ProductCategoryService productCategoryService;
+
 	@GetMapping
 	public List<ProductCategory> fetchAllCategories(){
 		return productCategoryService.fetchAllCategories();
