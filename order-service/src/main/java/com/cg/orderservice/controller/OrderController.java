@@ -14,7 +14,7 @@ import com.cg.orderservice.entities.OrderMain;
 import com.cg.orderservice.services.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,38 +23,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/orders")
 @RestController
+@CrossOrigin
 public class OrderController {
   @Autowired
   OrderService service;
 
   @GetMapping("/user/{id}")
-  List<OrderMain> fetchByUserId(Long userId) {
+  List<OrderMain> fetchByUserId(@PathVariable Long userId) {
     return service.fetchByUserId(userId);
   }
 
-  @GetMapping("/all")
+  @GetMapping
   List<OrderMain> fetchAll() {
-    List<OrderMain> orderlist = service.fetchAll();
     return service.fetchAll();
   }
 
   @GetMapping("/{id}")
-  OrderMain findByOrderId(Long orderId) {
+  OrderMain findByOrderId(@PathVariable Long orderId) {
     return service.findByOrderId(orderId);
   }
 
-  @PostMapping("/status")
-  OrderMain OrderStatus(UpdateStatusDto updateStatusDto) {
+  @PostMapping
+  OrderMain updateOrderStatus(UpdateStatusDto updateStatusDto) {
     return service.OrderStatus(updateStatusDto);
   }
 
-  @PostMapping("/addorder")
-  OrderMain addOrderMain(OrderMain order) {
-    return service.addOrderMain(order);
-  }
-
-  @DeleteMapping("/deleteorder/{id}")
-  OrderMain deleteByOrderId(UpdateStatusDto updateStatusDto) {
-    return service.deleteByOrderId(updateStatusDto);
-  }
 }
