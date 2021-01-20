@@ -1,27 +1,30 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-20 13:07:24
+ * @modify date 2021-01-20 13:07:24
+ * @desc [description]
+ */
 package com.cg.cartservice.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class ItemDto {
 
-  private Long productId;
-  private int quantity;
-  
-  
-public ItemDto(Long productId, int quantity) {
-	super();
-	this.productId = productId;
-	this.quantity = quantity;
-}
-public Long getProductId() {
-	return productId;
-}
-public void setProductId(Long productId) {
-	this.productId = productId;
-}
-public int getQuantity() {
-	return quantity;
-}
-public void setQuantity(int quantity) {
-	this.quantity = quantity;
-}
-  
+	@NotBlank
+	private Long productId;
+	@PositiveOrZero
+	@NotBlank
+	private int quantity;
+
 }
