@@ -1,7 +1,9 @@
 package com.cg.cartservice.services.implementation;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import com.cg.cartservice.dto.ItemDto;
 import com.cg.cartservice.entities.Cart;
 import com.cg.cartservice.entities.ProductInOrder;
 import com.cg.cartservice.entities.ProductInfo;
-import com.cg.cartservice.entities.User;
 import com.cg.cartservice.entities.UserDetails;
 import com.cg.cartservice.repositories.CartRepository;
 import com.cg.cartservice.repositories.ProductInOrderRepository;
@@ -41,50 +42,40 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	UserDetailsRepository userRepo;
 
-	ProductInfo productInfo;
-	ProductInOrder productInOrder;
-	Cart cart;
-	User user;
-	// UserDetails details;
-
 	@Override
 	public Cart fetchCartById(Long cartId) {
-
-		cart = this.cartRepo.findById(cartId).orElseThrow(() -> new CustomException("Wrong id "));
-		if (cart.getProducts().isEmpty()) {
-			throw new CustomException("cart is empty");
-		}
-
-		// cart=this.cartRepo.findByCartId(cartId);
-
+		Cart cart = cartRepo.findById(cartId).orElseThrow(() -> new CustomException("Wrong id "));
+		if (cart.getProducts().isEmpty()) throw new CustomException("cart is empty");
 		return cart;
 	}
 
 	@Override
-	public Cart addToCart(ItemDto itemDto, Long id) {
+	public Cart addToCart(ItemDto itemDto, Long userId) {
 
-		productInfo = new ProductInfo();
+		ProductInfo productInfo = productInfoRepo.findByproductId(itemDto.getProductId())
+			.orElseThrow(() -> new CustomException("Product Not found"));
+		if (productInfo.getProductStock() < itemDto.getQuantity())
+			throw new RuntimeException("Insufficient stock");
 
-		productInOrder = new ProductInOrder();
-
-		UserDetails details;
-
-		Cart cart = new Cart();
-
-		details = this.userRepo.findById(id).orElseThrow(() -> new CustomException("Wrong id "));
-		cart = details.getCart();
-
-		productInfo = this.productInfoRepo.findByproductId(itemDto.getProductId());
-
-		productInOrder.setProductCategory(productInfo.getProductCategory().getCategoryDescription());
-		productInOrder.setProductId(productInfo.getProductId().toString());
-		productInOrder.setProductName(productInfo.getProductName());
-		productInOrder.setProductDescription(productInfo.getProductDescription());
-		productInOrder.setProductIcon(productInfo.getProductIcon());
-		productInOrder.setProductPrice(productInfo.getProductPrice());
-		productInOrder.setProductStock(itemDto.getQuantity());
-		productInOrder.setCart(cart);
-
+		ProductInOrder productInOrder;
+		Cart cart = userRepo.findById(userId).orElseThrow(() -> new CustomException("Wrong id ")).getCart();
+		Optional<ProductInOrder> old = cart.getProducts().stream().filter(e -> e.getProductId().equals(itemDto.getProductId())).findFirst();
+		if (old.isPresent()){
+			productInOrder = old.get();
+			productInOrder.setProductStock( old.get().getProductStock() + itemDto.getQuantity());
+			productInOrder.setProductPrice(BigDecimal.valueOf(productInfo.getProductPrice().floatValue() * productInOrder.getProductStock()));
+		}
+		else {
+			productInOrder = new ProductInOrder();
+			productInOrder.setProductCategory(productInfo.getProductCategory().getCategoryDescription());
+			productInOrder.setProductId(productInfo.getProductId());
+			productInOrder.setProductName(productInfo.getProductName());
+			productInOrder.setProductDescription(productInfo.getProductDescription());
+			productInOrder.setProductIcon(productInfo.getProductIcon());
+			productInOrder.setCart(cart);
+			productInOrder.setProductStock(itemDto.getQuantity());
+			productInOrder.setProductPrice(productInfo.getProductPrice());
+		}
 		productRepo.save(productInOrder);
 
 		return cart;
