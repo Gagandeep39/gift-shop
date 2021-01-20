@@ -8,6 +8,7 @@
 package com.cg.productservice.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cg.productservice.dto.ProductInfoDto;
 import com.cg.productservice.dto.StockDto;
@@ -19,16 +20,18 @@ public interface ProductInfoService {
 
   public List<ProductInfo> fetchByCategory(String category);
 
-  public ProductInfo fetchById();
+  public ProductInfo fetchById(Long id);
 
   public ProductInfo increaseStock(StockDto stockDto);
 
   public ProductInfo reduceStock(StockDto stockDto);
+  
+  public ProductInfo updateStock(StockDto stockDto);
 
   public boolean removeProduct(Long productId);
 
-  public ProductInfo add(ProductInfoDto productInfoDto);
+  public Map<String, String> add(ProductInfoDto productInfoDto);
 
-  public ProductInfo update(ProductInfoDto productInfoDto);
+  public ProductInfoDto update(ProductInfoDto productInfoDto);
 
 }
