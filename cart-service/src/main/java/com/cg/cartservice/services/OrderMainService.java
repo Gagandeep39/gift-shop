@@ -1,10 +1,10 @@
 package com.cg.cartservice.services;
 
-import com.cg.cartservice.entities.OrderMain;
+import java.util.Map;
 
 public interface OrderMainService {
 
   
-  OrderMain checkOut(Long id);
+  Map<String, String> checkOut(Long id);
   
 }
