@@ -14,7 +14,6 @@ import com.cg.cartservice.dto.ItemDto;
 import com.cg.cartservice.entities.Cart;
 import com.cg.cartservice.entities.ProductInOrder;
 import com.cg.cartservice.entities.ProductInfo;
-import com.cg.cartservice.entities.UserDetails;
 import com.cg.cartservice.repositories.CartRepository;
 import com.cg.cartservice.repositories.ProductInOrderRepository;
 //import com.cg.cartservice.repositories.ProductInfo;
@@ -28,7 +27,7 @@ import com.cg.cartservice.exception.*;
 public class CartServiceImpl implements CartService {
 
 	@Autowired
-	ProductInOrderRepository productRepo;
+	ProductInOrderRepository productInOrderRepository;
 
 	@Autowired
 	ProductInfoRepository productInfoRepo;
@@ -45,7 +44,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public Cart fetchCartById(Long cartId) {
 		Cart cart = cartRepo.findById(cartId).orElseThrow(() -> new CustomException("Wrong id "));
-		if (cart.getProducts().isEmpty()) throw new CustomException("cart is empty");
+		// if (cart.getProducts().isEmpty()) throw new CustomException("cart is empty");
 		return cart;
 	}
 
@@ -76,69 +75,23 @@ public class CartServiceImpl implements CartService {
 			productInOrder.setProductStock(itemDto.getQuantity());
 			productInOrder.setProductPrice(productInfo.getProductPrice());
 		}
-		productRepo.save(productInOrder);
+		productInOrderRepository.save(productInOrder);
 
 		return cart;
 	}
-
+	
 	@Override
 	public Cart deleteFromCart(Long productId, Long id) {
-
-		System.out.println("In service delete method");
-
-		UserDetails details;
-		Cart cart = new Cart();
-
-		ProductInOrder prod;
-
-		details = this.userRepo.findById(id).orElseThrow(() -> new CustomException("Wrong id "));
-		cart = details.getCart();
-
-		System.out.println("cart: " + cart);
-
-		System.out.println("ProductInOrder before deletion: " + productRepo.findAll());
-
-		// prod=cart.getProducts().stream().filter(e ->
-		// e.getProductId().equals(productId)).findFirst();
-
-		this.productRepo.deleteById(productId);
-
-		System.out.println("ProductInOrder after deletion: " + productRepo.findAll());
-
-		return cart = fetchCartById(cart.getCartId());
-
-		// UserDetails details=new UserDetails();
-		//
-		// Cart cart=new Cart();
-		//
-		//
-		//
-		// List<ProductInOrder> prod=new ArrayList<>();
-		// prod=this.proOrder.fetchByCartId(id);
-		// System.out.println("Products: "+prod );
-
-		// details=this.userRepo.findById(id).get();
-
-		// System.out.println("User details: "+details);
-		// prod=details.getCart().getProducts().stream().collect(Collectors.toList());
-
-		// System.out.println("products in cart: "+prod);
-
-		// prod=cart.getProducts().stream().filter(e ->
-		// e.getProductId().equals(productId)).findFirst();
-
-		// Optional<ProductInOrder> id1=prod.stream().filter(e ->
-		// e.getProductId().equals(productId)).findAny();
-		//
-		// ProductInOrder id2=id1.get();
-		//
-		// System.out.println("Product in order id: "+id2.getProductInOrderId());
-		//
-		//
-		// this.productRepo.deleteById(id2.getProductInOrderId());
-		//
-
-		// return cart=this.fetchCartById(cart.getCartId());
+		Cart cart = userRepo.findById(id).orElseThrow(() -> new RuntimeException("User ot found")).getCart();
+		List<ProductInOrder> products = productInOrderRepository.findByCart_CartId(cart.getCartId());
+		if (products.size() == 0) throw new RuntimeException("Cart is empty");
+		Optional<ProductInOrder> toBeDeleted = products.stream().filter(p -> p.getProductId().equals(productId)).findFirst();
+		if(toBeDeleted.isPresent()){
+			toBeDeleted.get().setCart(null);
+			productInOrderRepository.deleteById(toBeDeleted.get().getProductInOrderId());
+		}
+		else throw new RuntimeException("Product not in cart");
+		return fetchCartById(cart.getCartId());
 	}
 
 	@Override
@@ -162,7 +115,7 @@ public class CartServiceImpl implements CartService {
 
 			long id1 = itemDto.getProductId();
 
-			products.add(this.productRepo.findByProductId(id1));
+			products.add(this.productInOrderRepository.findByProductId(id1));
 
 			// ItemDto id1=cartDto.getItemDtoList().stream().filter(e ->
 			// e.getProductId().equals(productInOrder.getProductId()));
@@ -202,7 +155,7 @@ public class CartServiceImpl implements CartService {
 		//// addToCart(itemDto, id);
 		//// }
 		// System.out.println("product in order after new addition: "+prod);
-		// productRepo.save(prod);
+		// productInOrderRepository.save(prod);
 		// });
 		return userCart;
 	}
