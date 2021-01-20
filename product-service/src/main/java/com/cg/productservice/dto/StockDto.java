@@ -8,6 +8,7 @@
 package com.cg.productservice.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +25,7 @@ public class StockDto {
 	private Long productId;
 	
 	@NotNull
+	@PositiveOrZero
 	private Integer quantity;
 
 }
