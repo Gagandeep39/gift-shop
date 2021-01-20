@@ -7,6 +7,8 @@
  */
 package com.cg.cartservice.controller;
 
+import javax.validation.Valid;
+
 import com.cg.cartservice.dto.CartDto;
 import com.cg.cartservice.dto.ItemDto;
 import com.cg.cartservice.entities.Cart;
@@ -62,7 +64,7 @@ public class CartController {
 
   // Merge local cart with Server cart
   @PostMapping("/merge/{id}")
-  public Cart mergeCart(@RequestBody CartDto cartDto, @PathVariable Long id) {
+  public Cart mergeCart(@Valid @RequestBody CartDto cartDto, @PathVariable Long id) {
     cart = this.cartService.mergeCart(cartDto, id);
     System.out.println("In cart controller before return : cart :" + cart);
     return cart;
