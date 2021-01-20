@@ -1,0 +1,43 @@
+### Fetch All Orders
+GET http://localhost:9400/orders
+
+### Fetch By Order ID - Invalid
+GET http://localhost:9400/orders/100010
+
+### Fetch By Order ID
+GET http://localhost:9400/orders/100001
+
+
+### Fetch By User ID - Invalid
+GET http://localhost:9400/orders/user/100010
+
+### Fetch By User ID
+GET http://localhost:9400/orders/user/100001
+
+### Update status - Invalid
+POST http://localhost:9400/orders
+Content-Type: application/json
+
+{
+  "orderId": 100001,
+  "status": "TEST"
+}
+
+### Update status - Invalid
+POST http://localhost:9400/orders
+Content-Type: application/json
+
+{
+  "orderId": 100001,
+  "status": "CANCELLED"
+}
+
+
+### Update status - Invalid
+POST http://localhost:9400/orders
+Content-Type: application/json
+
+{
+  "orderId": 100001,
+  "status": "DELIVERED"
+}
