@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import com.cg.productservice.dto.ProductInfoDto;
+import com.cg.productservice.dto.ProductInfoRequest;
 import com.cg.productservice.dto.StockDto;
 import com.cg.productservice.entities.ProductInfo;
 import com.cg.productservice.services.ProductInfoService;
@@ -71,14 +72,13 @@ public class ProductController {
   }
 
   @PostMapping
-  public Map<String, String> add(@Valid @RequestBody ProductInfoDto productInfoDto) {
-    System.out.println(productInfoDto);
-    return productInfoService.add(productInfoDto);
+  public ProductInfoDto add(@Valid @RequestBody ProductInfoRequest dto) {
+    return productInfoService.add(dto);
   }
 
   @PutMapping
-  public ProductInfoDto update(@Valid @RequestBody ProductInfoDto productInfoDto) {
-    return productInfoService.update(productInfoDto);
+  public ProductInfoDto update(@Valid @RequestBody ProductInfoRequest dto) {
+    return productInfoService.update(dto);
   }
 
 }
