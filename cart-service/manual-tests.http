@@ -11,6 +11,16 @@ GET http://localhost:9300/cart/100001
 POST http://localhost:9300/cart/checkout/100001
 
 ### Add item to cart - Invalid data
+PUT http://localhost:9300/cart/100012
+Content-Type: application/json
+
+{
+  "productId": "100003",
+  "quantity": 9
+}
+
+
+### Add item to cart - Valid data
 PUT http://localhost:9300/cart/100001
 Content-Type: application/json
 
@@ -18,6 +28,7 @@ Content-Type: application/json
   "productId": "100002",
   "quantity": 9
 }
+
 
 ### Delete from cart
 DELETE http://localhost:9300/cart/delete/100001/100001
