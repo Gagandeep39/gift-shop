@@ -50,7 +50,7 @@ public class ProductInOrder {
     @JoinColumn(name = "order_id")
     @JsonIgnore
     private OrderMain orderMain;
-    private String productId;
+    private Long productId;
     private String productName;
     private String productDescription;
     private String productIcon;
