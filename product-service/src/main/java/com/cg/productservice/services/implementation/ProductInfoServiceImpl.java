@@ -7,9 +7,7 @@
  */
 package com.cg.productservice.services.implementation;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.cg.productservice.dto.ProductInfoDto;
@@ -59,9 +57,13 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	}
 
 	@Override
-	public ProductInfoDto update(ProductInfoRequest productInfoDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProductInfoDto update(ProductInfoRequest request) {
+		if (request.getProductId() == null) throw new ProductNotFoundException("product", "Product ID cannot be null");
+		productInfoRepository.findById(request.getProductId()).orElseThrow(() ->  new ProductNotFoundException("product", "Not Found"));
+		ProductInfo info = ProductMapper.DtoToEntity(request);
+		ProductCategory category = categoryService.findById(request.getCategoryId());
+		info.setProductCategory(category);
+		return ProductMapper.EntityToDto(productInfoRepository.save(info));
 	}
 	
 
