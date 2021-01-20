@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.orderservice.dto.UpdateStatusDto;
 import com.cg.orderservice.entities.OrderMain;
+import com.cg.orderservice.enums.OrderStatus;
 import com.cg.orderservice.exception.CustomException;
 import com.cg.orderservice.repositories.OrderMainRepository;
 import com.cg.orderservice.services.OrderService;
@@ -21,27 +22,38 @@ import com.cg.orderservice.services.OrderService;
 public class OrderServiceImpl implements OrderService {
   
 	@Autowired
-	OrderMainRepository ordermainrepository;
+	OrderMainRepository orderRepository;
 
 
   @Override
   public List<OrderMain> fetchByUserId(Long userId) {
-    return ordermainrepository.findByUserId(userId);
+    return orderRepository.findByUserId(userId);
   }
 
   @Override
   public List<OrderMain> fetchAll() {
-    return ordermainrepository.findAll();
+    return orderRepository.findAll();
   }
 
   @Override
   public OrderMain findByOrderId(Long orderId) {
-    return ordermainrepository.findById(orderId).orElseThrow(() -> new CustomException("order", "Invalid Order ID"));
+    return orderRepository.findById(orderId).orElseThrow(() -> new CustomException("order", "Invalid Order ID"));
   }
 
   @Override
   public OrderMain updateOrderStatus(UpdateStatusDto updateStatusDto) {
-    return null;
+    OrderMain order = orderRepository.findById(updateStatusDto.getOrderId()).orElseThrow(() -> new CustomException("order", "Invalid Order ID"));
+
+    if (order.getOrderStatus().equals(OrderStatus.CANCELLED))
+      throw new CustomException("order", "Order has already been cancelled");
+    else if (order.getOrderStatus().equals(OrderStatus.DELIVERED))
+      throw new CustomException("order", "Order has already been delivered");
+    else if (order.getOrderStatus().equals(OrderStatus.valueOf(updateStatusDto.getStatus())))
+      throw new CustomException("order", "Update status cannot be the same as old status");
+    else {
+      order.setOrderStatus(OrderStatus.valueOf(updateStatusDto.getStatus()));
+      return orderRepository.save(order);
+    }
   }
 
 }
