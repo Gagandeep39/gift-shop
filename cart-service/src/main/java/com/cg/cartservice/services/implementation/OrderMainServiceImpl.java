@@ -35,9 +35,9 @@ public class OrderMainServiceImpl implements OrderMainService {
 
 	@Override
 	public OrderMain checkOut(Long id) {
-		UserDetails user = this.userRepo.findById(id).orElseThrow(() -> new CustomException("Wrong id "));
+		UserDetails user = this.userRepo.findById(id).orElseThrow(() -> new CustomException("user", "Invalid User ID"));
 		Set<ProductInOrder> products = user.getCart().getProducts();
-		if(products.size() == 0) throw new RuntimeException("Cart is empty");
+		if(products.size() == 0) throw new CustomException("cart", "Cart is empty");
 		OrderMain orderMain = new OrderMain();
 		orderMain.setUserId(user.getUserDetailsId());
 		orderMain.setBuyerAddress(createUserAddress(user.getAddress()));// change addr
@@ -56,6 +56,7 @@ public class OrderMainServiceImpl implements OrderMainService {
 			p.setCart(null);
 			p.setOrderMain(orderMain);
 			total += p.getProductPrice().floatValue();
+			// TODO - Reduce product Stock
       // productService.decreaseStock(productInOrder.getProductId(), productInOrder.getCount());
       productRepo.save(p);
 		}

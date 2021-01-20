@@ -46,7 +46,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Cart fetchCartById(Long cartId) {
-		Cart cart = cartRepo.findById(cartId).orElseThrow(() -> new CustomException("Wrong id "));
+		Cart cart = cartRepo.findById(cartId).orElseThrow(() -> new CustomException("cart", "Invalid Cart ID"));
 		// if (cart.getProducts().isEmpty()) throw new CustomException("cart is empty");
 		return cart;
 	}
@@ -55,12 +55,12 @@ public class CartServiceImpl implements CartService {
 	public Cart addToCart(ItemDto itemDto, Long userId) {
 
 		ProductInfo productInfo = productInfoRepo.findByproductId(itemDto.getProductId())
-			.orElseThrow(() -> new CustomException("Product Not found"));
+			.orElseThrow(() -> new CustomException("productInfo", "Invalid Product ID"));
 		if (productInfo.getProductStock() < itemDto.getQuantity())
-			throw new RuntimeException("Insufficient stock");
+			throw new CustomException("cart", "Insufficient product stock for product ID: " + itemDto.getProductId());
 
 		ProductInOrder productInOrder;
-		Cart cart = userRepo.findById(userId).orElseThrow(() -> new CustomException("Wrong id ")).getCart();
+		Cart cart = userRepo.findById(userId).orElseThrow(() -> new CustomException("user", "Invalid User ID")).getCart();
 		Optional<ProductInOrder> old = cart.getProducts().stream().filter(e -> e.getProductId().equals(itemDto.getProductId())).findFirst();
 		if (old.isPresent()){
 			productInOrder = old.get();
@@ -85,27 +85,27 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
 	public Cart deleteFromCart(Long productId, Long id) {
-		Cart cart = userRepo.findById(id).orElseThrow(() -> new RuntimeException("User ot found")).getCart();
+		Cart cart = userRepo.findById(id).orElseThrow(() -> new CustomException("cart", "Invalid user ID")).getCart();
 		List<ProductInOrder> products = productInOrderRepository.findByCart_CartId(cart.getCartId());
-		if (products.size() == 0) throw new RuntimeException("Cart is empty");
+		if (products.size() == 0) throw new CustomException("cart", "Cart is empty");
 		Optional<ProductInOrder> toBeDeleted = products.stream().filter(p -> p.getProductId().equals(productId)).findFirst();
 		if(toBeDeleted.isPresent()){
 			toBeDeleted.get().setCart(null);
 			productInOrderRepository.deleteById(toBeDeleted.get().getProductInOrderId());
 		}
-		else throw new RuntimeException("Product not in cart");
+		else throw new CustomException("product", "Product not in cart");
 		return fetchCartById(cart.getCartId());
 	}
 
 	@Override
 	public Cart mergeCart(CartDto cartDto, Long id) {
-		Cart finalCart = userRepo.findById(id).orElseThrow(() -> new RuntimeException("User ot found")).getCart();
+		Cart finalCart = userRepo.findById(id).orElseThrow(() -> new CustomException("cart", "User ID not found")).getCart();
 		List<ProductInOrder> productInOrders = new ArrayList<>();
 
 
 		// Create ProfuctPrderList for local items
 		for (ItemDto item : cartDto.getItemDtoList()) {
-			ProductInfo newProduct = productRepository.findById(item.getProductId()).orElseThrow(() -> new RuntimeException("Invalid product id"));
+			ProductInfo newProduct = productRepository.findById(item.getProductId()).orElseThrow(() -> new CustomException("product", "Invalid product ID"));
 			ProductInOrder productInOrder = new ProductInOrder();
 			productInOrder.setProductCategory(newProduct.getProductCategory().getCategoryDescription());
 			productInOrder.setProductId(newProduct.getProductId());
@@ -139,7 +139,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Cart fetchByUserId(Long userId) {
-		return cartRepo.findByUserDetails_UserDetailsId(userId).orElseThrow(() -> new RuntimeException("User not found"));
+		return cartRepo.findByUserDetails_UserDetailsId(userId).orElseThrow(() -> new CustomException("cart", "Invalid user ID"));
 	}
 
 }
