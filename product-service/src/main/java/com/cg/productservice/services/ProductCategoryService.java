@@ -17,4 +17,6 @@ public interface ProductCategoryService {
 
   ProductCategory createCategory(ProductCategory productCategory);
 
+  ProductCategory findById(Long id);
+
 }
