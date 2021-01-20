@@ -46,7 +46,7 @@ public class CartController {
 
   @PostMapping("/checkout/{id}") // working
   public OrderMain checkOut(@PathVariable Long id) {
-    return Order = this.order.checkOut(id);
+    return order.checkOut(id);
   }
 
   @PutMapping("/{id}") // working

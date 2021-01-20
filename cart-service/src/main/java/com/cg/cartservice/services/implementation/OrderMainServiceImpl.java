@@ -1,20 +1,19 @@
 package com.cg.cartservice.services.implementation;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.cartservice.entities.Cart;
+import com.cg.cartservice.entities.Address;
 import com.cg.cartservice.entities.OrderMain;
 import com.cg.cartservice.entities.ProductInOrder;
 import com.cg.cartservice.entities.UserDetails;
 import com.cg.cartservice.enums.OrderStatus;
 import com.cg.cartservice.enums.PaymentType;
 import com.cg.cartservice.exception.CustomException;
+import com.cg.cartservice.repositories.CartRepository;
 import com.cg.cartservice.repositories.OrderMainRepository;
 import com.cg.cartservice.repositories.ProductInOrderRepository;
 import com.cg.cartservice.repositories.UserDetailsRepository;
@@ -31,54 +30,43 @@ public class OrderMainServiceImpl implements OrderMainService {
 
 	@Autowired
 	OrderMainRepository orderRepo;
+	@Autowired
+	CartRepository cartRepository;
 
 	@Override
 	public OrderMain checkOut(Long id) {
-
 		UserDetails user = this.userRepo.findById(id).orElseThrow(() -> new CustomException("Wrong id "));
-
-		Cart userCart = this.userRepo.findById(id).get().getCart();
-
-		List<ProductInOrder> products = new ArrayList<>();
-
-		OrderMain order = new OrderMain();
-
-		long total = 0;
-
-		products = userCart.getProducts().stream().collect(Collectors.toList());
-
-		order.setBuyerAddress(user.getAddress().toString());// change addr
-		order.setBuyerCity(user.getAddress().getCity());
-		order.setBuyerEmail(user.getEmailId());
-		order.setBuyerName(user.getFirstName() + "  " + user.getLastName());
-		order.setBuyerPhone(user.getPhoneNo());
-		order.setBuyerPincode(user.getAddress().getPincode());
-		order.setBuyerState(user.getAddress().getState());
-
-		for (ProductInOrder productInOrder : products) {
-
-			total = total + productInOrder.getProductPrice().longValue();
-
-			order.setOrderStatus(OrderStatus.NEW);
-			order.setPaymentId((long) 1000011000);// change to proper payment id
-			order.setPaymentType(PaymentType.ONLINE);
-
-			order.setUserId(user.getUserDetailsId());
-
+		Set<ProductInOrder> products = user.getCart().getProducts();
+		if(products.size() == 0) throw new RuntimeException("Cart is empty");
+		OrderMain orderMain = new OrderMain();
+		orderMain.setUserId(user.getUserDetailsId());
+		orderMain.setBuyerAddress(createUserAddress(user.getAddress()));// change addr
+		orderMain.setBuyerCity(user.getAddress().getCity());
+		orderMain.setBuyerEmail(user.getEmailId());
+		orderMain.setBuyerName(user.getFirstName() + "  " + user.getLastName());
+		orderMain.setBuyerPhone(user.getPhoneNo());
+		orderMain.setBuyerPincode(user.getAddress().getPincode());
+		orderMain.setBuyerState(user.getAddress().getState());
+		orderMain.setOrderStatus(OrderStatus.NEW);
+		orderMain.setPaymentId((long) 1000011000);	// Dummyy
+		orderMain.setPaymentType(PaymentType.ONLINE);
+		orderRepo.save(orderMain);
+		Float total = 0F;
+		for (ProductInOrder p : products) {
+			p.setCart(null);
+			p.setOrderMain(orderMain);
+			total += p.getProductPrice().floatValue();
+      // productService.decreaseStock(productInOrder.getProductId(), productInOrder.getCount());
+      productRepo.save(p);
 		}
+		orderMain.setOrderAmount(BigDecimal.valueOf(total));
+		orderRepo.save(orderMain);
 
-		BigDecimal amount = new BigDecimal(total);
+		return orderMain;
+	}
 
-		order.setOrderAmount(amount);
-		order.setProducts(products.stream().collect(Collectors.toSet()));
-
-		this.orderRepo.save(order);
-
-		userCart.setProducts(null);
-
-		// Cart userCart = this.userRepo.findByUserDetailsId(id).getCart();
-
-		return order;
+	private String createUserAddress(Address address) {
+		return address.getArea() + ", " + address.getCity() + ", " + address.getState() + " " + address.getPincode();
 	}
 
 }
