@@ -11,14 +11,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.orderservice.dto.UpdateStatusDto;
 import com.cg.orderservice.entities.OrderMain;
+import com.cg.orderservice.exception.CustomException;
 import com.cg.orderservice.repositories.OrderMainRepository;
 import com.cg.orderservice.services.OrderService;
 @Service
 public class OrderServiceImpl implements OrderService {
+  
 	@Autowired
 	OrderMainRepository ordermainrepository;
 
@@ -35,23 +36,12 @@ public class OrderServiceImpl implements OrderService {
 
   @Override
   public OrderMain findByOrderId(Long orderId) {
-    return ordermainrepository.findByOrderId(orderId);
+    return ordermainrepository.findById(orderId).orElseThrow(() -> new CustomException("order", "Invalid Order ID"));
   }
 
   @Override
-  public OrderMain OrderStatus(UpdateStatusDto updateStatusDto) {
-    return ordermainrepository.OrderStatus(updateStatusDto);
+  public OrderMain updateOrderStatus(UpdateStatusDto updateStatusDto) {
+    return null;
   }
 
-
-@Override
-public OrderMain addOrderMain(OrderMain order) {
-	return ordermainrepository.save(order);
-}
-
-@Override
-public OrderMain deleteByOrderId(UpdateStatusDto updateStatusDto) {
-	return ordermainrepository.deleteByOrderId(updateStatusDto);
-}
-  
 }
