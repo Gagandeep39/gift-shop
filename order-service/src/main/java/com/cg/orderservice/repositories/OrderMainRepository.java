@@ -17,17 +17,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderMainRepository extends JpaRepository<OrderMain, Long> {
-	
-
 
 	List<OrderMain> findByUserId(Long userId);
 
-	OrderMain findByOrderId(Long orderId);
-
 	OrderMain OrderStatus(UpdateStatusDto updateStatusDto);
 
-	OrderMain deleteByOrderId(UpdateStatusDto updateStatusDto);
-	
-	
-	
 }
