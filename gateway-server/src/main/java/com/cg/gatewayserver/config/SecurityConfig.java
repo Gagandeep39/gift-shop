@@ -7,6 +7,8 @@
  */
 package com.cg.gatewayserver.config;
 
+import java.util.Arrays;
+
 import com.cg.gatewayserver.security.CustomAuthenticationEntryPoint;
 import com.cg.gatewayserver.security.JwtAuthorizationFilter;
 import com.cg.gatewayserver.security.JwtProvider;
@@ -38,7 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
   protected void configure(HttpSecurity http) throws Exception {
     http
       // Makes header as default with origin as *
-      .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and() // Required for accessing prpotected routes
+      .cors()
+      .configurationSource(request -> {
+          CorsConfiguration source = new CorsConfiguration();
+          source.applyPermitDefaultValues();
+          // .applyPermitDefaultValues(); only allows GET, HEAD, POST
+          source.setAllowedMethods(Arrays.asList("GET", "HEAD", "POST", "DELETE", "PUT"));
+        return source;
+      }).and() // Required for accessing prpotected routes
       .csrf().disable()
       .authorizeRequests().antMatchers("/auth-service/**", "/actuator/**", "/**/h2/**", "/**/swagger*/**", "/**/v2/api-docs").permitAll()
       .antMatchers(HttpMethod.GET, "/product-service/**").permitAll()
