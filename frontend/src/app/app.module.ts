@@ -33,6 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { httpInterceptors } from './providers';
+import { RequestPasswordComponent } from './components/auth/request-password/request-password.component';
+import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { httpInterceptors } from './providers';
     AdminComponent,
     FooterComponent,
     NotFoundComponent,
-    NavigationComponent
+    NavigationComponent,
+    RequestPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
