@@ -30,7 +30,7 @@ public class DeliveryHistoryScheduledService {
   private final DeliveryHistoryRepository deliveryRepository;
   private final OrderMainRepository orderRepository;
 
-  @Scheduled(cron = "60 * * * * *")
+  @Scheduled(cron = "5 * * * * *")
   public void autoApproveLeave() {
     log.info("Executed at " + new Date());
     List<OrderMain> orders = orderRepository.fetchOrderBasedOnStatus();
