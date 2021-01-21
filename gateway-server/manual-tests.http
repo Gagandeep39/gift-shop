@@ -72,6 +72,90 @@ Content-Type: application/json
   "newPassword": "123456"
 }
 
+################## Register Endpoint Tests ##################
+
+### Register Invalid Fields
+
+POST http://localhost:9100/register 
+Content-Type: application/json
+
+{
+  "username": "gaganddd",
+  "address": {
+  "state": "Maharashta",
+  "city": "Mumbai",
+  "area": "Chandivali"
+  },
+  "firstName": "Gagandeep",
+  "lastName": "Singh",
+  "designation": "Developer",
+  "gender": "Male",
+  "dob": "1999-05-14",
+  "emailId": "test@mail.com"
+}
+
+### Register Invalid Data
+POST http://localhost:9100/register 
+Content-Type: application/json
+
+{
+  "username": "gagandddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "address": {
+  "state": "Maharashta",
+  "city": "Mumbai",
+  "area": "Chandivali"
+  },
+  "firstName": "Gagandeep",
+  "lastName": "Singh",
+  "designation": "Developer",
+  "dob": "1999-05-14",
+  "emailId": "test@mail.com"
+}
+
+### Register Valid Data
+POST http://localhost:9100/register 
+Content-Type: application/json
+
+{
+  "username": "gagaa",
+  "address": {
+  "state": "Maharashta",
+  "city": "Mumbai",
+  "area": "Chandivali",
+  "pincode": "400072"
+  },
+  "firstName": "Gagandeep",
+  "lastName": "Singh",
+  "emailId": "test@mail.com",
+  "phoneNo": "8419969059",
+  "password": "12345678"
+}
+
+### Register Valid Data
+PUT http://localhost:9100/register 
+Content-Type: application/json
+
+{
+  "userId": "100001",
+  "username": "gagana",
+  "address": {
+  "state": "Maharashta",
+  "city": "Mumbai",
+  "area": "Chandivali",
+  "pincode": "400072"
+  },
+  "firstName": "Gagandeep",
+  "lastName": "Singh",
+  "emailId": "test@mail.com",
+  "phoneNo": "8419969059",
+  "password": "12345678",
+  "securityQuestion": "What is your name",
+  "securityAnswer": "123456"
+}
+
+
+
+
 
 #############################################
 ### Products
@@ -94,6 +178,7 @@ GET http://localhost:9000/product-service/products/999
 
 ### Update Stocks - Invalid
 PUT http://localhost:9000/product-service/products/stock
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYWdhbiIsInVzZXJJZCI6MTAwMDAxLCJpYXQiOjE2MTEyMTk3NDAsImV4cCI6MTYxMTIyMzM0MH0.diwTe6f5ihWtdcn-4YocsrmMhn_2iyj4WZJiwd93DHk
 Content-Type: application/json
 
 {
@@ -234,10 +319,10 @@ Content-Type: application/json
 
 ### Fetch All categories
 
-GET http://localhost:9200/categories
+GET http://localhost:9000/product-service/categories
 
 ### Create Category - Invalid data
-POST http://localhost:9200/categories
+POST http://localhost:9000/product-service/categories
 Content-Type: application/json
 
 {
@@ -246,7 +331,7 @@ Content-Type: application/json
 }
 
 ### Create category - Valid Data
-POST http://localhost:9200/categories
+POST http://localhost:9000/product-service/categories
 Content-Type: application/json
 
 {
@@ -257,11 +342,81 @@ Content-Type: application/json
 
 
 ### Create category - Valid Data
-POST http://localhost:9200/categories
+POST http://localhost:9000/product-service/categories
 Content-Type: application/json
 
 {
   "categoryName": "Dummy Category",
   "categoryDescription": "This is a dummy category description",
   "categoryImageUrl": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg"
+}
+
+#############################################
+### Cart
+#############################################
+
+### Fetch cart by user ID method - Invalid
+GET http://localhost:9000/cart-service/cart/user/100000
+
+### Fetch cart by user ID method 
+GET http://localhost:9000/cart-service/cart/user/100001
+
+### Fetch cart by user ID method 
+GET http://localhost:9000/cart-service/cart/100001
+
+### Checkout by cart Id
+POST http://localhost:9000/cart-service/cart/checkout/100001
+
+### Add item to cart - Invalid data
+PUT http://localhost:9000/cart-service/cart/100012
+Content-Type: application/json
+
+{
+  "productId": "100003",
+  "quantity": 9
+}
+
+
+### Add item to cart - Valid data
+PUT http://localhost:9000/cart-service/cart/100001
+Content-Type: application/json
+
+{
+  "productId": "100002",
+  "quantity": 9
+}
+
+
+### Delete from cart
+DELETE http://localhost:9000/cart-service/cart/delete/100001/100001
+
+### Merge - Invalid data
+POST http://localhost:9000/cart-service/cart/merge/100001
+Content-Type: application/json
+
+{
+  "itemDtoList": [
+    {
+      "productId": "100009",
+      "quantity": 9
+    }
+  ]
+}
+
+
+### Merge 
+POST http://localhost:9000/cart-service/cart/merge/100001
+Content-Type: application/json
+
+{
+  "itemDtoList": [
+    {
+      "productId": "100002",
+      "quantity": 9
+    },
+    {
+      "productId": "100001",
+      "quantity": 9
+    }
+  ]
 }
