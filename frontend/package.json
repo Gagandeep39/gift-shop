@@ -1,6 +1,9 @@
 {
   "name": "frontend",
   "version": "0.0.0",
+  "author": {
+    "name": "Gagandeep Singh"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
