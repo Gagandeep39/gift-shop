@@ -29,8 +29,10 @@ import { AdminComponent } from './components/admin/admin.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { httpInterceptors } from './providers';
 
 @NgModule({
   declarations: [
@@ -60,8 +62,12 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    httpInterceptors,
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
