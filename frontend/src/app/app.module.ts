@@ -29,6 +29,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
