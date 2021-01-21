@@ -78,9 +78,9 @@ public class CartServiceImpl implements CartService {
 			productInOrder.setProductStock(itemDto.getQuantity());
 			productInOrder.setProductPrice(productInfo.getProductPrice());
 		}
-		productInOrderRepository.save(productInOrder);
+		productInOrderRepository.saveAndFlush(productInOrder);
 
-		return cart;
+		return cartRepo.findByUserDetails_UserDetailsId(userId).orElseThrow(() -> new CustomException("user", "Invalid User ID"));
 	}
 	
 	@Override
@@ -94,7 +94,8 @@ public class CartServiceImpl implements CartService {
 			productInOrderRepository.deleteById(toBeDeleted.get().getProductInOrderId());
 		}
 		else throw new CustomException("product", "Product not in cart");
-		return fetchCartById(cart.getCartId());
+		// TODO - Return boolean as this cart is redundant
+		return cart;
 	}
 
 	@Override
