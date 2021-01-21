@@ -39,11 +39,16 @@
 
 .logo {
   padding: 24px;
-  padding-bottom: 30px;
   height: 204px;
   transition: all 0.5s;
 }
 
 .logo:hover {
   transform: scale(1.3);
+}
+
+.title {
+  height: 100px;
+
+  padding-bottom: 30px;
 }
