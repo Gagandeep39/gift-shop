@@ -36,6 +36,25 @@ nav {
   border-bottom: 2px solid black;
 }
 
+.search-hover {
+  width: 150px;
+  font-size: x-large;
+  transition: width 0.2s ease-in-out;
+  background-image: url('/assets/images/search.svg');
+  background-repeat: no-repeat;
+  background-position: 90% 50%;
+  padding: 8px 20px 8px 8px;
+  /* padding-right: 12px; */
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.search-hover:hover, .search-hover:focus {
+  width:400px;
+  cursor: pointer;
+}
 
 /* 
 px - Spacing in nav items
