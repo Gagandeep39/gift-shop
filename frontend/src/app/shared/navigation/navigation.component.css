@@ -24,10 +24,19 @@ nav {
   font-size: x-large;
 }
 
+.navbar-nav li a {
+  border-bottom: 2px solid transparent;
+  transition: 0.5s;
+  line-height:2em;
+  
+}
 
 .navbar-nav li a:hover{
-  transform: scale(1.3);
+  /* transform: scale(1.3); */ 
+  border-bottom: 2px solid black;
 }
+
+
 /* 
 px - Spacing in nav items
 py-3 - Increases height
