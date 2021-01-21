@@ -44,16 +44,16 @@ nav {
   background-repeat: no-repeat;
   background-position: 90% 50%;
   padding: 8px 20px 8px 8px;
-  /* padding-right: 12px; */
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .search-hover:hover, .search-hover:focus {
   width:400px;
   cursor: pointer;
+  outline: none;
 }
 
 /* 
