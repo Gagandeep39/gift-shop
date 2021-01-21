@@ -5,7 +5,7 @@
  * @modify date 2021-01-20 11:58:11
  * @desc [description]
  */
-package com.cg.cartservice.config;
+package com.cg.gatewayserver.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,15 +27,16 @@ public class SwaggerConfig {
 
   @Bean
   public Docket api() {                
-      return new Docket(DocumentationType.SWAGGER_2)
-        .select().apis(RequestHandlerSelectors.basePackage("com.cg")).build()
+      return new Docket(DocumentationType.SWAGGER_2)    
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.cg")).build()   
         .apiInfo(apiInfo());
   }
 
   private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
-      .title("Gift Shop - Product Service")
-      .description("Provide a product Catalog")
+      .title("Gift Shop - Gateway Service")
+      .description("Entrypoint")
       .license("Apache 2.0")
       .licenseUrl("No URL")
       .version("1.0")
