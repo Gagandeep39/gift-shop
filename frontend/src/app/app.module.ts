@@ -1,3 +1,10 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-21 12:46:55
+ * @modify date 2021-01-21 12:46:55
+ * @desc Root module
+ */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -18,6 +25,10 @@ import { ViewProductComponent } from './components/admin/view-product/view-produ
 import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/products/orders/orders.component';
 import { CheckoutComponent } from './components/products/checkout/checkout.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { NavigationComponent } from './shared/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +46,11 @@ import { CheckoutComponent } from './components/products/checkout/checkout.compo
     ViewProductComponent,
     ProductsComponent,
     OrdersComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AdminComponent,
+    FooterComponent,
+    NotFoundComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
