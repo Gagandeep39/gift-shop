@@ -1,0 +1,68 @@
+nav {
+  padding: 0 54px;
+  /* background: red !important; */
+}
+
+.brand-logo {
+  height: 60px;
+  width: auto;
+  transform: scale(1);
+  transition: 0.1s;
+}
+
+.brand-logo:hover {
+  transform: scale(1.3);
+}
+
+.navbar-nav {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.navbar-nav:hover {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.navbar-nav li a {
+  border-bottom: 2px solid transparent;
+  transition: 0.5s;
+  line-height:2em;
+  
+}
+
+.navbar-nav li a:hover{
+  /* transform: scale(1.3); */ 
+  border-bottom: 2px solid black;
+}
+
+.search-hover {
+  width: 150px;
+  font-size: x-large;
+  transition: width 0.2s ease-in-out;
+  background-image: url('/assets/images/search.svg');
+  background-repeat: no-repeat;
+  background-position: 90% 50%;
+  padding: 8px 20px 8px 8px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-right: 12px;
+}
+
+.search-hover:hover, .search-hover:focus {
+  width:400px;
+  cursor: pointer;
+  outline: none;
+}
+
+.navbar{
+  box-shadow: 0px 8px 8px 0.1px rgba(0,0,0,.1);
+  }
+
+/* 
+px - Spacing in nav items
+py-3 - Increases height
+ml-auto - Align right
+*/

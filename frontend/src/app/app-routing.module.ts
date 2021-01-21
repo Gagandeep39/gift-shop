@@ -11,8 +11,10 @@ import { AddProductComponent } from './components/admin/add-product/add-product.
 import { AdminComponent } from './components/admin/admin.component';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { ViewProductComponent } from './components/admin/view-product/view-product.component';
+import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
 import { CartComponent } from './components/products/cart/cart.component';
 import { CartSummaryComponent } from './components/products/checkout/cart-summary/cart-summary.component';
 import { CheckoutComponent } from './components/products/checkout/checkout.component';
@@ -26,6 +28,8 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forgotpassword', component: RequestQuestionComponent },
+  { path: 'changepassword', component: ChangePasswordComponent },
   {
     path: 'products',
     component: ProductsComponent,
