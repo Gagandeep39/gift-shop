@@ -33,8 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { httpInterceptors } from './providers';
-import { RequestPasswordComponent } from './components/auth/request-password/request-password.component';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
+import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
 
 @NgModule({
   declarations: [
@@ -57,8 +57,8 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
     FooterComponent,
     NotFoundComponent,
     NavigationComponent,
-    RequestPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    RequestQuestionComponent
   ],
   imports: [
     BrowserModule,
