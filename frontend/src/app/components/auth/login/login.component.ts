@@ -1,3 +1,10 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-22 01:46:26
+ * @modify date 2021-01-22 01:46:26
+ * @desc [description]
+ */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
