@@ -17,8 +17,13 @@
   background-size: cover;
   background-position: center;
   border-radius: 2px 0 0 2px;
+  opacity: 0.8;
+  transition: opacity 0.5s;
 }
 
+.front-img:hover {
+  opacity: 1;
+}
 /* Fixes extra white content on right */
 .row {
   margin: 0;
