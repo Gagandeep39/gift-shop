@@ -19,8 +19,8 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  authServiceUrl = `${environment.protocol}${environment.applicationUrl}/${environment.authService}`;
-  // authServiceUrl = `http://localhost:9100`;
+  authServiceUrl = `${environment.protocol}${environment.applicationUrl}/${environment.authService}/auth`;
+  // authServiceUrl = `http://localhost:9100/auth`;
 
   constructor(
     private http: HttpClient,
@@ -31,7 +31,7 @@ export class AuthService {
 
   login(formData) {
     return this.http
-      .post(`${this.authServiceUrl}/auth/login`, formData)
+      .post(`${this.authServiceUrl}/login`, formData)
       .pipe(tap((user: User) => {
         this.saveToSessionStorage(user);
         this.eventServie.loggedInUser.next(user);
