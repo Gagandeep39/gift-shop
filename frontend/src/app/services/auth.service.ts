@@ -20,6 +20,7 @@ import { tap } from 'rxjs/operators';
 export class AuthService {
 
   authServiceUrl = `${environment.protocol}${environment.applicationUrl}/${environment.authService}`;
+  // authServiceUrl = `http://localhost:9100`;
 
   constructor(
     private http: HttpClient,
