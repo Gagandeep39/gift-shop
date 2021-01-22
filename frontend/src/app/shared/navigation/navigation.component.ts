@@ -21,6 +21,7 @@ export class NavigationComponent implements OnInit {
     { name: 'Register', link: '/register' },
   ];
   adminTabs = [
+    { name: 'About', link: '/about' },
     { name: 'Add', link: '/admin/add' },
     { name: 'View', link: '/admin/view' },
   ];
