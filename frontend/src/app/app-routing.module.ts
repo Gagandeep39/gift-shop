@@ -20,6 +20,8 @@ import { CartSummaryComponent } from './components/products/checkout/cart-summar
 import { CheckoutComponent } from './components/products/checkout/checkout.component';
 import { PaymentComponent } from './components/products/checkout/payment/payment.component';
 import { ShippingDetailsComponent } from './components/products/checkout/shipping-details/shipping-details.component';
+import { DeliveryHistoryComponent } from './components/products/orders/delivery-history/delivery-history.component';
+import { OrderHistoryComponent } from './components/products/orders/order-history/order-history.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -36,6 +38,8 @@ const routes: Routes = [
     children: [
       { path: '', component: ProductListComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'orders', component: OrderHistoryComponent },
+      { path: 'delivery/:orderId', component: DeliveryHistoryComponent },
       {
         path: 'checkout',
         component: CheckoutComponent,
