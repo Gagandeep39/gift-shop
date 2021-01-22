@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   align-content: center;
   justify-content: space-evenly;
-  margin: 0 124px;
+  padding: 24px 124px;
   /* flex-direction: column; */
 }
 
@@ -13,9 +13,21 @@
   height: max-content;
   height: auto;
   margin: 12px;
-  border: 1px solid black;
   border-radius: 4px;
-  background: chartreuse;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* Fixes border radius on images */
+  overflow: hidden;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  /* transform: scale(1.02); */
+  transform: scale(1.1);
+  /* margin-top: 5px;
+  margin-bottom: 5px; */
+  box-shadow: 0 0 12px 6px rgba(0, 0, 0, 0.2);
 }
 
 .product-img {
@@ -25,7 +37,7 @@
   /* Scale object while mantaining aspect ratio */
   object-fit: cover;
   /* Moved  */
-  object-position: center
+  object-position: center;
 }
 
 .product-body {
