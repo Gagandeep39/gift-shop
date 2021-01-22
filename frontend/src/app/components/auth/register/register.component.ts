@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
           this.message =
             'Successfully Created user with ID ' + response['userId'];
           setTimeout(() => {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/login');
           }, 3000);
         },
         (error) => {
