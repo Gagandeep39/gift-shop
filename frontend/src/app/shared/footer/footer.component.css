@@ -1,5 +1,7 @@
 footer {
   text-align: center;
+  /* Remove later */
+  padding-left: 36px;
 }
 .brand-logo {
   height: 60px;
