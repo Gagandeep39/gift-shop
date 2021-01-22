@@ -20,10 +20,12 @@
   overflow: hidden;
   transition: 0.2s;
   cursor: pointer;
+  opacity: 0.9;
 }
 
 .product-card:hover {
   /* transform: scale(1.02); */
+  opacity: 1;
   transform: scale(1.1);
   /* margin-top: 5px;
   margin-bottom: 5px; */
