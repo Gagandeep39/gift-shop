@@ -61,6 +61,9 @@ nav {
   box-shadow: 0px 8px 8px 0.1px rgba(0,0,0,.1);
   }
 
+.nav-item a {
+  cursor: pointer;
+}
 /* 
 px - Spacing in nav items
 py-3 - Increases height

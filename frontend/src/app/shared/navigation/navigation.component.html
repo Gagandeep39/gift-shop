@@ -9,20 +9,11 @@
     <li class="nav-item px-2">
       <input type="text" class="search-hover" name="" placeholder="Search..." />
     </li>
-    <li class="nav-item px-2">
-      <a class="nav-link" href="#">About</a>
+    <li class="nav-item px-2" *ngFor="let item of activeTabs">
+      <a class="nav-link" [routerLink]="[item.link]" > {{item.name}} </a>
     </li>
     <li class="nav-item px-2">
-      <a class="nav-link" href="#">Sign In</a>
-    </li>
-    <li class="nav-item px-2">
-      <a class="nav-link" href="#">Cart</a>
-    </li>
-    <li class="nav-item px-2">
-      <a class="nav-link" href="#">My Purchase</a>
-    </li>
-    <li class="nav-item px-2">
-      <a class="nav-link">Log Out</a>
+      <a class="nav-link" *ngIf="isLoggedIn" (click)="logOut()">Log Out</a>
     </li>
   </ul>
 </nav>
