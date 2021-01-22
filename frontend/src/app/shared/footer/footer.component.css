@@ -48,5 +48,8 @@ p {
 p,
 .footer-copyright {
   letter-spacing: 1px;
+}
+
+.footer-copyright {
   font-weight: bold;
 }
