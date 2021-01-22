@@ -49,7 +49,8 @@ export class AuthService {
   logout(): void {
     sessionStorage.clear();
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this.eventServie.loggedInUser.next(null);
+    this.router.navigate(['/']);
   }
 
   redirectIfLoggedIn() {

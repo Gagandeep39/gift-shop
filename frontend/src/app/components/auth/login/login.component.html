@@ -3,13 +3,12 @@
   <div class="col-12">
     <div class="my-card mx-auto">
       <div class="row">
-        <div class="col-6 front-img">
-        </div>
+        <div class="col-6 front-img"></div>
         <div class="col-6 user-form">
           <div class="p-5">
             <div class="text-center">
-              <img class="logo" src="assets/images/gift-box.svg" >
-              <img class="title" src="assets/images/logo-text.png" >
+              <img class="logo" [routerLink]="['/']" src="assets/images/gift-box.svg" />
+              <img class="title" [routerLink]="['/']" src="assets/images/logo-text.png" />
             </div>
             <form class="user" [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="form-group">
@@ -84,6 +83,11 @@
                 ></span>
                 Login
               </button>
+              <a
+                class="btn btn-primary btn-block text-white btn-user"
+                [routerLink]="['/register']"
+                >Register
+              </a>
               <hr />
             </form>
             <div class="text-center">

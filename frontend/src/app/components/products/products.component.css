@@ -1,0 +1,7 @@
+.content {
+  background: yellow;
+  /* height: 800px; */
+}
+.allButFooter {
+  min-height: calc(100vh - 178px);
+}

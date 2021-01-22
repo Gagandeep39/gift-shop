@@ -35,6 +35,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { httpInterceptors } from './providers';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
+import { AboutUsComponent } from './components/products/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { RequestQuestionComponent } from './components/auth/request-question/req
     NotFoundComponent,
     NavigationComponent,
     ChangePasswordComponent,
-    RequestQuestionComponent
+    RequestQuestionComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

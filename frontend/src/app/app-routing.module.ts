@@ -15,11 +15,14 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
+import { AboutUsComponent } from './components/products/about-us/about-us.component';
 import { CartComponent } from './components/products/cart/cart.component';
 import { CartSummaryComponent } from './components/products/checkout/cart-summary/cart-summary.component';
 import { CheckoutComponent } from './components/products/checkout/checkout.component';
 import { PaymentComponent } from './components/products/checkout/payment/payment.component';
 import { ShippingDetailsComponent } from './components/products/checkout/shipping-details/shipping-details.component';
+import { DeliveryHistoryComponent } from './components/products/orders/delivery-history/delivery-history.component';
+import { OrderHistoryComponent } from './components/products/orders/order-history/order-history.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -36,6 +39,9 @@ const routes: Routes = [
     children: [
       { path: '', component: ProductListComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'orders', component: OrderHistoryComponent },
+      { path: 'about', component: AboutUsComponent },
+      { path: 'delivery/:orderId', component: DeliveryHistoryComponent },
       {
         path: 'checkout',
         component: CheckoutComponent,
@@ -58,6 +64,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'view', pathMatch: 'full' },
     ],
   },
+  { path: 'about', redirectTo: 'products/about', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: '404' },
