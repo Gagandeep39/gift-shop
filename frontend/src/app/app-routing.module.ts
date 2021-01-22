@@ -15,6 +15,7 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
+import { AboutUsComponent } from './components/products/about-us/about-us.component';
 import { CartComponent } from './components/products/cart/cart.component';
 import { CartSummaryComponent } from './components/products/checkout/cart-summary/cart-summary.component';
 import { CheckoutComponent } from './components/products/checkout/checkout.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
       { path: '', component: ProductListComponent },
       { path: 'cart', component: CartComponent },
       { path: 'orders', component: OrderHistoryComponent },
+      { path: 'about', component: AboutUsComponent },
       { path: 'delivery/:orderId', component: DeliveryHistoryComponent },
       {
         path: 'checkout',
@@ -62,6 +64,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'view', pathMatch: 'full' },
     ],
   },
+  { path: 'about', redirectTo: 'products/about', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: '404' },
