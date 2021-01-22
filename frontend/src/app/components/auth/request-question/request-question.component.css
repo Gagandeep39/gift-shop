@@ -52,3 +52,7 @@
 
   padding-bottom: 30px;
 }
+
+.text-center {
+  cursor: pointer;
+}

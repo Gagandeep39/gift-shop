@@ -7,8 +7,8 @@
         <div class="col-6 user-form">
           <div class="p-5">
             <div class="text-center">
-              <img class="logo" src="assets/images/gift-box.svg" />
-              <img class="title" src="assets/images/logo-text.png" />
+              <img class="logo" [routerLink]="['/']" src="assets/images/gift-box.svg" />
+              <img class="title" [routerLink]="['/']" src="assets/images/logo-text.png" />
             </div>
             <form class="user" [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="form-group">
