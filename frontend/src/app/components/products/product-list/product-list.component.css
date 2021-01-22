@@ -1,0 +1,14 @@
+.parent {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-evenly;
+  /* flex-direction: column; */
+}
+
+.product-card {flex: 1 16%;
+  max-width: 256px;
+  /* display: flex; */
+  margin: 12px;
+  border: 1px solid black;
+}
