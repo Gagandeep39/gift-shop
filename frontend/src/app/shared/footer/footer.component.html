@@ -1,11 +1,7 @@
 <footer class="page-footer font-small bg-light pt-4">
-  <!-- Footer Links -->
   <div class="container-fluid text-center text-md-left">
-    <!-- Grid row -->
     <div class="row">
-      <!-- Grid column -->
       <div class="col-md-5 mt-md-0 mt-3">
-        <!-- Content -->
         <a class="navbar-brand" [routerLink]="['/']">
           <img class="brand-logo" src="assets/images/gift-box.svg" />
           <img class="title" src="assets/images/logo-text.png" />
@@ -15,81 +11,61 @@
           Powai, 400072, Maharashtra, India
         </p>
       </div>
-      <!-- Grid column -->
-
       <hr class="clearfix w-100 d-md-none pb-3" />
-
-      <!-- Grid column -->
       <div class="col-md-2 mb-md-0 mb-3">
-        <!-- Links -->
         <h5 class="text-uppercase footer-title">Community</h5>
-
         <ul class="list-unstyled">
           <li>
-            <a class="footer-items" href="#!">About Us</a>
+            <a class="footer-items" [routerLink]="['/about']">About Us</a>
           </li>
           <li>
-            <a class="footer-items" href="#!">Home</a>
+            <a class="footer-items" [routerLink]="['/']">Home</a>
           </li>
         </ul>
       </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
       <div class="col-md-2 mb-md-0 mb-3">
-        <!-- Links -->
         <h5 class="text-uppercase footer-title">Links</h5>
 
         <ul class="list-unstyled text-dark">
           <li>
-            <a class="footer-items" href="#!">Cart</a>
+            <a class="footer-items" [routerLink]="['/products/cart']">Cart</a>
           </li>
           <li>
-            <a class="footer-items" href="#!">Purchases</a>
+            <a class="footer-items" [routerLink]="['/products/orders']">
+              Purchases
+            </a>
           </li>
         </ul>
       </div>
-
-      <!-- Grid column -->
       <div class="col-md-3 mb-md-0 mb-3">
-        <!-- Links -->
-        <h5 class="text-uppercase footer-title">&nbsp; Follow Us</h5>
-
+        <h5 class="text-uppercase footer-title">Follow Us</h5>
         <ul class="list-unstyled row">
           <li>
-            <a href="#!">
+            <a [routerLink]="['/']">
               <img class="social" src="/assets/images/twitter.svg" />
             </a>
           </li>
           <li>
-            <a href="#!">
+            <a [routerLink]="['/']">
               <img class="social" src="/assets/images/facebook.svg" />
             </a>
           </li>
           <li>
-            <a href="#!">
+            <a [routerLink]="['/']">
               <img class="social" src="/assets/images/instagram.svg" />
             </a>
           </li>
           <li>
-            <a href="#!">
+            <a [routerLink]="['/']">
               <img class="social" src="/assets/images/whatsapp.svg" />
             </a>
           </li>
         </ul>
       </div>
-
-      <!-- Grid column -->
     </div>
-    <!-- Grid row -->
   </div>
-  <!-- Footer Links -->
-
-  <!-- Copyright -->
   <div class="footer-copyright text-center py-1">
     © 2021 Copyright
     <a class="footer-items" [routerLink]="['/']"> Gift Shop</a>
   </div>
-  <!-- Copyright -->
 </footer>
-<!-- Footer -->

@@ -26,9 +26,11 @@ footer {
 .footer-title {
   font-weight: bolder;
   font-size: 120%;
+  letter-spacing: 2px;
 }
 
 .footer-items {
+  letter-spacing: 2px;
   align-items: center;
   font-size: 100%;
   text-decoration: none;
@@ -37,4 +39,14 @@ footer {
 
 .footer-items:hover {
   color: rgb(43, 43, 43);
+}
+
+p {
+  margin-top: 4px;
+}
+
+p,
+.footer-copyright {
+  letter-spacing: 1px;
+  font-weight: bold;
 }
