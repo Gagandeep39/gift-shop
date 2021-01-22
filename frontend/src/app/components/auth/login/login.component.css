@@ -61,3 +61,8 @@
 .text-center {
   cursor: pointer;
 }
+
+
+.logo:focus, .title:focus {
+  outline: none;
+}
