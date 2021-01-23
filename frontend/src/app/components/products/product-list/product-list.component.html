@@ -1,4 +1,14 @@
 <div class="parent">
-  <app-product-card class="product-card" *ngFor="let i of [].constructor(25)"></app-product-card>
-   
+  <app-product-card
+    class="product-card"
+    *ngFor="let item of productList"
+    [productId]="item.productId"
+    [productName]="item.productName"
+    [productPrice]="item.productPrice"
+    [productImageUrl]="item.productImageUrl"
+    [productDescription]="item.productDescription"
+    [productStatus]="item.productStatus"
+    [productQuantity]="item.productQuantity"
+    (addToCartEvent)="addToCart($event)"
+  ></app-product-card>
 </div>
