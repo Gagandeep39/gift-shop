@@ -1,8 +1,10 @@
 <div class="parent">
   <div *ngFor="let i of [].constructor(5)" class="product-card">
     <div class="img-container">
-        <button class="details">Details</button>
+        <div class="overlay">
+          <button class="details">Details</button>
         <button class="add">Add to Cart</button>
+        </div>
       <img
         class="product-img"
         src="/assets/images/celebration2.jpg"
