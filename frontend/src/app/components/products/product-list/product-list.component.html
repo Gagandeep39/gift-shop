@@ -1,25 +1,35 @@
 <div class="parent">
   <div *ngFor="let i of [].constructor(5)" class="product-card">
-    <img
-      class="product-img"
-      src="/assets/images/celebration3.jpg"
-      alt="Denim Jeans"
-    />
+    <div class="img-container">
+      <img
+        class="product-img"
+        src="/assets/images/celebration2.jpg"
+        alt="Denim Jeans"
+        
+      />
+      <!-- Display if Product disabled / quantity 0 -->
+      <div *ngIf="false"  class="product-img-sold"></div>
+    </div>
     <div class="product-body">
-      <h1>Tailored Jeans</h1> 
+      <h1>Tailored Jeans</h1>
       <p class="price">$19.99</p>
       <p>Some text about the jeans..</p>
       <p><button>Add to Cart</button></p>
     </div>
   </div>
   <div *ngFor="let i of [].constructor(5)" class="product-card">
-    <img
-      class="product-img"
-      src="/assets/images/celebration2.jpg"
-      alt="Denim Jeans"
-    />
+    <div class="img-container">
+      <img
+        class="product-img"
+        src="/assets/images/celebration3.jpg"
+        alt="Denim Jeans"
+        [ngStyle]="{'filter': false ? 'blur(4px)' : 'blur(4px)'}"
+      />
+      <!-- Display if Product disabled / quantity 0 -->
+      <div class="product-img-sold"></div>
+    </div>
     <div class="product-body">
-      <h1>Tailored Jeans</h1> 
+      <h1>Tailored Jeans</h1>
       <p class="price">$19.99</p>
       <p>Some text about the jeans..</p>
       <p><button>Add to Cart</button></p>
