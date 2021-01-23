@@ -1,1 +1,19 @@
-<p>product-card works!</p>
+
+  <div class="img-container">
+      <div class="overlay">
+        <button class="details">Details</button>
+      <button class="add">Add to Cart</button>
+      </div>
+    <img
+      class="product-img"
+      src="/assets/images/celebration2.jpg"
+      alt="Denim Jeans"
+    />
+    <!-- Display if Product disabled / quantity 0 -->
+    <div *ngIf="false" class="product-img-sold"></div>
+  </div>
+  <div class="product-body">
+    <h1 class="product-name">Tailored Jeans</h1>
+    <p class="product-description">Some text about the jeans..</p>
+    <p class="product-price">₹19.99</p>
+  </div>
