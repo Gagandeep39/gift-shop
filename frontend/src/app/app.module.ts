@@ -37,6 +37,7 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
 import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
 import { AboutUsComponent } from './components/products/about-us/about-us.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
+import { ProductCardComponent } from './components/products/product-list/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ProductListComponent } from './components/products/product-list/product
     RequestQuestionComponent,
     AboutUsComponent,
     ProductListComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
