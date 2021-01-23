@@ -67,17 +67,28 @@
   top: 30%;
 }
 
+/* Related to animation on hover */
 .img-container {
   position: relative;
   text-align: center;
   width: 100%;
 }
 
+/* Initially button are hidden */
 .details,
 .add {
   position: absolute;
   opacity: 0;
 }
+
+/* Ading blur behind in background */
+.img-container:hover .product-img {
+  filter: blur(2px);
+  z-index: 0;
+}
+
+
+/* Centering button aboce te background */
 .img-container:hover .overlay .details {
   opacity: 1;
   z-index: 1;
@@ -88,6 +99,7 @@
   transform: translateX(-50%);
 }
 
+/* Centering button aboce te background */
 .img-container:hover .overlay .add {
   opacity: 1;
   top: 60%;
@@ -95,11 +107,6 @@
   z-index: 1;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.img-container:hover .product-img {
-  filter: blur(2px);
-  z-index: 0;
 }
 
 /* Buttons */
