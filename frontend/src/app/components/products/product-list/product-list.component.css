@@ -38,6 +38,7 @@
   /* Moved  */
   object-position: center;
   /* Code requied for out of stock */
+  transition: 0.2s;
 }
 
 .product-body {
@@ -68,4 +69,32 @@
 
 .img-container {
   position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.details, .add {
+  position: absolute;
+  opacity: 0;
+}
+.img-container:hover .details {
+  opacity: 1;
+  z-index: 1;
+  top: 30%;
+  /* Center lign */
+  z-index: 1;left: 50%;
+  transform: translateX(-50%);
+}
+
+.img-container:hover .add {
+  opacity: 1;
+  top: 60%;
+  /* Center lign */
+  z-index: 1;left: 50%;
+  transform: translateX(-50%);
+}
+
+.img-container:hover .product-img{
+  filter: blur(2px);
+  z-index: 0;
 }
