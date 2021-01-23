@@ -36,6 +36,8 @@ import { httpInterceptors } from './providers';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
 import { AboutUsComponent } from './components/products/about-us/about-us.component';
+import { ProductListComponent } from './components/products/product-list/product-list.component';
+import { ProductCardComponent } from './components/products/product-list/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { AboutUsComponent } from './components/products/about-us/about-us.compon
     NavigationComponent,
     ChangePasswordComponent,
     RequestQuestionComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ProductListComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,

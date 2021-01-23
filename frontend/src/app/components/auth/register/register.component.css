@@ -56,6 +56,13 @@
   height: 100px;
   padding-bottom: 30px;
   padding-left: 33%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.title:hover, .title:focus {
+  outline: none;
+  transform: scaleX(1.2)
 }
 
 .btn {

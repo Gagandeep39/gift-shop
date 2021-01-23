@@ -1,5 +1,7 @@
 footer {
   text-align: center;
+  /* Remove later */
+  padding-left: 36px;
 }
 .brand-logo {
   height: 60px;
@@ -48,5 +50,9 @@ p {
 p,
 .footer-copyright {
   letter-spacing: 1px;
+}
+
+.footer-copyright {
   font-weight: bold;
+  padding-bottom: 8px;
 }
