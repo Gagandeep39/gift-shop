@@ -11,7 +11,7 @@
 }
 
 .content{
-  padding: 10%;
+  padding: 5%;
 }
 
 .root {
@@ -120,4 +120,12 @@
 .breadcrumb-item a:hover {
   color: #21a0bd;
   border-bottom: 1px solid #21a0bd;
+}
+
+
+/* Price */
+.product-price {
+  color: #24b7d8;
+  font-weight: lighter;
+  font-size: 200%;
 }
