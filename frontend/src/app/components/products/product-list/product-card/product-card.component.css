@@ -145,3 +145,9 @@
   /* width: 200px; */
   transform: scaleX(1.5);
 }
+
+.product-price {
+  color: #24b7d8;
+  font-size: 120%;
+  font-weight: normal;
+}
