@@ -4,7 +4,7 @@
     <div class="my-card">
       <div class="row">
         <div class="col-6 front-img"></div>
-        <div class="col-6 user-form">
+        <div class="col-6 section-product">
           <div class="p-5">
             <div class="section-back">
               <img class="back-img" src="/assets/images/back.svg" alt="" />
@@ -25,6 +25,12 @@
               Facilisis sed odio morbi quis commodo odio aenean sed adipiscing.
               Neque aliquam vestibulum morbi blandit cursus risus at.
             </p>
+            <div class="quantity">
+              <button class="quantity-btn-left" (click)="decrement()">-</button>
+              <input class="quantity-input" type="number" placeholder="0" [(ngModel)]="count" onkeydown="return false">
+              <button class="quantity-btn-right" (click)="increment()">+</button>
+              <p class="quantity-stock">Available Stock: 999</p>
+            </div>
             <div class="cart-buttons">
               <button class="cart-btn" >Add to Cart</button>
               <button class="cart-btn" >View Cart</button>
