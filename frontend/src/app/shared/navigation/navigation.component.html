@@ -11,11 +11,12 @@
       <input type="text" class="search-hover" name="" placeholder="Search..." />
     </li>
     <li class="dropdown" *ngIf="isLoggedIn">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         All Products
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a *ngFor="let category of categories" class="dropdown-item" (click)="changeCategory(category)"> {{ category.categoryName }} </a>
+        <a  class="dropdown-item" (click)="changeCategory(null)"> All Products </a>
       </div>
     </li>
     <li class="nav-item px-2" *ngFor="let item of activeTabs">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { windowWhen } from 'rxjs/operators';
 import { Category } from 'src/app/models/category.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { CategoryService } from 'src/app/services/category.service';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -27,30 +27,12 @@ export class NavigationComponent implements OnInit {
     { name: 'Add', link: '/admin/add' },
     { name: 'View', link: '/admin/view' },
   ];
-  categories: Category[] = [
-    {
-      categoryId: 100001,
-      categoryName: 'Test',
-      categoryDescription: 'Something something',
-      categoryImageUrl: 'windowWhen.tedt.com',
-    },
-    {
-      categoryId: 100002,
-      categoryName: 'Test 2',
-      categoryDescription: 'Something something',
-      categoryImageUrl: 'windowWhen.tedt.com',
-    },
-    {
-      categoryId: 100003,
-      categoryName: 'Test 3',
-      categoryDescription: 'Something something',
-      categoryImageUrl: 'windowWhen.tedt.com',
-    },
-  ];
+  categories: Category[] = [];
 
   constructor(
     private authService: AuthService,
-    private eventService: EventService
+    private eventService: EventService,
+    private categoryService: CategoryService,
   ) {
     this.initializeApp();
     this.initializeNavItems();
@@ -64,7 +46,14 @@ export class NavigationComponent implements OnInit {
     }
     // Log out user if toke already expired
     else this.authService.logout();
+    this.initCategories();
   }
+  initCategories() {
+    this.categoryService.fetchAllCategories().subscribe((res: Category[]) => {
+      this.categories = res;
+    })
+  }
+
   initializeNavItems() {
     this.eventService.loggedInUser.subscribe((res) => {
       if (res === null) {
