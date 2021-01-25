@@ -1,17 +1,37 @@
 <div class="parent">
   <!-- Displyed when no category is selected -->
-  <div class="category" *ngIf="!activeCategory && !productQuery ">
+  <div class="category" *ngIf="!activeCategory && !productQuery">
     All Products
+    <span *ngIf="loadingService.loading" class="spinner-grow"></span>
   </div>
   <!-- Displayed when we pecify a cateogy -->
   <div class="category" *ngIf="!productQuery && activeCategory">
-    {{ activeCategory?.categoryName}}
-    <img *ngIf="activeCategory !== null" (click)="resetAll()" class="category-icon" data-toggle="tooltip" data-placement="right"  title="Show all categories" src="/assets/images/x-circle.svg" alt="">
+    {{ activeCategory?.categoryName }}
+    <img
+      *ngIf="activeCategory !== null"
+      (click)="resetAll()"
+      class="category-icon"
+      data-toggle="tooltip"
+      data-placement="right"
+      title="Show all categories"
+      src="/assets/images/x-circle.svg"
+      alt=""
+    />
+    <span *ngIf="loadingService.loading" class="spinner-grow"></span>
   </div>
   <!-- Displayed when we enter a seacrh criteria -->
   <div class="category" *ngIf="!activeCategory && productQuery">
-    {{  'Search: ' + productQuery }}
-    <img (click)="resetAll()" class="category-icon" data-toggle="tooltip" data-placement="right"  title="Show all categories" src="/assets/images/x-circle.svg" alt="">
+    {{ "Search: " + productQuery }}
+    <img
+      (click)="resetAll()"
+      class="category-icon"
+      data-toggle="tooltip"
+      data-placement="right"
+      title="Show all categories"
+      src="/assets/images/x-circle.svg"
+      alt=""
+    />
+    <span *ngIf="loadingService.loading" class="spinner-grow"></span>
   </div>
   <app-product-card
     class="product-card"

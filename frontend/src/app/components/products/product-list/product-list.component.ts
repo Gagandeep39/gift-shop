@@ -39,8 +39,10 @@ export class ProductListComponent implements OnInit {
 
   // Fetch from server
   fetchAll() {
+    this.loadingService.enableLoading();
     this.productService.fetchAllProducts().subscribe((res: Product[]) => {
       this.productList = res;
+      this.loadingService.disableLoading();
     }).closed;
   }
 
@@ -65,6 +67,7 @@ export class ProductListComponent implements OnInit {
   // Subbscribe to search
   subscribeToSearchQuery() {
     this.eventService.searchQueryChanged.subscribe((query) => {
+      this.loadingService.enableLoading();
       // Fetch and unsubscribe
       if (!query) this.fetchAll();
       else
@@ -72,6 +75,7 @@ export class ProductListComponent implements OnInit {
           this.productQuery = query;
           this.activeCategory = null;
           this.productList = res;
+          this.loadingService.disableLoading();
         }).closed;
     });
   }
@@ -79,6 +83,7 @@ export class ProductListComponent implements OnInit {
   // Category change subscription
   subscribeToCategories() {
     this.eventService.categoryChanged.subscribe((category) => {
+      this.loadingService.enableLoading();
       // Reset previous cateogry
       this.activeCategory = null;
       this.productQuery = null;
@@ -90,6 +95,7 @@ export class ProductListComponent implements OnInit {
             this.productQuery = null;
             this.activeCategory = category;
             this.productList = res;
+            this.loadingService.disableLoading();
           }).closed;
     });
   }

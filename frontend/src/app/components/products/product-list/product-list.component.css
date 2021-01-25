@@ -57,3 +57,12 @@
   transform: scale(1.5);
   cursor: pointer;
 }
+
+/* Loading spinner */
+.spinner-grow {
+  vertical-align: middle;
+  color: #fb5a69;
+  height: 3rem;
+  width: 3rem;
+  margin-left: 24px;
+}
