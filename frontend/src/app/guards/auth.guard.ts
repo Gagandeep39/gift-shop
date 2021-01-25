@@ -7,6 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthModalService } from '../services/auth-modal.service';
 import { AuthService } from '../services/auth.service';
 import { EventService } from '../services/event.service';
 
@@ -17,6 +18,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authServie: AuthService,
     private router: Router,
+    private modalAuthService: AuthModalService,
   ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -27,7 +29,8 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (!this.authServie.isAuthenticated()) {
-      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+      this.modalAuthService.open(state.url);
+      // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
       return false;
     }
     return true;
