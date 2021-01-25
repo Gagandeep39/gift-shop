@@ -1,1 +1,73 @@
-<p>product-details works!</p>
+<div class="root">
+  <div
+    class="background"
+    [ngStyle]="{ 'background-image': 'url(' + product?.productIcon + ')' }"
+  ></div>
+  <div class="content">
+    <div class="my-card">
+      <div class="row">
+        <div
+          class="col-6 front-img"
+          [ngStyle]="{ 'background-image': 'url(' + product?.productIcon + ')' }"
+        ></div>
+        <div class="col-6 section-product">
+          <div class="p-5">
+            <div class="section-back" (click)="goBack()">
+              <img class="back-img" src="/assets/images/back.svg" alt="" />
+              <span class="back-text">Back to Products</span>
+            </div>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a [routerLink]="['/']">Home</a>
+                </li>
+                <li class="breadcrumb-item" (click)="redirectToCategory()">
+                  <a> {{ product?.categoryName }} </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  {{ product?.productName }}
+                </li>
+              </ol>
+            </nav>
+            <h1 class="product-title">{{ product?.productName }}</h1>
+            <h2 class="product-price">₹ {{ product?.productPrice }}</h2>
+            <p class="product-description">
+              {{ product?.productDescription }}
+            </p>
+            <div class="quantity">
+              <button class="quantity-btn-left" (click)="decrement()">-</button>
+              <input
+                class="quantity-input"
+                type="number"
+                placeholder="1"
+                [(ngModel)]="count"
+                onkeydown="return false"
+              />
+              <button class="quantity-btn-right" (click)="increment()">
+                +
+              </button>
+              <p class="quantity-stock">
+                Available Stock: {{ product?.productStock }}
+              </p>
+            </div>
+            <div class="cart-buttons">
+              <button class="cart-btn" (click)="addNewItem(12)">
+                <span
+                  *ngIf="loadingService.loading"
+                  class="spinner-border spinner-border-sm"
+                ></span>
+                Add to Cart
+              </button>
+              <button class="cart-btn">View Cart</button>
+            </div>
+            <button class="checkout-btn">Checkout</button> <br />
+            <div class="section-info">
+              <img class="info-img" src="/assets/images/search.svg" alt="" />
+              <span class="info-text">Search for similar products</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

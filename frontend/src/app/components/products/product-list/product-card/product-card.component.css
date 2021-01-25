@@ -145,3 +145,15 @@
   /* width: 200px; */
   transform: scaleX(1.5);
 }
+
+.product-price {
+  color: #1f9db9;
+  font-size: 130%;
+  font-weight: 500;
+
+}
+
+hr {
+  height:  12px;
+  border: transparent;
+}

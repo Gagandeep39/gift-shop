@@ -7,6 +7,8 @@
  */
 package com.cg.productservice.repositories;
 
+import java.util.List;
+
 import com.cg.productservice.entities.ProductInfo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +18,6 @@ import org.springframework.stereotype.Repository;
 public interface ProductInfoRepository extends JpaRepository<ProductInfo, Long> {
 
 	// List<ProductInfo> fetchProductByCategory(String category);
+
+	List<ProductInfo> findByProductNameContainingIgnoreCase(String name);
 }

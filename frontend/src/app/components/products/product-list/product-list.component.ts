@@ -6,7 +6,10 @@
  * @desc [description]
  */
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product.model';
+import { EventService } from 'src/app/services/event.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -14,82 +17,44 @@ import { LoadingService } from 'src/app/services/loading.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  productList = [
-    {
-      productId: 100001,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration2.jpg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'ENABLED',
-    },
-    {
-      productId: 100002,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration3.jpg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'ENABLED',
-    },
-    {
-      productId: 100003,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration.jpeg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'DISABLED',
-    },
-    {
-      productId: 100004,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration2.jpg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 0,
-      productStatus: 'ENABLED',
-    },
-    {
-      productId: 100005,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration2.jpg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'DISABLED',
-    },
-    {
-      productId: 100006,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/confetti1.gif',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'ENABLED',
-    },
-    {
-      productId: 100007,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/confetti2.gif',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'ENABLED',
-    },
-  ];
+  productList: Product[] = [];
+  activeCategory = null;
+  productQuery = null;
 
-  constructor(private loadingService: LoadingService) {}
+  constructor(
+    public loadingService: LoadingService,
+    private eventService: EventService,
+    private productService: ProductService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initProducts();
+    this.subscribeToCategories();
+    this.subscribeToSearchQuery();
+  }
+
+  initProducts() {
+    this.fetchAll();
+  }
+
+  // Fetch from server
+  fetchAll() {
+    this.loadingService.enableLoading();
+    this.productService.fetchAllProducts().subscribe((res: Product[]) => {
+      this.productList = res;
+      this.loadingService.disableLoading();
+    }).closed;
+  }
+
+  // Reset all search queries
+  resetAll() {
+    this.eventService.categoryChanged.next(null);
+    this.eventService.searchQueryChanged.next(null);
+    this.productQuery = null;
+    this.productList = null;
+    this.activeCategory = null;
+    this.fetchAll();
+  }
 
   addToCart(itemId) {
     console.log(itemId);
@@ -97,6 +62,41 @@ export class ProductListComponent implements OnInit {
     setTimeout(() => {
       this.loadingService.disableLoading();
     }, 2000);
-    
+  }
+
+  // Subbscribe to search
+  subscribeToSearchQuery() {
+    this.eventService.searchQueryChanged.subscribe((query) => {
+      this.loadingService.enableLoading();
+      // Fetch and unsubscribe
+      if (!query) this.fetchAll();
+      else
+        this.productService.findByName(query).subscribe((res: Product[]) => {
+          this.productQuery = query;
+          this.activeCategory = null;
+          this.productList = res;
+          this.loadingService.disableLoading();
+        }).closed;
+    });
+  }
+
+  // Category change subscription
+  subscribeToCategories() {
+    this.eventService.categoryChanged.subscribe((category) => {
+      this.loadingService.enableLoading();
+      // Reset previous cateogry
+      this.activeCategory = null;
+      this.productQuery = null;
+      if (!category) this.fetchAll();
+      else
+        this.productService
+          .findByCategory(category)
+          .subscribe((res: Product[]) => {
+            this.productQuery = null;
+            this.activeCategory = category;
+            this.productList = res;
+            this.loadingService.disableLoading();
+          }).closed;
+    });
   }
 }

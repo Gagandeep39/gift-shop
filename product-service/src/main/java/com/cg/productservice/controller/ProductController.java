@@ -41,6 +41,11 @@ public class ProductController {
     return productInfoService.fetchAll();
   }
 
+  @GetMapping("/name/{name}")
+  public List<ProductInfoDto> fetchByName(@PathVariable String name) {
+    return productInfoService.fetchByName(name);
+  }
+
   @GetMapping("/category/{category}")
   public List<ProductInfoDto> fetchByCategory(@PathVariable String category) {
     return productInfoService.fetchByCategory(category);
