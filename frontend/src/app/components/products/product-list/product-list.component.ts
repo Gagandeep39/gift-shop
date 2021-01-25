@@ -28,9 +28,9 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initProducts();
     this.subscribeToCategories();
     this.subscribeToSearchQuery();
-    this.initProducts();
   }
 
   initProducts() {
