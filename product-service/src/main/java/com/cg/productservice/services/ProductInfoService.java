@@ -21,6 +21,8 @@ public interface ProductInfoService {
 
   public ProductInfoDto fetchById(Long id);
 
+  public List<ProductInfoDto> fetchByName(String name);
+
   public ProductInfoDto increaseStock(StockDto stockDto);
 
   public ProductInfoDto reduceStock(StockDto stockDto);

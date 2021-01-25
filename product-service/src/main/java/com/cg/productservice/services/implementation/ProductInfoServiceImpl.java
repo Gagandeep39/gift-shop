@@ -100,4 +100,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		return ProductMapper.EntityToDto(productInfoRepository.save(productInfo));
 	}
 
+	@Override
+	public List<ProductInfoDto> fetchByName(String name) {
+		return productInfoRepository.findByProductNameContainingIgnoreCase(name).stream().map(p -> ProductMapper.EntityToDto(p)).collect(Collectors.toList());
+	}
+
 }
