@@ -87,14 +87,21 @@ export class ProductListComponent implements OnInit {
       productStatus: 'ENABLED',
     },
   ];
-  activeCategory = '';
+  activeCategory = null;
 
   constructor(
     private loadingService: LoadingService,
-    private eventService: EventService
+    private eventService: EventService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscribeToCategories();
+  }
+  subscribeToCategories() {
+    this.eventService.categoryChanged.subscribe(res => {
+      this.activeCategory = res;
+    })
+  }
 
   addToCart(itemId) {
     console.log(itemId);
