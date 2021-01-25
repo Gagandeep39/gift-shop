@@ -61,7 +61,7 @@
               <button class="cart-btn" [routerLink]="['/products/cart']">View Cart</button>
             </div>
             <button class="checkout-btn">Checkout</button> <br />
-            <div class="section-info">
+            <div class="section-info" (click)="redirectToCategory()">
               <img class="info-img" src="/assets/images/search.svg" alt="" />
               <span class="info-text">Search for similar products</span>
             </div>
