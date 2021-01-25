@@ -105,6 +105,6 @@ export class ProductListComponent implements OnInit {
   }
 
   resetCategory() {
-    this.eventService.categoryChanged.next('');
+    this.eventService.categoryChanged.next(null);
   }
 }

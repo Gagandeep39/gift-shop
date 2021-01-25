@@ -7,6 +7,7 @@
  */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Category } from '../models/category.model';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class EventService {
 
   public resetPasswordData = new BehaviorSubject<any>(null);
   public loggedInUser = new BehaviorSubject<User>(null);
+  public categoryChanged = new BehaviorSubject<Category>(null);
 
   constructor() { }
 }
