@@ -26,6 +26,9 @@ import { OrderHistoryComponent } from './components/products/orders/order-histor
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
+import { AccessDeniedComponent } from './shared/access-denied/access-denied.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
@@ -38,13 +41,22 @@ const routes: Routes = [
     component: ProductsComponent,
     children: [
       { path: '', component: ProductListComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'orders', component: OrderHistoryComponent },
+      { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+      {
+        path: 'orders',
+        component: OrderHistoryComponent,
+        canActivate: [AuthGuard],
+      },
       { path: 'about', component: AboutUsComponent },
-      { path: 'delivery/:orderId', component: DeliveryHistoryComponent },
+      {
+        path: 'delivery/:orderId',
+        component: DeliveryHistoryComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'checkout',
         component: CheckoutComponent,
+        canActivate: [AuthGuard],
         children: [
           { path: 'summary', component: CartSummaryComponent },
           { path: 'shipping', component: ShippingDetailsComponent },
@@ -57,6 +69,8 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'Admin' },
     children: [
       { path: 'add', component: AddProductComponent },
       { path: 'update', component: UpdateProductComponent },
@@ -66,6 +80,7 @@ const routes: Routes = [
   },
   { path: 'about', redirectTo: 'products/about', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
+  { path: '403', component: AccessDeniedComponent },
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: '404' },
 ];

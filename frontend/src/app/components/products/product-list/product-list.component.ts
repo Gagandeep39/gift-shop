@@ -6,7 +6,10 @@
  * @desc [description]
  */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { AuthModalService } from 'src/app/services/auth-modal.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { EventService } from 'src/app/services/event.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -24,7 +27,10 @@ export class ProductListComponent implements OnInit {
   constructor(
     public loadingService: LoadingService,
     private eventService: EventService,
-    private productService: ProductService
+    private productService: ProductService,
+    private modalService: AuthModalService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -57,11 +63,17 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(itemId) {
-    console.log(itemId);
-    this.loadingService.enableLoading();
-    setTimeout(() => {
-      this.loadingService.disableLoading();
-    }, 2000);
+    if (this.checkForAuthAndShowPopUp()) {
+      this.loadingService.enableLoading();
+      setTimeout(() => {
+        this.loadingService.disableLoading();
+      }, 2000);
+    }
+  }
+  checkForAuthAndShowPopUp() {
+    if (this.authService.isAuthenticated()) return true;
+    this.modalService.open(this.router.url);
+    return false;
   }
 
   // Subbscribe to search

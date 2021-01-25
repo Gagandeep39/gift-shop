@@ -182,6 +182,8 @@
   transition: 0.1s;
   margin-top: 12px;
   font-style: italic;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   transform: scale(1);
   font-weight: lighter;
   vertical-align: middle;
@@ -253,8 +255,9 @@
 }
 
 .quantity-stock {
-color: rgba(179, 179, 179, 0.8);
+color: rgba(136, 136, 136, 0.8);
 padding-top: 8px;
+text-transform: uppercase;
 letter-spacing: 0.5px;
 }
 

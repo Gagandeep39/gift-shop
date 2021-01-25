@@ -7,7 +7,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -22,11 +22,14 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   loginSubscription: Subscription;
+  returnUrl;
+  
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnDestroy(): void {
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.redirectIfLoggedIn();
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.initForm();
   }
 
@@ -47,7 +51,7 @@ export class LoginComponent implements OnInit {
     this.loadingService.enableLoading();
     this.loginSubscription = this.authService.login(formData).subscribe(
       (response) => {
-        this.router.navigate(['/']);
+        this.router.navigateByUrl(this.returnUrl);
         this.loadingService.disableLoading();
       },
       (error) => {

@@ -9,6 +9,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { AuthModalService } from 'src/app/services/auth-modal.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { EventService } from 'src/app/services/event.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -20,13 +22,6 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductDetailsComponent implements OnInit {
   count = 1;
-  maxQuantity = 10;
-  productImageUrl = '/assets/images/celebration2.jpg';
-  productName;
-  productQuantity;
-  productDescription;
-  productCategory;
-  productPrice;
   productId;
   product: Product = null;
 
@@ -37,6 +32,8 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     public eventService: EventService,
+    private authService: AuthService,
+    private authModalService: AuthModalService
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +48,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   increment() {
-    if (this.count >= this.product.productStock) this.count = this.product.productStock;
+    if (this.count >= this.product.productStock)
+      this.count = this.product.productStock;
     else this.count++;
   }
   decrement() {
@@ -60,11 +58,13 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addNewItem(productId) {
-    this.loadingService.enableLoading();
-    setTimeout(() => {
-      this.loadingService.disableLoading();
-      this.router.navigateByUrl('/');
-    }, 2000);
+    if (this.checkForAuthAndShowPopUp()) {
+      this.loadingService.enableLoading();
+      setTimeout(() => {
+        this.loadingService.disableLoading();
+        this.router.navigateByUrl('/');
+      }, 2000);
+    }
   }
 
   goBack() {
@@ -72,7 +72,13 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   redirectToCategory() {
-    this.eventService.categoryChanged.next(this.product.categoryName)
+    this.eventService.categoryChanged.next(this.product.categoryName);
     this.router.navigateByUrl('/');
+  }
+
+  checkForAuthAndShowPopUp() {
+    if (this.authService.isAuthenticated()) return true;
+    this.authModalService.open(this.router.url);
+    return false;
   }
 }
