@@ -1,52 +1,81 @@
-<div class="container px-1 px-md-4 py-5 mx-auto">
+<div class="parent px-1 px-md-4 py-5 mx-auto">
   <div class="card">
     <div class="row d-flex justify-content-between px-3 top">
-      <div class="d-flex">
-        <h5>
-          ORDER <span class="text-primary font-weight-bold">#Y34XDHR</span>
-        </h5>
+      <div class="logo-container">
+        <img
+          [routerLink]="['/']"
+          class="title"
+          src="assets/images/logo-text.png"
+        />
       </div>
-      <div class="d-flex flex-column text-sm-right">
-        <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
-        <p>USPS <span class="font-weight-bold">234094567242423422898</span></p>
-      </div>
+      <hr />
+      <p class="summary">
+        Order #<span class="item">{{ orderId }} </span>
+      </p>
+      <p class="summary">
+        Current Status
+        <span class="item">
+          {{ OrderStaus[deliveryHistory.slice(-1)[0]?.orderStatus] }}
+        </span>
+      </p>
+      <p class="summary">
+        Updated On
+        <span class="item">
+          {{ formattedDate(deliveryHistory.slice(-1)[0]?.updatedOn) }}
+        </span>
+      </p>
     </div>
     <!-- Add class 'active' to progress -->
     <div class="row d-flex justify-content-center">
       <div class="col-12">
         <ul id="progressbar" class="text-center">
-          <li class="active step0"></li>
-          <li class="active step0"></li>
-          <li class="active step0"></li>
-          <li class="active step0"></li>
+          <li
+            *ngFor="let item of deliveryHistory"
+            class="active step0"
+            ata-toggle="popover"
+            [title]="OrderStaus[item.orderStatus]"
+            [attr.data-content]="'Updated On ' + formattedDate(item.updatedOn)"
+            data-placement="top"
+            onmouseenter="$(this).popover('show')"
+            onmouseout="$(this).popover('hide')"
+          ></li>
+          <!-- Display in active for remaining lements -->
+          <li
+            class="step0"
+            *ngFor="let i of [].constructor(4 - deliveryHistory.length)"
+          ></li>
         </ul>
       </div>
     </div>
-    <div class="row justify-content-between top">
-      <div class="row d-flex icon-content">
-        <img class="icon" src="https://i.imgur.com/9nnc9Et.png" />
-        <div class="d-flex flex-column">
-          <p class="font-weight-bold">Order<br />Processed</p>
-        </div>
+    <div class="row justify-content-between delivery-icon-container">
+      <div class="delivery-container row d-flex icon-content">
+        <img class="icon" src="/assets/images/created.svg" />
+        <p class="font-weight-bold">Order<br />Created</p>
       </div>
-      <div class="row d-flex icon-content">
-        <img class="icon" src="https://i.imgur.com/u1AzR7w.png" />
-        <div class="d-flex flex-column">
-          <p class="font-weight-bold">Order<br />Shipped</p>
-        </div>
+      <div class="delivery-container row icon-content">
+        <img class="icon" src="/assets/images/dispatched.svg" />
+        <p class="font-weight-bold">Order<br />Dispatched</p>
       </div>
-      <div class="row d-flex icon-content">
-        <img class="icon" src="https://i.imgur.com/TkPm63y.png" />
-        <div class="d-flex flex-column">
-          <p class="font-weight-bold">Order<br />En Route</p>
-        </div>
+      <div class="delivery-container row icon-content">
+        <img class="icon" src="/assets/images/out_for_delivery.svg" />
+        <p class="font-weight-bold">Out for<br />Delivery</p>
       </div>
-      <div class="row d-flex icon-content">
-        <img class="icon" src="https://i.imgur.com/HdsziHP.png" />
-        <div class="d-flex flex-column">
-          <p class="font-weight-bold">Order<br />Arrived</p>
-        </div>
+      <div class="delivery-container row icon-content">
+        <img class="icon" src="/assets/images/delivered.svg" />
+        <p class="font-weight-bold">Delivered</p>
       </div>
+    </div>
+    <div class="actions">
+      <button class="back-btn" (click)="goBack()">Back</button>
+      <button class="cancel-btn" (click)="cancelOrder()">
+        <span
+          *ngIf="loadingService.loading"
+          class="spinner-border spinner-border-sm"
+        ></span>
+        Cancel Order
+      </button>
     </div>
   </div>
 </div>
+
+<app-order-cancel-modal></app-order-cancel-modal>

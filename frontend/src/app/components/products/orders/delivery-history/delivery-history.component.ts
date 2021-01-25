@@ -5,15 +5,21 @@
  * @modify date 2021-01-25 22:36:58
  * @desc [description]
  */
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DeliveryHistory } from 'src/app/models/delivery-history.model';
-
+import { OrderStatus } from 'src/app/models/order-status.model';
+import { LoadingService } from 'src/app/services/loading.service';
+import { OrderCancelModalService } from 'src/app/services/order-cancel-modal.service';
 @Component({
   selector: 'app-delivery-history',
   templateUrl: './delivery-history.component.html',
   styleUrls: ['./delivery-history.component.css'],
 })
 export class DeliveryHistoryComponent implements OnInit {
+  OrderStaus = OrderStatus;
+  orderId;
   deliveryHistory: DeliveryHistory[] = [
     {
       orderId: 100001,
@@ -41,7 +47,43 @@ export class DeliveryHistoryComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    public loadingService: LoadingService,
+    private orderCancelModal: OrderCancelModalService
+  ) {
+    console.log(new Date('2021-01-23'));
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.orderId = this.route.snapshot.params['orderId'];
+  }
+
+  formattedDate(date) {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  cancelOrder() {
+    this.orderCancelModal.open();
+    this.orderCancelModal.watch().subscribe((res) => {
+      this.loadingService.enableLoading();
+      if (res === 'cancel-order')
+        setTimeout(() => {
+          // Cancel order and fetch order details
+          console.log('Order cancelled');
+          this.loadingService.disableLoading();
+        }, 2000);
+
+    }).closed;
+  }
 }
