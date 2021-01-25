@@ -21,4 +21,12 @@ export class ProductService {
   fetchAllProducts() {
     return this.http.get(this.productServiceUrl);
   }
+
+  findByName(name) {
+    return this.http.get(`${this.productServiceUrl}/name/${name}`);
+  }
+
+  findByCategory(category) {
+    return this.http.get(`${this.productServiceUrl}/category/${category}`);
+  }
 }

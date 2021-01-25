@@ -18,6 +18,7 @@ export class EventService {
   public resetPasswordData = new BehaviorSubject<any>(null);
   public loggedInUser = new BehaviorSubject<User>(null);
   public categoryChanged = new BehaviorSubject<Category>(null);
+  public searchQueryChanged = new BehaviorSubject<String>(null);
 
   constructor() { }
 }
