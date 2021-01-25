@@ -29,4 +29,8 @@ export class ProductService {
   findByCategory(category) {
     return this.http.get(`${this.productServiceUrl}/category/${category}`);
   }
+
+  fetchById(productId) {
+    return this.http.get(`${this.productServiceUrl}/${productId}`);
+  }
 }
