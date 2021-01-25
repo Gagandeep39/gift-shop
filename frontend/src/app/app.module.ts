@@ -40,6 +40,7 @@ import { ProductListComponent } from './components/products/product-list/product
 import { ProductCardComponent } from './components/products/product-list/product-card/product-card.component';
 import { AccessDeniedComponent } from './shared/access-denied/access-denied.component';
 import { AuthModalComponent } from './shared/auth-modal/auth-modal.component';
+import { CartConfirmModalComponent } from './shared/cart-confirm-modal/cart-confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { AuthModalComponent } from './shared/auth-modal/auth-modal.component';
     ProductCardComponent,
     AccessDeniedComponent,
     AuthModalComponent,
+    CartConfirmModalComponent,
   ],
   imports: [
     BrowserModule,
