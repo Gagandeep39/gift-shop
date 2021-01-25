@@ -10,8 +10,16 @@
     <li class="nav-item px-2">
       <input type="text" class="search-hover" name="" placeholder="Search..." />
     </li>
+    <li class="dropdown" *ngIf="isLoggedIn">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        All Products
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a *ngFor="let category of categories" class="dropdown-item" (click)="changeCategory(category)"> {{ category.categoryName }} </a>
+      </div>
+    </li>
     <li class="nav-item px-2" *ngFor="let item of activeTabs">
-      <a class="nav-link" [routerLink]="[item.link]" > {{item.name}} </a>
+      <a class="nav-link menu-item" [routerLink]="[item.link]" > {{item.name}} </a>
     </li>
     <li class="nav-item px-2">
       <a class="nav-link" *ngIf="isLoggedIn" (click)="logOut()">Log Out</a>

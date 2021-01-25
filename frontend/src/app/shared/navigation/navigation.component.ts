@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { windowWhen } from 'rxjs/operators';
+import { Category } from 'src/app/models/category.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { EventService } from 'src/app/services/event.service';
 
@@ -24,6 +26,26 @@ export class NavigationComponent implements OnInit {
     { name: 'About', link: '/about' },
     { name: 'Add', link: '/admin/add' },
     { name: 'View', link: '/admin/view' },
+  ];
+  categories: Category[] = [
+    {
+      categoryId: 100001,
+      categoryName: 'Test',
+      categoryDescription: 'Something something',
+      categoryImageUrl: 'windowWhen.tedt.com',
+    },
+    {
+      categoryId: 100002,
+      categoryName: 'Test 2',
+      categoryDescription: 'Something something',
+      categoryImageUrl: 'windowWhen.tedt.com',
+    },
+    {
+      categoryId: 100003,
+      categoryName: 'Test 3',
+      categoryDescription: 'Something something',
+      categoryImageUrl: 'windowWhen.tedt.com',
+    },
   ];
 
   constructor(
@@ -62,5 +84,9 @@ export class NavigationComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
+  }
+
+  changeCategory(category: Category) {
+    this.eventService.categoryChanged.next(category);
   }
 }
