@@ -27,6 +27,7 @@ import { ProductDetailsComponent } from './components/products/product-details/p
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 import { AccessDeniedComponent } from './shared/access-denied/access-denied.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
@@ -68,7 +69,8 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: 'Admin' },
     children: [
       { path: 'add', component: AddProductComponent },
       { path: 'update', component: UpdateProductComponent },
