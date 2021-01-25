@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit {
   productQuery = null;
 
   constructor(
-    private loadingService: LoadingService,
+    public loadingService: LoadingService,
     private eventService: EventService,
     private productService: ProductService
   ) {}
