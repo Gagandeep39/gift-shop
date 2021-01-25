@@ -147,9 +147,10 @@
 }
 
 .product-price {
-  color: #24b7d8;
+  color: #1f9db9;
   font-size: 130%;
-  font-weight: normal;
+  font-weight: 500;
+
 }
 
 hr {
