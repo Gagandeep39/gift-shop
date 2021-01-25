@@ -78,7 +78,7 @@ export class NavigationComponent implements OnInit {
     this.authService.logout();
   }
 
-  changeCategory(category: Category) {
+  changeCategory(category) {
     this.eventService.categoryChanged.next(category);
     this.redirectHome();
   }

@@ -15,7 +15,7 @@
         All Products
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a *ngFor="let category of categories" class="dropdown-item" (click)="changeCategory(category)"> {{ category.categoryName }} </a>
+        <a *ngFor="let category of categories" class="dropdown-item" (click)="changeCategory(category.categoryName)"> {{ category.categoryName }} </a>
         <a  class="dropdown-item" (click)="changeCategory(null)"> All Products </a>
       </div>
     </li>

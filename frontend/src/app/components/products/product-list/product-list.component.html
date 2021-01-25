@@ -6,7 +6,7 @@
   </div>
   <!-- Displayed when we pecify a cateogy -->
   <div class="category" *ngIf="!productQuery && activeCategory">
-    {{ activeCategory?.categoryName }}
+    {{ activeCategory }}
     <img
       *ngIf="activeCategory !== null"
       (click)="resetAll()"

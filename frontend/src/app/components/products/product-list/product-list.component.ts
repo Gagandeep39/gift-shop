@@ -90,7 +90,7 @@ export class ProductListComponent implements OnInit {
       if (!category) this.fetchAll();
       else
         this.productService
-          .findByCategory(category?.categoryName)
+          .findByCategory(category)
           .subscribe((res: Product[]) => {
             this.productQuery = null;
             this.activeCategory = category;
