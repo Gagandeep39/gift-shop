@@ -1,6 +1,8 @@
 <div class="parent">
   <div class="category">
     All Products
+    <!-- TODO - Add tooltip -->
+    <img *ngIf="activeCategory!==''" (click)="resetCategory()" class="category-icon" data-toggle="tooltip" data-placement="right"  title="Show all categories" src="/assets/images/x-circle.svg" alt="">
   </div>
   <app-product-card
     class="product-card"

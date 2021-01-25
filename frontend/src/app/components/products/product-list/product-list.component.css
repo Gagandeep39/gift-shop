@@ -48,3 +48,12 @@
   text-shadow: 1px 1px 2px rgb(211, 211, 211);
   color: black;
 }
+
+.category-icon {
+  transform: scale(1.2);
+}
+
+.category-icon:hover {
+  transform: scale(1.5);
+  cursor: pointer;
+}

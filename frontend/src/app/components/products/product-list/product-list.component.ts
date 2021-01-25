@@ -6,6 +6,7 @@
  * @desc [description]
  */
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/services/event.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
@@ -86,8 +87,12 @@ export class ProductListComponent implements OnInit {
       productStatus: 'ENABLED',
     },
   ];
+  activeCategory = '';
 
-  constructor(private loadingService: LoadingService) {}
+  constructor(
+    private loadingService: LoadingService,
+    private eventService: EventService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -97,6 +102,9 @@ export class ProductListComponent implements OnInit {
     setTimeout(() => {
       this.loadingService.disableLoading();
     }, 2000);
-    
+  }
+
+  resetCategory() {
+    this.eventService.categoryChanged.next('');
   }
 }
