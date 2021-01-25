@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -28,11 +29,13 @@ export class NavigationComponent implements OnInit {
     { name: 'View', link: '/admin/view' },
   ];
   categories: Category[] = [];
+  searchQuery = '';
 
   constructor(
     private authService: AuthService,
     private eventService: EventService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router,
   ) {}
   initializeApp() {
     // If user data is present and token not expired, emi event to update navi
@@ -77,5 +80,16 @@ export class NavigationComponent implements OnInit {
 
   changeCategory(category: Category) {
     this.eventService.categoryChanged.next(category);
+    this.redirectHome();
+  }
+
+  searchItem() {
+    this.eventService.searchQueryChanged.next(this.searchQuery);
+    this.searchQuery = '';
+    this.redirectHome();
+  }
+
+  redirectHome() {
+    this.router.navigateByUrl('/')
   }
 }
