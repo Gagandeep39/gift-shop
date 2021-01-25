@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from 'src/app/models/product.model';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -17,17 +19,30 @@ export class ProductDetailsComponent implements OnInit {
   productDescription;
   productCategory;
   productPrice;
+  productId;
+  product: Product = null;
 
   constructor(
     public loadingService: LoadingService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private productService: ProductService,
+    private route: ActivatedRoute,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.productId = this.route.snapshot.paramMap.get('productId');
+    this.initializeProductDetails();
+  }
+
+  initializeProductDetails() {
+    this.productService.fetchById(this.productId).subscribe((res: Product) => {
+      this.product = res;
+    }).closed;
+  }
 
   increment() {
-    if (this.count >= this.maxQuantity) this.count = this.maxQuantity;
+    if (this.count >= this.product.productStock) this.count = this.product.productStock;
     else this.count++;
   }
   decrement() {

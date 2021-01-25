@@ -1,14 +1,14 @@
 <div class="root">
   <div
     class="background"
-    [ngStyle]="{ 'background-image': 'url(' + productImageUrl + ')' }"
+    [ngStyle]="{ 'background-image': 'url(' + product.productIcon + ')' }"
   ></div>
   <div class="content">
     <div class="my-card">
       <div class="row">
         <div
           class="col-6 front-img"
-          [ngStyle]="{ 'background-image': 'url(' + productImageUrl + ')' }"
+          [ngStyle]="{ 'background-image': 'url(' + product.productIcon + ')' }"
         ></div>
         <div class="col-6 section-product">
           <div class="p-5">
@@ -21,19 +21,16 @@
                 <li class="breadcrumb-item">
                   <a [routerLink]="['/']">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a>Books</a></li>
+                <li class="breadcrumb-item"><a> {{ product.categoryName }} </a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Pokemon Mystery Dungeon
+                  {{ product.productName }}
                 </li>
               </ol>
             </nav>
-            <h1 class="product-title">Pokemon Myster Dungeon</h1>
-            <h2 class="product-price">₹ 22.99</h2>
+            <h1 class="product-title"> {{ product.productName }} </h1>
+            <h2 class="product-price">₹  {{ product.productPrice }} </h2>
             <p class="product-description">
-              uisque egestas diam in arcu cursus euismod quis viverra. Risus
-              pretium quam vulputate dignissim suspendisse in est ante.
-              Facilisis sed odio morbi quis commodo odio aenean sed adipiscing.
-              Neque aliquam vestibulum morbi blandit cursus risus at.
+              {{ product.productDescription }} 
             </p>
             <div class="quantity">
               <button class="quantity-btn-left" (click)="decrement()">-</button>
@@ -47,7 +44,7 @@
               <button class="quantity-btn-right" (click)="increment()">
                 +
               </button>
-              <p class="quantity-stock">Available Stock: 999</p>
+              <p class="quantity-stock">Available Stock:  {{ product.productStock }} </p>
             </div>
             <div class="cart-buttons">
               <button class="cart-btn" (click)="addNewItem(12)">

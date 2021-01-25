@@ -61,7 +61,7 @@
 }
 
 
-.product-price::after {
+.product-title::after {
   display: block;
   height: 2px;
   background-color: #fb5a69;
@@ -69,6 +69,10 @@
   width: 100px;
   margin-top: 20px;
   transition: 0.2s;
+}
+
+.product-title:hover::after {
+  width: 200px;
 }
 
 /* Back Button Section */
