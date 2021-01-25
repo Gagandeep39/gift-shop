@@ -51,7 +51,7 @@
               </p>
             </div>
             <div class="cart-buttons">
-              <button class="cart-btn" (click)="addNewItem(12)">
+              <button class="cart-btn" (click)="addNewItem(product.productId)">
                 <span
                   *ngIf="loadingService.loading"
                   class="spinner-border spinner-border-sm"
