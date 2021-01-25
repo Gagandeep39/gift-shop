@@ -1,7 +1,15 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-25 13:56:07
+ * @modify date 2021-01-25 13:56:07
+ * @desc Product Details
+ */
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { EventService } from 'src/app/services/event.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -28,6 +36,7 @@ export class ProductDetailsComponent implements OnInit {
     private location: Location,
     private productService: ProductService,
     private route: ActivatedRoute,
+    public eventService: EventService,
   ) {}
 
   ngOnInit(): void {
@@ -60,5 +69,10 @@ export class ProductDetailsComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  redirectToCategory() {
+    this.eventService.categoryChanged.next(this.product.categoryName)
+    this.router.navigateByUrl('/');
   }
 }

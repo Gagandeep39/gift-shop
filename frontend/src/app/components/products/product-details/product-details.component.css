@@ -257,3 +257,12 @@ color: rgba(179, 179, 179, 0.8);
 padding-top: 8px;
 letter-spacing: 0.5px;
 }
+
+.product-description {
+  letter-spacing: 1.3px;
+  font-size: 130%;
+}
+
+.breadcrumb-item {
+  cursor: pointer;
+}
