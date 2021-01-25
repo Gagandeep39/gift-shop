@@ -8,9 +8,12 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Item } from 'src/app/models/item.model';
 import { Product } from 'src/app/models/product.model';
 import { AuthModalService } from 'src/app/services/auth-modal.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartConfirmModalService } from 'src/app/services/cart-confirm-modal.service';
+import { CartService } from 'src/app/services/cart.service';
 import { EventService } from 'src/app/services/event.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -33,7 +36,9 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     public eventService: EventService,
     private authService: AuthService,
-    private authModalService: AuthModalService
+    private authModalService: AuthModalService,
+    private cartService: CartService,
+    private cartModal: CartConfirmModalService
   ) {}
 
   ngOnInit(): void {
@@ -58,12 +63,19 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addNewItem(productId) {
+    const item: Item = {
+      productId,
+      quantity: this.count,
+    };
+    console.log(item);
+
     if (this.checkForAuthAndShowPopUp()) {
       this.loadingService.enableLoading();
-      setTimeout(() => {
+      this.cartService.addToCart(item).subscribe((res) => {
         this.loadingService.disableLoading();
+        this.cartModal.open();
         this.router.navigateByUrl('/');
-      }, 2000);
+      });
     }
   }
 
