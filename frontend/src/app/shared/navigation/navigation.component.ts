@@ -32,11 +32,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private eventService: EventService,
-    private categoryService: CategoryService,
-  ) {
-    this.initializeApp();
-    this.initializeNavItems();
-  }
+    private categoryService: CategoryService
+  ) {}
   initializeApp() {
     // If user data is present and token not expired, emi event to update navi
     if (this.authService.isAuthenticated()) {
@@ -46,12 +43,11 @@ export class NavigationComponent implements OnInit {
     }
     // Log out user if toke already expired
     else this.authService.logout();
-    this.initCategories();
   }
   initCategories() {
     this.categoryService.fetchAllCategories().subscribe((res: Category[]) => {
       this.categories = res;
-    })
+    });
   }
 
   initializeNavItems() {
@@ -69,7 +65,11 @@ export class NavigationComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initializeApp();
+    this.initializeNavItems();
+    this.initCategories();
+  }
 
   logOut() {
     this.authService.logout();
