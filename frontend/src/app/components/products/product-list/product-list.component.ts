@@ -6,8 +6,10 @@
  * @desc [description]
  */
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product.model';
 import { EventService } from 'src/app/services/event.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,92 +17,29 @@ import { LoadingService } from 'src/app/services/loading.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  productList = [
-    {
-      productId: 100001,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration2.jpg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'ENABLED',
-    },
-    {
-      productId: 100002,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration3.jpg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'ENABLED',
-    },
-    {
-      productId: 100003,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration.jpeg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'DISABLED',
-    },
-    {
-      productId: 100004,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration2.jpg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 0,
-      productStatus: 'ENABLED',
-    },
-    {
-      productId: 100005,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/celebration2.jpg',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'DISABLED',
-    },
-    {
-      productId: 100006,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/confetti1.gif',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'ENABLED',
-    },
-    {
-      productId: 100007,
-      productName: 'Cake',
-      productImageUrl: '/assets/images/confetti2.gif',
-      productDescription:
-        'A seet disk made from white and used for celebration',
-      productPrice: 1200,
-      productQuantity: 99,
-      productStatus: 'ENABLED',
-    },
-  ];
+  productList: Product[] = [];
   activeCategory = null;
 
   constructor(
     private loadingService: LoadingService,
     private eventService: EventService,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
     this.subscribeToCategories();
+    this.initProducts();
+  }
+
+  initProducts() {
+    this.productService.fetchAllProducts().subscribe((res: Product[]) => {
+      this.productList = res;
+    });
   }
   subscribeToCategories() {
-    this.eventService.categoryChanged.subscribe(res => {
+    this.eventService.categoryChanged.subscribe((res) => {
       this.activeCategory = res;
-    })
+    });
   }
 
   addToCart(itemId) {
