@@ -10,6 +10,7 @@ package com.cg.authservice.dto;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.cg.authservice.entities.Address;
@@ -30,6 +31,7 @@ public class RegisterRequest {
   private String username;
   @NotBlank
   @Size(min = 5, max = 20)
+  @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}", message = "Plese enter a string password with upper case, lower case, special character")
   private String password;
   @NotBlank
   @Email
