@@ -50,6 +50,14 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 
 INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category) VALUES (100002, 'Color Pencils', 200, 99, 'Colored drawing pencil for kids', 'https://previews.123rf.com/images/kenishirotie/kenishirotie1801/kenishirotie180100009/92727823-spectrum-color-pencils-set-arranged-in-s-curve-isolated-on-white-background.jpg', 'ENABLED', 100001);
 
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category) VALUES (100003, 'Color Pencils', 300, 99, 'Coloring book for kids', 'https://images-na.ssl-images-amazon.com/images/I/61+7VR7+dsL._SX360_BO1,204,203,200_.jpg', 'ENABLED', 100001);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category) VALUES (100004, 'Coloring Book', 200, 99, 'Colored drawing', 'https://cdn.shopify.com/s/files/1/2486/2582/products/118-202-Color-In-Book-Enchanting-Unicorns-B1_88e62295-d705-41d7-ad68-8a9b8c4c7ba7_800x.png', 'ENABLED', 100001);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category) VALUES (100005, 'Action Figure', 200, 299, 'Toys for kids', 'https://www.staractionfigures.co.uk/user/products/large/yfghngfjhtrju.jpg', 'ENABLED', 100002);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category) VALUES (100006, 'Action Figure', 200, 399, 'Toys for kids', 'https://www.meijer.com/content/dam/meijer/product/0063/05/0980/90/0063050980908_0_A1C1_1200.png', 'ENABLED', 100002);
+
 -- TODO Add 25 more items
 
 ALTER sequence product_id_sequence restart with 100026;
