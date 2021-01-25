@@ -19,6 +19,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductListComponent implements OnInit {
   productList: Product[] = [];
   activeCategory = null;
+  productQuery = null;
 
   constructor(
     private loadingService: LoadingService,
@@ -28,18 +29,29 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeToCategories();
+    this.subscribeToSearchQuery();
     this.initProducts();
   }
 
   initProducts() {
+    this.fetchAll();
+  }
+
+  // Fetch from server
+  fetchAll() {
     this.productService.fetchAllProducts().subscribe((res: Product[]) => {
       this.productList = res;
-    });
+    }).closed;
   }
-  subscribeToCategories() {
-    this.eventService.categoryChanged.subscribe((res) => {
-      this.activeCategory = res;
-    });
+
+  // Reset all search queries
+  resetAll() {
+    this.eventService.categoryChanged.next(null);
+    this.eventService.searchQueryChanged.next(null);
+    this.productQuery = null;
+    this.productList = null;
+    this.activeCategory = null;
+    this.fetchAll();
   }
 
   addToCart(itemId) {
@@ -50,7 +62,35 @@ export class ProductListComponent implements OnInit {
     }, 2000);
   }
 
-  resetCategory() {
-    this.eventService.categoryChanged.next(null);
+  // Subbscribe to search
+  subscribeToSearchQuery() {
+    this.eventService.searchQueryChanged.subscribe((query) => {
+      // Fetch and unsubscribe
+      if (!query) this.fetchAll();
+      else
+        this.productService.findByName(query).subscribe((res: Product[]) => {
+          this.productQuery = query;
+          this.activeCategory = null;
+          this.productList = res;
+        }).closed;
+    });
+  }
+
+  // Category change subscription
+  subscribeToCategories() {
+    this.eventService.categoryChanged.subscribe((category) => {
+      // Reset previous cateogry
+      this.activeCategory = null;
+      this.productQuery = null;
+      if (!category) this.fetchAll();
+      else
+        this.productService
+          .findByCategory(category?.categoryName)
+          .subscribe((res: Product[]) => {
+            this.productQuery = null;
+            this.activeCategory = category;
+            this.productList = res;
+          }).closed;
+    });
   }
 }

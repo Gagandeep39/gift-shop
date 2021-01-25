@@ -1,7 +1,17 @@
 <div class="parent">
-  <div class="category">
-    {{ activeCategory?.categoryName || 'All Products' }}
-    <img *ngIf="activeCategory !== null" (click)="resetCategory()" class="category-icon" data-toggle="tooltip" data-placement="right"  title="Show all categories" src="/assets/images/x-circle.svg" alt="">
+  <!-- Displyed when no category is selected -->
+  <div class="category" *ngIf="!activeCategory && !productQuery ">
+    All Products
+  </div>
+  <!-- Displayed when we pecify a cateogy -->
+  <div class="category" *ngIf="!productQuery && activeCategory">
+    {{ activeCategory?.categoryName}}
+    <img *ngIf="activeCategory !== null" (click)="resetAll()" class="category-icon" data-toggle="tooltip" data-placement="right"  title="Show all categories" src="/assets/images/x-circle.svg" alt="">
+  </div>
+  <!-- Displayed when we enter a seacrh criteria -->
+  <div class="category" *ngIf="!activeCategory && productQuery">
+    {{  'Search: ' + productQuery }}
+    <img (click)="resetAll()" class="category-icon" data-toggle="tooltip" data-placement="right"  title="Show all categories" src="/assets/images/x-circle.svg" alt="">
   </div>
   <app-product-card
     class="product-card"
