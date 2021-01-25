@@ -38,12 +38,15 @@
             data-placement="top"
             onmouseenter="$(this).popover('show')"
             onmouseout="$(this).popover('hide')"
+            [ngClass]="{ delete: item.orderStatus === 'CANCELLED' }"
           ></li>
           <!-- Display in active for remaining lements -->
+          <!-- <span *ngIf="deliveryHistory.slice(-1)[0]?.orderStatus!=='CANCELLED'"> -->
           <li
             class="step0"
             *ngFor="let i of [].constructor(4 - deliveryHistory.length)"
           ></li>
+          <!-- </span> -->
         </ul>
       </div>
     </div>
@@ -67,7 +70,11 @@
     </div>
     <div class="actions">
       <button class="back-btn" (click)="goBack()">Back</button>
-      <button class="cancel-btn" (click)="cancelOrder()">
+      <button
+        class="cancel-btn"
+        (click)="cancelOrder()"
+        *ngIf="checkIfCancellable()"
+      >
         <span
           *ngIf="loadingService.loading"
           class="spinner-border spinner-border-sm"

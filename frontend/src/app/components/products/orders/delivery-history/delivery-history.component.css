@@ -101,6 +101,11 @@
   content: url("/assets/images/check.svg");
 }
 
+#progressbar li.delete:before {
+  content: url("/assets/images/check.svg");
+  background: red;
+}
+
 .icon {
   width: 60px;
   height: 60px;

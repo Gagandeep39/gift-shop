@@ -42,7 +42,7 @@ export class DeliveryHistoryComponent implements OnInit {
     {
       orderId: 100001,
       deliveryId: 100004,
-      orderStatus: 'DELIVERED',
+      orderStatus: 'CANCELLED',
       updatedOn: new Date('2021-01-24'),
     },
   ];
@@ -83,7 +83,13 @@ export class DeliveryHistoryComponent implements OnInit {
           console.log('Order cancelled');
           this.loadingService.disableLoading();
         }, 2000);
-
     }).closed;
+  }
+
+  checkIfCancellable() {
+    return (
+      this.deliveryHistory.slice(-1)[0].orderStatus !==
+      ('DELIVERED' && 'CANCELLED')
+    );
   }
 }
