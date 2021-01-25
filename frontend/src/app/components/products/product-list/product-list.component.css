@@ -24,7 +24,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.2s;
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.9;
   /* Fixes border radius on images */
   overflow: hidden;
 }
