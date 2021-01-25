@@ -27,6 +27,7 @@ import { ProductDetailsComponent } from './components/products/product-details/p
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AccessDeniedComponent } from './shared/access-denied/access-denied.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
@@ -77,6 +78,7 @@ const routes: Routes = [
   },
   { path: 'about', redirectTo: 'products/about', pathMatch: 'full' },
   { path: '404', component: NotFoundComponent },
+  { path: '403', component: AccessDeniedComponent },
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: '404' },
 ];

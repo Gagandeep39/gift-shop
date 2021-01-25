@@ -38,6 +38,7 @@ import { RequestQuestionComponent } from './components/auth/request-question/req
 import { AboutUsComponent } from './components/products/about-us/about-us.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductCardComponent } from './components/products/product-list/product-card/product-card.component';
+import { AccessDeniedComponent } from './shared/access-denied/access-denied.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ProductCardComponent } from './components/products/product-list/product
     AboutUsComponent,
     ProductListComponent,
     ProductCardComponent,
+    AccessDeniedComponent,
   ],
   imports: [
     BrowserModule,
