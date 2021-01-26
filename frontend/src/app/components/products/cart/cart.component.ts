@@ -5,6 +5,7 @@ import { ProductInOrder } from 'src/app/models/product-in-order.model';
 import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
+import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ManageUserService } from 'src/app/services/manage-user.service';
 
 @Component({
@@ -23,11 +24,14 @@ export class CartComponent implements OnInit {
   products = this.cart.products;
   userDetails;
   totalBeforeDiscount = 0;
+  error;
+  deliveryCharge;
 
   constructor(
     public cartService: CartService,
     private authService: AuthService,
-    private manageUserService: ManageUserService
+    private manageUserService: ManageUserService,
+    private geolocationService: GeolocationService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,7 @@ export class CartComponent implements OnInit {
           this.cart.cartId = data.cartId;
           this.cart.products = data.products;
           this.products = this.cart.products;
+          this.calculateDistance();
           this.calculateOrderSummary(this.products);
         });
     });
@@ -80,7 +85,7 @@ export class CartComponent implements OnInit {
       this.shipping = 0;
     }
 
-    total = this.orderTotal + this.shipping;
+    total = this.orderTotal + this.shipping + this.deliveryCharge;
     this.total = total;
   }
 
@@ -89,10 +94,30 @@ export class CartComponent implements OnInit {
     sessionStorage.setItem('City', this.address.city);
     sessionStorage.setItem('State', this.address.state);
     sessionStorage.setItem('Pincode', this.address.pincode);
-
-    console.log(sessionStorage.getItem('shippingAddress'));
   }
 
+  calculateDistance() {
+    this.geolocationService.fetchDistance(this.address.pincode).subscribe(
+      (res) => {
+        if (res['info'].statuscode !== 0)
+          this.error = 'error';
+        else {
+          this.error = null;
+          console.log(res['route'].distance);
+          this.calculateDeliveryCharge(res['route'].distance);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  calculateDeliveryCharge(distance) {
+    if (distance <= 5) this.deliveryCharge = 50;
+    else if (distance <= 50) this.deliveryCharge = 200;
+    else this.deliveryCharge = 500;
+  }
   calculatePrice(currentProduct: ProductInOrder) {
     return (
       currentProduct.productPrice -

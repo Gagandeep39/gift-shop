@@ -191,12 +191,13 @@
               #pincode="ngModel"
               required
               pattern="[0-9]{6}"
+              (change)="calculateDistance()"
             />
             <div
-              *ngIf="pincode.invalid && pincode.touched && pincode.dirty"
+              *ngIf="(pincode.invalid && pincode.touched && pincode.dirty) || error"
               class="alert alert-danger"
             >
-              pincode must be 6 digits!
+              Invalid Pincode
             </div>
           </div>
 
@@ -220,6 +221,10 @@
           <li class="d-flex justify-content-between py-3 border-bottom">
             <strong class="text-muted">TOTAL AFTER DISCOUNT </strong
             ><strong>{{ orderTotal | currency: "INR" }}</strong>
+          </li>
+          <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">DELIVERY CHARGE </strong
+            ><strong>{{ deliveryCharge | currency: "INR" }}</strong>
           </li>
           <li class="d-flex justify-content-between py-3 border-bottom">
             <strong class="text-muted"
