@@ -16,4 +16,12 @@ export class CartService {
   addToCart(item: Item) {
     return this.http.put(`${this.cartServiceUrl}/${this.authService.fetchFromSessionStorage()?.userId}`, item);
   }
+
+  fetchCartByUserId() {
+    return this.http.get(`${this.cartServiceUrl}/${this.authService.fetchFromSessionStorage()?.userId}`);
+  }
+
+  removeItemFromCart(productId) {
+    return this.http.delete(`${this.cartServiceUrl}/${productId}/${this.authService.fetchFromSessionStorage()?.userId}`)
+  }
 }
