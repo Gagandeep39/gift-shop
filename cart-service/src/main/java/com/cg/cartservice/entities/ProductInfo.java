@@ -43,7 +43,7 @@ public class ProductInfo {
     private Integer productStock;
     private String productDescription;
     private String productIcon;
-    private Long discountPercent;
+    private Double discountPercent;
 
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
