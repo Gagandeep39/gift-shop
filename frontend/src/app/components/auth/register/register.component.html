@@ -6,7 +6,10 @@
         <!-- <div class="col-6 front-img"></div> -->
         <div class="col-12 user-form">
           <div class="p-3">
-            <img [routerLink]="['/']" class="title" src="assets/images/logo-text.png" />
+            <div class="logo-container">
+              <img [routerLink]="['/']" class="title" src="assets/images/logo-text.png" />
+              <hr>
+            </div>
             <!-- <div class="text-center">
               <img class="logo" src="assets/images/gift-box.svg" />
               <img class="title" src="assets/images/logo-text.png" />
@@ -235,8 +238,7 @@
                     </div>
                     <div class="col">
                       <div class="form-group">
-                        <br>
-                        <button class="btn btn-primary btn-block text-white btn-user" type="submit">
+                        <button class="primary-btn btn-block" type="submit">
                           <span *ngIf="loadingService.loading" class="spinner-border spinner-border-sm"></span>
                           Register
                         </button>
@@ -249,7 +251,7 @@
               <hr>
             </form>
             <div class="text-center">
-              <a class="small" [routerLink]="['/login']"
+              <a class="actions" [routerLink]="['/login']"
                 >Back to Login
               </a>
             </div>
