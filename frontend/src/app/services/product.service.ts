@@ -40,4 +40,8 @@ export class ProductService {
   deleteProduct(productId) {
     return this.http.delete(`${this.productServiceUrl}/${productId}`);
   }
+
+  updateProduct(product) {
+    return this.http.put(`${this.productServiceUrl}`, product);
+  }
 }
