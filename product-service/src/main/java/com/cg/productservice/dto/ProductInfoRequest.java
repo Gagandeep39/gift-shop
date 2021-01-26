@@ -10,12 +10,11 @@ package com.cg.productservice.dto;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
+import javax.validation.constraints.PositiveOrZero;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -59,5 +58,10 @@ public class ProductInfoRequest {
   @Min(100000)
   @Max(999999)
   private Long categoryId;
+
+  @NotNull
+  @DecimalMax(value = "100")
+  @PositiveOrZero
+  private Double discountPercent;
 
 }

@@ -74,6 +74,38 @@
             Price must be between 100 to 9999
           </div>
         </div>
+
+        <!-- form-group// -->
+
+        <p>Required*</p>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i
+                style="width: 20px; font-size: 1.5em; color: #f56774"
+                class="fa fa-inr"
+              ></i>
+            </span>
+          </div>
+          <input
+            name="discountPercent"
+            pattern="([0-9]|[1-9][0-9]|100)"
+            id="discountPercent"
+            [(ngModel)]="product.discountPercent"
+            #discountPercent="ngModel"
+            class="form-control"
+            placeholder="Discount Percent"
+          />
+          <br />
+          <div
+            *ngIf="
+              discountPercent.invalid && discountPercent.touched && discountPercent.dirty
+            "
+            class="alert alert-danger"
+          >
+            Enter a valid discount
+          </div>
+        </div>
         <!-- form-group// -->
 
         <p>Required*</p>

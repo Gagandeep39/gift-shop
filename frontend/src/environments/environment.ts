@@ -11,6 +11,9 @@ export const environment = {
   orderService: 'order-service',
   paymentService: 'payment-service',
   cartService: 'cart-service',
+  mapQuestAPIKey: 'nXLMbpX6U0545mAaAJyeI2QQd1JYVqG4',
+  mapQuestUrl: 'http://www.mapquestapi.com/directions/v2/route',
+  from: '400072',
 };
 
 /*

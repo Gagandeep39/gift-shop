@@ -27,6 +27,8 @@ export class NavigationComponent implements OnInit {
     { name: 'About', link: '/about' },
     { name: 'Add', link: '/admin/add' },
     { name: 'View', link: '/admin/view' },
+    { name: 'Cart', link: '/products/cart' },
+    { name: 'My Purchase', link: '/products/orders' },
   ];
   categories: Category[] = [];
   searchQuery = '';

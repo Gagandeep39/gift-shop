@@ -8,7 +8,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
 import { CategoryService } from 'src/app/services/category.service';
@@ -28,6 +28,7 @@ export class UpdateProductComponent implements OnInit {
   statuses = ['ENABLED', 'DISABLED'];
   product: Product;
   productIcon = '';
+  message;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,7 @@ export class UpdateProductComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private location: Location,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class UpdateProductComponent implements OnInit {
       productId: new FormControl(this.productId),
       productName: new FormControl('', [Validators.required]),
       productPrice: new FormControl('', [Validators.required]),
+      discountPercent: new FormControl('', [Validators.required]),
       productStock: new FormControl('', [Validators.required]),
       productDescription: new FormControl('', [Validators.required]),
       productIcon: new FormControl('', [Validators.required]),
@@ -70,6 +73,7 @@ export class UpdateProductComponent implements OnInit {
       productId: product.productId,
       productName: product?.productName,
       productPrice: product?.productPrice,
+      discountPercent: product?.discountPercent,
       productStock: product?.productStock,
       productDescription: product?.productDescription,
       productIcon: product?.productIcon,
@@ -87,9 +91,12 @@ export class UpdateProductComponent implements OnInit {
     this.loadingService.enableLoading();
     this.productService.updateProduct(formData).subscribe(
       (response) => {
-        console.log(response);
-
         this.loadingService.disableLoading();
+        this.message =
+        'Successfully updated product with ID ' + response['productId'];
+        setTimeout(() => {
+          this.router.navigateByUrl('/admin/view');
+        }, 3000);
       },
       (error) => {
         this.loadingService.disableLoading();

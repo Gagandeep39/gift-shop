@@ -57,5 +57,6 @@ public class ProductInOrder {
     private String productCategory;
     private BigDecimal productPrice;
     private Integer productStock;
+    private Double discountPercent;
 
 }

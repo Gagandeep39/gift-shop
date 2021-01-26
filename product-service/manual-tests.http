@@ -59,7 +59,8 @@ Content-Type: application/json
   "productStock": 888,
   "productIcon": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg",
   "categoryId": 100001,
-  "productStatus": "ENABLED"
+  "productStatus": "ENABLED",
+  "discountPercent": "12"
 }
 
 ### Update Product - Null id
@@ -88,7 +89,8 @@ Content-Type: application/json
   "productStock": 888,
   "productIcon": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg",
   "categoryId": 100001,
-  "productStatus": "ENABLED"
+  "productStatus": "ENABLED",
+  "discountPercent": "12"
 }
 
 ### Update Product - InValid id

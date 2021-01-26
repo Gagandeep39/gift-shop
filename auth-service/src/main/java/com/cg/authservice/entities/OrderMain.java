@@ -53,6 +53,10 @@ public class OrderMain {
     private String buyerCity;
     private String buyerPincode;
     private BigDecimal orderAmount;
+    private BigDecimal discountedAmount;
+    private BigDecimal deliveryCharge;
+    private BigDecimal finalPrice;
+
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
