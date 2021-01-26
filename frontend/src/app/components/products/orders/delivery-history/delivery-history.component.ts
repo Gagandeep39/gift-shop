@@ -41,6 +41,7 @@ export class DeliveryHistoryComponent implements OnInit {
     this.deliveryService
       .fetchDeliveryByOrderId(this.orderId)
       .subscribe((res: DeliveryHistory[]) => {
+        console.log(res);
         this.deliveryHistory = res;
       });
   }
@@ -52,6 +53,8 @@ export class DeliveryHistoryComponent implements OnInit {
       month: 'long',
       day: 'numeric',
       hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
     });
   }
 
@@ -79,7 +82,7 @@ export class DeliveryHistoryComponent implements OnInit {
 
   checkIfCancellable() {
     return (
-      this.deliveryHistory.slice(-1)[0].orderStatus !==
+      this.deliveryHistory?.slice(-1)[0]?.orderStatus !==
       ('DELIVERED' || 'CANCELLED')
     );
   }
