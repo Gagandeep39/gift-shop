@@ -15,4 +15,5 @@ export class Product {
   productPrice: number;
   productStatus: string;
   productStock: number;
+  discountPercent: number;
 }
