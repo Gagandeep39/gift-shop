@@ -180,14 +180,14 @@
 /* .separator {
   text-align: center;
 } */
-hr {
+.logo-container hr {
   width: 10%;
   border-top: 3px solid #fb5a69;
   transition: 0.2s;
 }
 
-hr:hover {
-  width: 40%;
+.logo-container:hover hr {
+  width: 20%;
 }
 .back-btn,
 .cancel-btn {
@@ -224,4 +224,11 @@ hr:hover {
   background: white;
   color: #1f9db9;
   transform: scale(1.1);
+}
+
+.title-main {
+  font-weight: 600;
+  font-size: 200%;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
 }
