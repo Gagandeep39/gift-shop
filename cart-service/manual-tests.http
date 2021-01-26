@@ -7,7 +7,7 @@ GET http://localhost:9300/cart/user/100001
 ### Fetch cart by user ID method 
 GET http://localhost:9300/cart/100001
 
-### Checkout by cart Id
+### Checkout by user Id
 POST http://localhost:9300/cart/checkout/100001
 
 ### Add item to cart - Invalid data
@@ -25,7 +25,7 @@ PUT http://localhost:9300/cart/100001
 Content-Type: application/json
 
 {
-  "productId": "100002",
+  "productId": "100001",
   "quantity": 9
 }
 
