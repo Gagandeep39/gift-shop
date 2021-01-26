@@ -59,9 +59,10 @@ nav {
 
 .search-hover:hover,
 .search-hover:focus {
-  width: 400px;
+  width: 300px;
   cursor: pointer;
   outline: none;
+  max-width: 100%;
 }
 
 .navbar {
