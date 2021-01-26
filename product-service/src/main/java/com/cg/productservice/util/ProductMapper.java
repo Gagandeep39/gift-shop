@@ -45,7 +45,7 @@ public class ProductMapper {
 			.productStatus(info.getProductStatus())
 			.productName(info.getProductName())
 			.productId(info.getProductId())
-			.discountPercentage(info.getDiscountPercent())
+			.discountPercent(info.getDiscountPercent())
 			.build();
 	}
 

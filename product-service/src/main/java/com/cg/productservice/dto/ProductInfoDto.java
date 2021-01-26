@@ -23,6 +23,6 @@ public class ProductInfoDto {
   private ProductStatus productStatus;
   private Long categoryId;
   private String categoryName;
-  private Double discountPercentage;
+  private Double discountPercent;
 
 }
