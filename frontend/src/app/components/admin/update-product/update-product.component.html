@@ -100,6 +100,39 @@
                   </div>
                 </div>
               </div>
+              <!-- Discount Percent -->
+              <div class="form-group">
+                <label for="exampleInputdiscountPercent"> Discount Percent</label>
+                <input
+                  class="form-control form-control-user"
+                  formControlName="discountPercent"
+                  type="number"
+                  id="exampleInputdiscountPercent"
+                  placeholder="Discount Percent"
+                  name="discountPercent"
+                  [ngClass]="{
+                    'is-invalid': submitted && updateProductForm.get('discountPercent').invalid
+                  }"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="submitted && updateProductForm.get('discountPercent').invalid"
+                >
+                  <div *ngIf="updateProductForm.get('discountPercent').errors['required']">
+                    * Required
+                  </div>
+                  <div
+                    *ngIf="
+                      updateProductForm.get('discountPercent').errors['serverValidationError']
+                    "
+                  >
+                    {{
+                      updateProductForm.controls["discountPercent"].errors
+                        .serverValidationError
+                    }}
+                  </div>
+                </div>
+              </div>
               <!-- Product Stock -->
               <div class="form-group">
                 <label for="exampleInputproductStock"> Product Description</label>
@@ -277,6 +310,9 @@
                       {{updateProductForm.controls['categoryId'].errors.serverValidationError }} 
                   </div>
                 </div>
+              </div>
+              <div *ngIf="message" class="alert alert-success" role="alert">
+                {{message}}
               </div>
               <button class="primary-btn btn-block" type="submit">
                 <span
