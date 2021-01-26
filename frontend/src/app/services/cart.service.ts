@@ -18,10 +18,10 @@ export class CartService {
   }
 
   fetchCartByUserId() {
-    return this.http.get(`${this.cartServiceUrl}/${this.authService.fetchFromSessionStorage()?.userId}`);
+    return this.http.get(`${this.cartServiceUrl}/user/${this.authService.fetchFromSessionStorage()?.userId}`);
   }
 
   removeItemFromCart(productId) {
-    return this.http.delete(`${this.cartServiceUrl}/${productId}/${this.authService.fetchFromSessionStorage()?.userId}`)
+    return this.http.delete(`${this.cartServiceUrl}/delete/${productId}/${this.authService.fetchFromSessionStorage()?.userId}`)
   }
 }
