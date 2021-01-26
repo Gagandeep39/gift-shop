@@ -10,6 +10,7 @@ package com.cg.productservice.dto;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -41,8 +42,8 @@ public class ProductInfoRequest {
   private BigDecimal productPrice;
 
   @NotNull
-  @DecimalMax(value = "999.999")
-  private Integer productStock;
+  @Pattern(regexp = "^\\d{0,3}$", message = "Enter a quantity between 1-999")
+  private String productStock;
 
   @NotNull
   private String productDescription;

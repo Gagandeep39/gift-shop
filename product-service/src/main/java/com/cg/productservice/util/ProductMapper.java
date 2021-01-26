@@ -13,7 +13,7 @@ public class ProductMapper {
 		productInfo.setProductId(request.getProductId());
 		productInfo.setProductName(request.getProductName());
 		productInfo.setProductPrice(request.getProductPrice());
-		productInfo.setProductStock(request.getProductStock());
+		productInfo.setProductStock(Integer.valueOf(request.getProductStock()));
 		productInfo.setProductDescription(request.getProductDescription());
 		productInfo.setProductIcon(request.getProductIcon());
 		productInfo.setProductStatus(ProductStatus.valueOf(request.getProductStatus()));
