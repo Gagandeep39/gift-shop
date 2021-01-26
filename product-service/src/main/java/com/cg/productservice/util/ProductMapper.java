@@ -17,6 +17,7 @@ public class ProductMapper {
 		productInfo.setProductDescription(request.getProductDescription());
 		productInfo.setProductIcon(request.getProductIcon());
 		productInfo.setProductStatus(ProductStatus.valueOf(request.getProductStatus()));
+		productInfo.setDiscountPercent(request.getDiscountPercent());
 		return productInfo;
 	}
 	
@@ -44,6 +45,7 @@ public class ProductMapper {
 			.productStatus(info.getProductStatus())
 			.productName(info.getProductName())
 			.productId(info.getProductId())
+			.discountPercentage(info.getDiscountPercent())
 			.build();
 	}
 
