@@ -1,8 +1,15 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-01-27 02:57:00
+ * @modify date 2021-01-27 02:57:00
+ * @desc [description]
+ */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address.model';
 import { Cart } from 'src/app/models/cart.model';
 import { ProductInOrder } from 'src/app/models/product-in-order.model';
-import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { GeolocationService } from 'src/app/services/geolocation.service';
@@ -31,7 +38,8 @@ export class CartComponent implements OnInit {
     public cartService: CartService,
     private authService: AuthService,
     private manageUserService: ManageUserService,
-    private geolocationService: GeolocationService
+    private geolocationService: GeolocationService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +102,15 @@ export class CartComponent implements OnInit {
     sessionStorage.setItem('City', this.address.city);
     sessionStorage.setItem('State', this.address.state);
     sessionStorage.setItem('Pincode', this.address.pincode);
+    const data = {
+      ...this.address,
+      deliveryCharge: this.deliveryCharge,
+      paymentId: 100005
+    }
+    this.cartService.checkout(data).subscribe(res => {
+      alert('Succeccfully purchased products');
+      this.router.navigateByUrl('/');
+    })
   }
 
   calculateDistance() {
