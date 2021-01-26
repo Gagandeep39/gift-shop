@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.cartservice.entities.Address;
+import com.cg.cartservice.entities.DeliveryHistory;
 import com.cg.cartservice.entities.OrderMain;
 import com.cg.cartservice.entities.ProductInOrder;
 import com.cg.cartservice.entities.ProductInfo;
@@ -17,6 +18,7 @@ import com.cg.cartservice.enums.OrderStatus;
 import com.cg.cartservice.enums.PaymentType;
 import com.cg.cartservice.exception.CustomException;
 import com.cg.cartservice.repositories.CartRepository;
+import com.cg.cartservice.repositories.DeliveryHistoryRepository;
 import com.cg.cartservice.repositories.OrderMainRepository;
 import com.cg.cartservice.repositories.ProductInOrderRepository;
 import com.cg.cartservice.repositories.ProductInfoRepository;
@@ -38,6 +40,8 @@ public class OrderMainServiceImpl implements OrderMainService {
 	CartRepository cartRepository;
 	@Autowired
 	ProductInfoRepository productInfoRepository;
+	@Autowired
+	DeliveryHistoryRepository historyRepository;
 
 	@Override
 	public Map<String, String> checkOut(Long id) {
@@ -68,8 +72,16 @@ public class OrderMainServiceImpl implements OrderMainService {
 		}
 		orderMain.setOrderAmount(BigDecimal.valueOf(total));
 		orderRepo.save(orderMain);
-
+		createDeliveryHistoryEntry(orderMain.getOrderId());
 		return Collections.singletonMap("orderId", orderMain.getOrderId().toString());
+	}
+
+	private void createDeliveryHistoryEntry(Long orderId) {
+		DeliveryHistory history = new DeliveryHistory();
+		history.setOrderId(orderId);
+		history.setOrderStatus(OrderStatus.NEW);
+		history.setUpdatedOn(System.currentTimeMillis());
+		historyRepository.save(history);
 	}
 
 	private String createUserAddress(Address address) {

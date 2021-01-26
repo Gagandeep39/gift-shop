@@ -9,5 +9,5 @@ package com.cg.cartservice.enums;
 
 public enum OrderStatus {
 
-  NEW, DELIVERED, CANCELLED;
+  NEW, DELIVERED, CANCELLED, OUT_FOR_DELIVERY, DISPATCHED;
 }
