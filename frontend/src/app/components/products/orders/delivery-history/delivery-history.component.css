@@ -231,4 +231,52 @@
   font-size: 200%;
   letter-spacing: 1.2px;
   text-transform: uppercase;
+  text-align: center;
+}
+
+/* Log contianer */
+.logs-container {
+  margin: 0 10%;
+}
+
+.logs-container hr {
+  width: 10%;
+  border-top: 3px solid #fb5a69;
+  transition: 0.2s;
+}
+
+.logs-heading:hover hr {
+  width: 20%;
+}
+
+.log-img {
+  background-color: blue;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+}
+
+.log-entry {
+  transition: 0.1s;
+  padding-top: 24px;
+}
+
+.log-entry:hover {
+  transform: scale(1.1);
+}
+
+.log-item {
+  /* margin: 0 12px; */
+  font-size: 150%;
+  vertical-align: middle;
+  letter-spacing: 1px;
+}
+
+.log-status {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.log-date {
+  font-weight: bold;
 }

@@ -70,6 +70,38 @@
         <p class="font-weight-bold">Delivered</p>
       </div>
     </div>
+    <div class="logs-container">
+      <div class="logs-heading">
+        <hr />
+        <h1 class="title-main">Delivery Logs</h1>
+      </div>
+      <div
+        class="log-entry"
+        *ngFor="let item of deliveryHistory?.slice().reverse()"
+      >
+        <img
+          class="log-img"
+          [ngStyle]="{
+            'background-color': fetchDeliveryColor(item.orderStatus)
+          }"
+          src="/assets/images/check.svg"
+          alt=""
+        />
+        <span class="log-item">
+          Order<span
+            class="log-status"
+            [ngStyle]="{ color: fetchDeliveryColor(item.orderStatus) }"
+          >
+            {{ OrderStaus[item.orderStatus] }}
+          </span>
+          on
+          <span class="log-date">{{
+            formattedDate(item.updatedOn)
+          }}</span></span
+        >
+      </div>
+    </div>
+    <br />
     <div class="actions">
       <button class="back-btn" (click)="goBack()">Back</button>
       <button

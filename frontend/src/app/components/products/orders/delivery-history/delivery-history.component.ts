@@ -92,4 +92,16 @@ export class DeliveryHistoryComponent implements OnInit {
       ('DELIVERED' && 'CANCELLED')
     );
   }
+
+  fetchDeliveryColor(orderStatus) {
+    switch (orderStatus) {
+      case 'NEW':
+      case 'DELIVERED':
+        return 'green';
+      case 'CANCELLED':
+        return 'red';
+      default:
+        return '#1f9db9';
+    }
+  }
 }
