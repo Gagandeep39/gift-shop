@@ -53,7 +53,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Cart addToCart(ItemDto itemDto, Long userId) {
-
+		
 		Cart cart = userRepo.findById(userId).orElseThrow(() -> new CustomException("user", "Invalid User ID")).getCart();
 		ProductInfo productInfo = productInfoRepo.findByproductId(itemDto.getProductId())
 			.orElseThrow(() -> new CustomException("productInfo", "Invalid Product ID"));
@@ -74,12 +74,13 @@ public class CartServiceImpl implements CartService {
 			productInOrder.setProductName(productInfo.getProductName());
 			productInOrder.setProductDescription(productInfo.getProductDescription());
 			productInOrder.setProductIcon(productInfo.getProductIcon());
+			productInOrder.setDiscountPercent(productInfo.getDiscountPercent());
 			productInOrder.setCart(cart);
 			productInOrder.setProductStock(itemDto.getQuantity());
 			productInOrder.setProductPrice(productInfo.getProductPrice());
 		}
 		productInOrderRepository.saveAndFlush(productInOrder);
-
+		// TODO - Return boolean as below code will not give latest cart
 		return cartRepo.findByUserDetails_UserDetailsId(userId).orElseThrow(() -> new CustomException("user", "Invalid User ID"));
 	}
 	
@@ -94,7 +95,6 @@ public class CartServiceImpl implements CartService {
 			productInOrderRepository.deleteById(toBeDeleted.get().getProductInOrderId());
 		}
 		else throw new CustomException("product", "Product not in cart");
-		// TODO - Return boolean as this cart is redundant
 		return cart;
 	}
 

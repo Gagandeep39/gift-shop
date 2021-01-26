@@ -62,15 +62,22 @@ public class OrderMainServiceImpl implements OrderMainService {
 		orderMain.setPaymentId((long) 1000011000);	// Dummyy
 		orderMain.setPaymentType(PaymentType.ONLINE);
 		orderRepo.save(orderMain);
-		Float total = 0F;
+		Double total = 0D;
+		Double discountPrice = 0D;
+		// int DisTotal=0;
 		for (ProductInOrder p : products) {
 			p.setCart(null);
 			p.setOrderMain(orderMain);
 			total += p.getProductPrice().floatValue();
+
+			if (p.getDiscountPercent() == 0) discountPrice = total;
+			else discountPrice = discountPrice + (p.getProductPrice().doubleValue() - (p.getProductPrice().doubleValue() * p.getDiscountPercent() * 0.01));
+
       reduceStock(p.getProductId(), p.getProductStock());
       productRepo.save(p);
 		}
 		orderMain.setOrderAmount(BigDecimal.valueOf(total));
+		orderMain.setDiscountedAmount(BigDecimal.valueOf(discountPrice));
 		orderRepo.save(orderMain);
 		createDeliveryHistoryEntry(orderMain.getOrderId());
 		return Collections.singletonMap("orderId", orderMain.getOrderId().toString());
