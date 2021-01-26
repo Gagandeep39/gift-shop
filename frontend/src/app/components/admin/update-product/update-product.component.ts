@@ -26,6 +26,7 @@ export class UpdateProductComponent implements OnInit {
   categories: Category[] = [];
   statuses = ['ENABLED', 'DISABLED'];
   product: Product;
+  productIcon = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -57,6 +58,7 @@ export class UpdateProductComponent implements OnInit {
     }).closed;
     this.productService.fetchById(this.productId).subscribe((res: Product) => {
       this.product = res;
+      this.productIcon = res.productIcon; // Apply image fetched from server
       this.populateFormFields(this.product);
     }).closed;
   }
@@ -76,14 +78,15 @@ export class UpdateProductComponent implements OnInit {
 
   submitForm() {
     this.submitted = true;
-    if (this.updateProductForm.valid) this.submitData(this.updateProductForm.value);
+    if (this.updateProductForm.valid)
+      this.submitData(this.updateProductForm.value);
   }
   submitData(formData: any) {
     this.loadingService.enableLoading();
     this.productService.updateProduct(formData).subscribe(
       (response) => {
         console.log(response);
-        
+
         this.loadingService.disableLoading();
       },
       (error) => {
@@ -97,5 +100,16 @@ export class UpdateProductComponent implements OnInit {
         else throw new Error(error);
       }
     );
+  }
+
+  updateImage(image) {
+    console.log('triggered');
+
+    this.productIcon = image;
+  }
+
+  resetToDefault() {
+    this.populateFormFields(this.product);
+    this.productIcon = this.product.productIcon;
   }
 }
