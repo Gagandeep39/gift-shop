@@ -42,6 +42,7 @@ import { AccessDeniedComponent } from './shared/access-denied/access-denied.comp
 import { AuthModalComponent } from './shared/auth-modal/auth-modal.component';
 import { CartConfirmModalComponent } from './shared/cart-confirm-modal/cart-confirm-modal.component';
 import { OrderCancelModalComponent } from './shared/order-cancel-modal/order-cancel-modal.component';
+import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { OrderCancelModalComponent } from './shared/order-cancel-modal/order-can
     DeliveryHistoryComponent,
     AddProductComponent,
     ViewProductComponent,
+    UpdateProductComponent,
     ProductsComponent,
     OrdersComponent,
     CheckoutComponent,

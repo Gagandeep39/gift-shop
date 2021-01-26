@@ -73,9 +73,9 @@ const routes: Routes = [
     data: { role: 'Admin' },
     children: [
       { path: 'add', component: AddProductComponent },
-      { path: 'update', component: UpdateProductComponent },
       { path: 'view', component: ViewProductComponent },
       { path: '', redirectTo: 'view', pathMatch: 'full' },
+      { path: 'update/:productId', component: UpdateProductComponent },
     ],
   },
   { path: 'about', redirectTo: 'products/about', pathMatch: 'full' },
