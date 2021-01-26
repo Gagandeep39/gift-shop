@@ -53,6 +53,7 @@ public class OrderMain {
     private String buyerCity;
     private String buyerPincode;
     private BigDecimal orderAmount;
+    private BigDecimal discountedAmount;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
@@ -63,4 +64,5 @@ public class OrderMain {
     private Long paymentId;
 
     private Long userId;
+
 }
