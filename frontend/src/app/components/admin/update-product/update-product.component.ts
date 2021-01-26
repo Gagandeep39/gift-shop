@@ -5,6 +5,7 @@
  * @modify date 2021-01-26 16:48:58
  * @desc [description]
  */
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -32,7 +33,8 @@ export class UpdateProductComponent implements OnInit {
     private route: ActivatedRoute,
     public loadingService: LoadingService,
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -111,5 +113,9 @@ export class UpdateProductComponent implements OnInit {
   resetToDefault() {
     this.populateFormFields(this.product);
     this.productIcon = this.product.productIcon;
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
