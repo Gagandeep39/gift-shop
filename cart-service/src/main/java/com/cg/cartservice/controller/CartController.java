@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 import com.cg.cartservice.dto.CartDto;
 import com.cg.cartservice.dto.ItemDto;
+import com.cg.cartservice.dto.OrderDto;
 import com.cg.cartservice.entities.Cart;
 import com.cg.cartservice.entities.OrderMain;
 import com.cg.cartservice.services.CartService;
@@ -51,6 +52,11 @@ public class CartController {
   @PostMapping("/checkout/{id}") // working
   public Map<String, String> checkOut(@PathVariable Long id) {
     return order.checkOut(id);
+  }
+
+  @PostMapping("/manualcheckout/{id}")
+  public Map<String, String> manualCheckout(@PathVariable Long id, @Valid @RequestBody OrderDto orderDto) {
+    return order.manualCheckout(id, orderDto);
   }
 
   @PutMapping("/{id}") // working

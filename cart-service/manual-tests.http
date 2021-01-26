@@ -63,3 +63,16 @@ Content-Type: application/json
     }
   ]
 }
+
+### Manual checkout
+POST http://localhost:9300/cart/manualcheckout/100001
+Content-Type: application/json
+
+{
+  "city": "Mumbai",
+  "area": "Powai",
+  "pincode": "400001",
+  "state": "Maharashtra",
+  "paymentId": "100002",
+  "deliveryCharge": "120"
+}
