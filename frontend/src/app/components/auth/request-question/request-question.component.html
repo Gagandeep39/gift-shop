@@ -7,9 +7,10 @@
         </div>
         <div class="col-6 user-form">
           <div class="p-5">
-            <div class="text-center">
+            <div class="text-center logo-container">
               <img class="logo" [routerLink]="['/']" src="assets/images/gift-box.svg" />
               <img class="title" [routerLink]="['/']" src="assets/images/logo-text.png" />
+              <hr>
             </div>
             <form class="user"  [formGroup]="requestQuestionForm" (ngSubmit)="requestSecretQuestion()">
               <div class="form-group">
@@ -28,14 +29,15 @@
                   </div>
                 </div>
               </div>
-              <button class="btn btn-primary btn-block text-white btn-user" type="submit">
+              <button class="primary-btn btn-block" type="submit">
                 <span *ngIf="loadingService.loading" class="spinner-border spinner-border-sm"></span>
                 Request Secret Question
               </button>
             </form>
-            <hr />
+            <!-- <hr /> -->
+            <br>
             <div class="text-center">
-              <a class="small" [routerLink]="['/login']">Back To Login</a>
+              <a class="actions" [routerLink]="['/login']">Back To Login</a>
             </div>
           </div>
         </div>
