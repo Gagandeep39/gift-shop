@@ -28,10 +28,14 @@ nav {
 }
 
 .navbar-nav li a {
-  border-bottom: 2px solid transparent;
-  transition: 0.3s;
   line-height: 2em;
 }
+
+.navbar-nav li .menu-item {
+  border-bottom: 2px solid white;
+  transition: 0.3s;
+}
+
 
 .navbar-nav li .menu-item:hover {
   /* transform: scale(1.3); */
