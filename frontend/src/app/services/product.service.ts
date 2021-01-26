@@ -10,13 +10,12 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
   productServiceUrl = `${environment.protocol}${environment.applicationUrl}/${environment.productService}/products`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   fetchAllProducts() {
     return this.http.get(this.productServiceUrl);
@@ -32,5 +31,13 @@ export class ProductService {
 
   fetchById(productId) {
     return this.http.get(`${this.productServiceUrl}/${productId}`);
+  }
+
+  addProduct(product) {
+    return this.http.post(`${this.productServiceUrl}`, product);
+  }
+
+  deleteProduct(productId) {
+    return this.http.delete(`${this.productServiceUrl}/${productId}`);
   }
 }

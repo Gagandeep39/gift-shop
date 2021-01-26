@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Product } from 'src/app/models/product.model';
+import { ProductService } from 'src/app/services/product.service';
+
+
 
 @Component({
   selector: 'app-view-product',
@@ -7,9 +12,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewProductComponent implements OnInit {
 
-  constructor() { }
+  products : Product[] = [];
 
-  ngOnInit(): void {
+
+  constructor(private service : ProductService, private route : Router) { }
+
+  ngOnInit() : void {
+    this.service.fetchAllProducts().subscribe((data: Product[]) => {
+      this.products = data;
+      console.log(this.products);
+    });
   }
+
+  deleteProduct(productID : number){
+      this.service.deleteProduct(productID).subscribe(response => {
+        // console.log(data);
+        this.route.navigate(['admin/view']);
+      });
+  }
+
+  updateProduct(product :Product){
+    
+  }
+
 
 }
