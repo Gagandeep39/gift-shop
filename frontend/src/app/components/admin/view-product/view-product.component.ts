@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ViewProductComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private service: ProductService, private route: Router) {}
+  constructor(private service: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchAllProducts();

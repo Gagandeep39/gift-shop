@@ -32,7 +32,7 @@
                             <td>{{ product.categoryId }}</td>
                             <td>{{ product.categoryName }}</td>
                             <td class="border-0 align-middle"><button class="btn" (click)="deleteProduct(product.productId)"><i class="fa fa-trash-o fa-border" style="color:#ff4d4d;" ></i></button></td>
-                            <td class="border-0 align-middle"><button class="btn" (click)="updateProduct(product)"><i class="fa fa-pencil fa-border" style="color:#ff4d4d;" ></i></button></td>
+                            <td class="border-0 align-middle"><button class="btn" [routerLink]="['/admin/update', product.productId]" ><i class="fa fa-pencil fa-border" style="color:#ff4d4d;" ></i></button></td>
                         </tr>
                     </tbody>
                 </table>
