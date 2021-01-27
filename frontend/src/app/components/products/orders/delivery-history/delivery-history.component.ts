@@ -38,10 +38,11 @@ export class DeliveryHistoryComponent implements OnInit {
     this.fetchDeliveryHistory();
   }
   fetchDeliveryHistory() {
+    this.loadingService.enableLoading();
     this.deliveryService
       .fetchDeliveryByOrderId(this.orderId)
       .subscribe((res: DeliveryHistory[]) => {
-        console.log(res);
+        this.loadingService.disableLoading();
         this.deliveryHistory = res;
       });
   }
@@ -82,8 +83,7 @@ export class DeliveryHistoryComponent implements OnInit {
 
   checkIfCancellable() {
     return (
-      this.deliveryHistory?.slice(-1)[0]?.orderStatus !==
-      ('DELIVERED' || 'CANCELLED')
+      this.deliveryHistory?.slice(-1)[0]?.orderStatus !== 'DELIVERED' && this.deliveryHistory?.slice(-1)[0]?.orderStatus !== 'CANCELLED'
     );
   }
 
