@@ -2,7 +2,7 @@ server:
   port: ${server_port:9600}
 spring:
   profiles:
-    active: test
+    active: dev
   application:
     name: payment-service
 eureka:
