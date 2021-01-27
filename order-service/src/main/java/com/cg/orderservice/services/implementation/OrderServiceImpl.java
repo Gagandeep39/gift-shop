@@ -17,12 +17,16 @@ import com.cg.orderservice.entities.OrderMain;
 import com.cg.orderservice.enums.OrderStatus;
 import com.cg.orderservice.exception.CustomException;
 import com.cg.orderservice.repositories.OrderMainRepository;
+import com.cg.orderservice.services.DeliveryHistoryService;
 import com.cg.orderservice.services.OrderService;
 @Service
 public class OrderServiceImpl implements OrderService {
   
 	@Autowired
-	OrderMainRepository orderRepository;
+  OrderMainRepository orderRepository;
+  
+  @Autowired
+  DeliveryHistoryService deliveryService;
 
 
   @Override
@@ -52,6 +56,7 @@ public class OrderServiceImpl implements OrderService {
       throw new CustomException("order", "Update status cannot be the same as old status");
     else {
       order.setOrderStatus(OrderStatus.valueOf(updateStatusDto.getStatus()));
+      deliveryService.createEntry(updateStatusDto.getOrderId(), OrderStatus.valueOf(updateStatusDto.getStatus()));
       return orderRepository.save(order);
     }
   }
