@@ -10,11 +10,10 @@ package com.cg.orderservice.schedulingtask;
 import java.util.Date;
 import java.util.List;
 
-import com.cg.orderservice.entities.DeliveryHistory;
 import com.cg.orderservice.entities.OrderMain;
 import com.cg.orderservice.enums.OrderStatus;
-import com.cg.orderservice.repositories.DeliveryHistoryRepository;
 import com.cg.orderservice.repositories.OrderMainRepository;
+import com.cg.orderservice.services.DeliveryHistoryService;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -27,8 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DeliveryHistoryScheduledService {
 
-  private final DeliveryHistoryRepository deliveryRepository;
   private final OrderMainRepository orderRepository;
+  private final DeliveryHistoryService deliveryService;
 
   @Scheduled(cron = "5 * * * * *")
   public void autoApproveLeave() {
@@ -44,11 +43,7 @@ public class DeliveryHistoryScheduledService {
         orderMain.setOrderStatus(OrderStatus.DELIVERED);
       orderRepository.save(orderMain);
       // Add to delivery table
-      DeliveryHistory history = new DeliveryHistory();
-      history.setOrderStatus(orderMain.getOrderStatus());
-      history.setUpdatedOn(System.currentTimeMillis());
-      history.setOrderId(orderMain.getOrderId());
-      deliveryRepository.save(history);
+      deliveryService.createEntry(orderMain.getOrderId(), orderMain.getOrderStatus());
     }
 
   }

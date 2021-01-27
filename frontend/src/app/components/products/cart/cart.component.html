@@ -197,7 +197,7 @@
               *ngIf="(pincode.invalid && pincode.touched && pincode.dirty) || error"
               class="alert alert-danger"
             >
-              Invalid Pincode
+              Invalid Pincode or delivery unavailable
             </div>
           </div>
 
@@ -226,12 +226,12 @@
             <strong class="text-muted">DELIVERY CHARGE </strong
             ><strong>{{ deliveryCharge | currency: "INR" }}</strong>
           </li>
-          <li class="d-flex justify-content-between py-3 border-bottom">
+          <!-- <li class="d-flex justify-content-between py-3 border-bottom">
             <strong class="text-muted"
-              ><!-- <i class="fa fa-truck" aria-hidden="true"></i>&nbsp;&nbsp; -->SHIPPING
+              >SHIPPING
               AND HANDLING</strong
-            ><strong>{{ shipping | currency: "INR" }}</strong>
-          </li>
+            > (Free for Order greater than ₹ 2000) <strong>{{ shipping | currency: "INR" }}</strong>
+          </li> -->
           <!-- Removed for time being -->
           <!-- <li class="d-flex justify-content-between py-3 border-bottom">
                 <strong class="text-muted">GST (18%)</strong
@@ -239,15 +239,16 @@
               </li> -->
           <li class="d-flex justify-content-between py-3 border-bottom">
             <strong class="text-muted" style="font-size: 120%">TOTAL</strong>
-            <h5 class="font-weight-bold">{{ total | currency: "INR" }}</h5>
+            <h4 class="font-weight-bold">{{ total | currency: "INR" }}</h4>
           </li>
         </ul>
         <button
             class="btn btn-outline-success font-weight-bold"
             (click)="checkout()"
+            [disabled]="!total"
           >
             <i class="fa fa-credit-card-alt" aria-hidden="true"></i> &nbsp;
-            PROCEED TO CHECKOUT
+            PROCEED TO PAY
           </button>
       </div>
       

@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ManageUserService } from 'src/app/services/manage-user.service';
+import { PaymentStripeService } from 'src/app/services/payment-stripe.service';
 
 @Component({
   selector: 'app-cart',
@@ -40,9 +41,11 @@ export class CartComponent implements OnInit {
     private manageUserService: ManageUserService,
     private geolocationService: GeolocationService,
     private router: Router,
+    private paymentStripeService: PaymentStripeService
   ) {}
 
   ngOnInit(): void {
+    this.paymentStripeService.loadStripe();
     this.fetchCart();
   }
 
@@ -92,8 +95,8 @@ export class CartComponent implements OnInit {
     } else {
       this.shipping = 0;
     }
+    total = this.orderTotal + this.deliveryCharge;
 
-    total = this.orderTotal + this.shipping + this.deliveryCharge;
     this.total = total;
   }
 
@@ -102,22 +105,29 @@ export class CartComponent implements OnInit {
     sessionStorage.setItem('City', this.address.city);
     sessionStorage.setItem('State', this.address.state);
     sessionStorage.setItem('Pincode', this.address.pincode);
+    this.paymentStripeService.pay(this.total);
+    this.paymentStripeService.paymentComplete.subscribe(res => {
+      this.checkOutInServer(res);
+    })
+    
+  }
+  checkOutInServer(res) {
     const data = {
       ...this.address,
       deliveryCharge: this.deliveryCharge,
-      paymentId: 100005
-    }
-    this.cartService.checkout(data).subscribe(res => {
-      alert('Succeccfully purchased products');
-      this.router.navigateByUrl('/');
-    })
+      paymentId: res.paymentId,
+    };
+    this.cartService.checkout(data).subscribe((res) => {
+      console.log(res);
+      
+      this.router.navigateByUrl('/products/delivery/' + res['orderId']);
+    });
   }
 
   calculateDistance() {
     this.geolocationService.fetchDistance(this.address.pincode).subscribe(
       (res) => {
-        if (res['info'].statuscode !== 0)
-          this.error = 'error';
+        if (res['info'].statuscode !== 0) this.error = 'error';
         else {
           this.error = null;
           console.log(res['route'].distance);
@@ -132,8 +142,12 @@ export class CartComponent implements OnInit {
 
   calculateDeliveryCharge(distance) {
     if (distance <= 5) this.deliveryCharge = 50;
+    else if (distance <= 25) this.deliveryCharge = 100;
     else if (distance <= 50) this.deliveryCharge = 200;
+    else if (distance <= 100) this.deliveryCharge = 300;
+    else if (distance <= 200) this.deliveryCharge = 400;
     else this.deliveryCharge = 500;
+    this.total = this.orderTotal + this.deliveryCharge;
   }
   calculatePrice(currentProduct: ProductInOrder) {
     return (

@@ -13,6 +13,7 @@ export const environment = {
   cartService: 'cart-service',
   mapQuestAPIKey: 'nXLMbpX6U0545mAaAJyeI2QQd1JYVqG4',
   mapQuestUrl: 'http://www.mapquestapi.com/directions/v2/route',
+  publicStripeKey: 'pk_test_51I3zWOI8py6Rj5ufY6RnJ1zjPK930I2xwWW0XKPWFr6cp7mAvgM8q8aoAV5R0trqmGEEqSgrLY6xVhZRqTsgZJqE00zW2TqkZa',
   from: '400072',
 };
 
