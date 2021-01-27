@@ -32,9 +32,8 @@ public class PaymentServiceImpl implements PaymentService {
     chargeParams.put("currency", "INR");
     chargeParams.put("source", token);
     Charge charge = Charge.create(chargeParams);
-    System.out.println(charge);
     PaymentEntry entry = new PaymentEntry();
-    entry.setAmount(BigDecimal.valueOf(charge.getAmount()));
+    entry.setAmount(BigDecimal.valueOf(charge.getAmount()/100));
     entry.setName(charge.getBillingDetails().getName());
     entry.setGeneratedId(charge.getId());
     paymentRepository.save(entry);
