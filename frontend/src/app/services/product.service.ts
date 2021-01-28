@@ -7,6 +7,7 @@
  */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -43,5 +44,9 @@ export class ProductService {
 
   updateProduct(product) {
     return this.http.put(`${this.productServiceUrl}`, product);
+  }
+
+  fetchAllByPaging(page) {
+    return this.http.get(`${this.productServiceUrl}/pages?pageNo=${page}`).pipe(map(res => res['content']));
   }
 }
