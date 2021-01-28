@@ -14,7 +14,6 @@ declare global {
   styleUrls: ['./order-history.component.css'],
 })
 export class OrderHistoryComponent implements OnInit {
-
   orderId1: number;
   order;
 
