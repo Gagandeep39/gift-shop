@@ -1,14 +1,18 @@
 body {
-	background: #8cd4e4;
+	
+	background:#fb5a69;
+	background:linear-gradient(to right,#ffb3ad,#ddaaff,#b9f9f8);
 	font-family: 'Varela Round', sans-serif;
 	font-size: 13px;
+	
 }
-.bg{
-	background:linear-gradient(to right, #ffb3ad,#ddaaff,#b9f9f8);
+.table-responsive {
+	margin: 30px 0;
+	background-color: #fb5a69;
 }
-
 .table-wrapper {
-	min-width: 1000px;
+    min-width: 1000px;
+	background: #fff;
 	background:linear-gradient(to right,#ffb3ad,#ddaaff,#b9f9f8);
 	padding: 80px 40px;
 	border-radius: 3px;
@@ -16,7 +20,7 @@ body {
 }
 .table-title {
 	color: #fff;
-	background:#4b5366;	
+	background: #4b5366;		
 	padding: 16px 25px;
 	margin: -20px -25px 10px;
 	border-radius: 3px 3px 0 0;
@@ -31,17 +35,13 @@ table.table tr th, table.table tr td {
 	padding: 12px 15px;
 	vertical-align: middle;
 }
-table.table tr th:first-child {
-	width: 60px;
+	
+table.table td a {
+	font-weight: bold;
+	color: #566787;
+	display: inline-block;
+	text-decoration: none;
 }
-table.table tr th:last-child {
-	width: 80px;
-}
-button{
-	background-color: #ffb3ad;
-	align-items: center !important;
-	border-color: #b9f9f8;
-	border-radius: 15%;
-}
+ 
 
 

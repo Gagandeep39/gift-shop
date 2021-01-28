@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+import { OrderService } from 'src/app/services/order.service';
 
 declare global {
   interface Window {
@@ -14,42 +14,31 @@ declare global {
   styleUrls: ['./order-history.component.css'],
 })
 export class OrderHistoryComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+
+  orderId1: number;
+  order;
+
+  constructor(private orderservice: OrderService, private router: Router) {}
+
   ngOnInit(): void {
-    // this.loadStripe();
+    this.getOrders();
   }
 
-  chargeCreditCard() {
-    let form = document.getElementsByTagName('form')[0];
-    (<any>window).Stripe.card.createToken(
-      {
-        number: form.cardNumber.value,
-        exp_month: form.expMonth.value,
-        exp_year: form.expYear.value,
-        cvc: form.cvc.value,
-      },
-      (status: number, response: any) => {
-        if (status === 200) {
-          let token = response.id;
-          this.chargeCard(token, 999);
-        } else {
-          console.log(response.error.message);
-        }
-      }
-    );
+  onSave(orderId: number) {
+    this.orderId1 = orderId;
+    console.log(orderId);
+
+    //localStorage.setItem("id", this.orderId1);
+    sessionStorage.setItem('id', orderId.toString());
+    console.log(sessionStorage.getItem('id'));
+    this.router.navigate(['/products/orders', this.orderId1]);
   }
 
-  chargeCard(token: string, amount: number) {
-    // const headers = new HttpHeaders()
-    let headers = new HttpHeaders().set('token', token); // create header object
-    headers = headers.append('amount', amount.toString()); // add a new header, creating a new object
-    console.log(headers);
-
-    this.http
-      .post('http://localhost:9600/payment/charge', {}, { headers })
-      .subscribe((resp) => {
-        console.log(resp);
-      });
+  getOrders() {
+    console.log('before call');
+    this.orderservice.fetchOrder().subscribe((data) => {
+      this.order = data;
+      //alert("Orders in your cart");
+    });
   }
-
 }

@@ -22,6 +22,7 @@ import { CheckoutComponent } from './components/products/checkout/checkout.compo
 import { PaymentComponent } from './components/products/checkout/payment/payment.component';
 import { ShippingDetailsComponent } from './components/products/checkout/shipping-details/shipping-details.component';
 import { DeliveryHistoryComponent } from './components/products/orders/delivery-history/delivery-history.component';
+import { OrderDetailsComponent } from './components/products/orders/order-details/order-details.component';
 import { OrderHistoryComponent } from './components/products/orders/order-history/order-history.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
@@ -45,6 +46,11 @@ const routes: Routes = [
       {
         path: 'orders',
         component: OrderHistoryComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'orders/:orderId',
+        component: OrderDetailsComponent,
         canActivate: [AuthGuard],
       },
       { path: 'about', component: AboutUsComponent },

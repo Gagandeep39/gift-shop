@@ -43,6 +43,7 @@ import { AuthModalComponent } from './shared/auth-modal/auth-modal.component';
 import { CartConfirmModalComponent } from './shared/cart-confirm-modal/cart-confirm-modal.component';
 import { OrderCancelModalComponent } from './shared/order-cancel-modal/order-cancel-modal.component';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
+import { OrderDetailsComponent } from './components/products/orders/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { UpdateProductComponent } from './components/admin/update-product/update
     AuthModalComponent,
     CartConfirmModalComponent,
     OrderCancelModalComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
