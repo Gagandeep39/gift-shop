@@ -21,4 +21,12 @@ export class OrderService {
   updateOrderStatus(data: UpdateOrderStatus) {
     return this.http.post(`${this.orderServiceUrl}`, data);
   }
+
+  fetchOrder() {
+    return this.http.get(`${this.orderServiceUrl}`);
+  }
+
+  fetchById(id) {
+    return this.http.get(`${this.orderServiceUrl}/${id}`);
+  }
 }

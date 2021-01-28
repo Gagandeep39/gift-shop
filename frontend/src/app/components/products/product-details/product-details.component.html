@@ -39,8 +39,20 @@
                 </li>
               </ol>
             </nav>
-            <h1 class="product-title">{{ product?.productName }}</h1>
-            <h2 class="product-price">₹ {{ product?.productPrice }}</h2>
+            <h1 class="product-title">
+              {{ product?.productName }}
+              <span
+                class="badge"
+                *ngIf="product?.discountPercent > 0"
+                [ngStyle]="{ backgroundColor: badgeColor() }"
+              >
+                -{{ product?.discountPercent }}%
+              </span>
+            </h1>
+            <h2 class="product-price">
+              <span class="reduced">₹ {{ product?.productPrice }}</span> ₹
+              {{ reducedPrice() }}
+            </h2>
             <p class="product-description">
               {{ product?.productDescription }}
             </p>

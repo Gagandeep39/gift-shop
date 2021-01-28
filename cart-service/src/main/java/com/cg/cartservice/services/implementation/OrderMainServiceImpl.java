@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.cartservice.dto.NotificationEmail;
 import com.cg.cartservice.dto.OrderDto;
 import com.cg.cartservice.entities.Address;
 import com.cg.cartservice.entities.DeliveryHistory;
@@ -24,6 +25,7 @@ import com.cg.cartservice.repositories.OrderMainRepository;
 import com.cg.cartservice.repositories.ProductInOrderRepository;
 import com.cg.cartservice.repositories.ProductInfoRepository;
 import com.cg.cartservice.repositories.UserDetailsRepository;
+import com.cg.cartservice.services.EmailService;
 import com.cg.cartservice.services.OrderMainService;
 
 @Service
@@ -43,6 +45,8 @@ public class OrderMainServiceImpl implements OrderMainService {
 	ProductInfoRepository productInfoRepository;
 	@Autowired
 	DeliveryHistoryRepository historyRepository;
+	@Autowired
+	private EmailService emailService;
 
 	@Override
 	public Map<String, String> checkOut(Long id) {
@@ -160,7 +164,16 @@ public class OrderMainServiceImpl implements OrderMainService {
 		orderMain.setFinalPrice(BigDecimal.valueOf(discountPrice + orderDto.getDeliveryCharge().doubleValue()));
 		orderRepo.save(orderMain);
 		createDeliveryHistoryEntry(orderMain.getOrderId());
+		sendEmail(user, orderMain);
+		
 		return Collections.singletonMap("orderId", orderMain.getOrderId().toString());
+	}
+
+	private void sendEmail(UserDetails user, OrderMain orderMain) {
+		NotificationEmail email = new NotificationEmail();
+		email.setTo(user.getEmailId());
+		email.setBody("Order Successfully Created with ID: " + orderMain.getOrderId());
+		emailService.SendEmail(email);
 	}
 
 }

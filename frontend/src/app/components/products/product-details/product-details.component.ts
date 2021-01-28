@@ -93,4 +93,18 @@ export class ProductDetailsComponent implements OnInit {
     this.authModalService.open(this.router.url);
     return false;
   }
+
+  
+  badgeColor() {
+    if (this.product?.discountPercent <= 10) return '#FFCE03';
+    else if (this.product?.discountPercent <= 20) return '#FD9A01';
+    else if (this.product?.discountPercent <= 30) return '#FD6104';
+    else if (this.product?.discountPercent <= 40) return '#FF2C05';
+    else return '#F00505';
+  }
+
+  reducedPrice() {
+    if (this.product?.discountPercent === 0) return this.product?.productPrice;
+    return this.product?.productPrice - this.product?.productPrice * 0.01 * this.product?.discountPercent;
+  }
 }

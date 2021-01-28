@@ -5,7 +5,7 @@
  * @modify date 2021-01-27 02:57:00
  * @desc [description]
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address.model';
 import { Cart } from 'src/app/models/cart.model';
@@ -14,8 +14,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ManageUserService } from 'src/app/services/manage-user.service';
+import { PaymentRazorpayService } from 'src/app/services/payment-razorpay.service';
 import { PaymentStripeService } from 'src/app/services/payment-stripe.service';
+import { environment } from 'src/environments/environment';
 
+declare var Razorpay: any;
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -34,6 +37,7 @@ export class CartComponent implements OnInit {
   totalBeforeDiscount = 0;
   error;
   deliveryCharge;
+  user;
 
   constructor(
     public cartService: CartService,
@@ -41,7 +45,9 @@ export class CartComponent implements OnInit {
     private manageUserService: ManageUserService,
     private geolocationService: GeolocationService,
     private router: Router,
-    private paymentStripeService: PaymentStripeService
+    private paymentStripeService: PaymentStripeService,
+    private razorpayService: PaymentRazorpayService,
+    private ngZone: NgZone,
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +62,7 @@ export class CartComponent implements OnInit {
       this.manageUserService
         .fetchById(this.authService.fetchFromSessionStorage()?.userId)
         .subscribe((user) => {
+          this.user = user;
           this.address = user['address'];
           this.cart.cartId = data.cartId;
           this.cart.products = data.products;
@@ -106,10 +113,9 @@ export class CartComponent implements OnInit {
     sessionStorage.setItem('State', this.address.state);
     sessionStorage.setItem('Pincode', this.address.pincode);
     this.paymentStripeService.pay(this.total);
-    this.paymentStripeService.paymentComplete.subscribe(res => {
+    this.paymentStripeService.paymentComplete.subscribe((res) => {
       this.checkOutInServer(res);
-    })
-    
+    });
   }
   checkOutInServer(res) {
     const data = {
@@ -119,8 +125,8 @@ export class CartComponent implements OnInit {
     };
     this.cartService.checkout(data).subscribe((res) => {
       console.log(res);
-      
-      this.router.navigateByUrl('/products/delivery/' + res['orderId']);
+      // this.router.navigate([])
+      this.router.navigateByUrl('/products/delivery/' + res['orderId'])
     });
   }
 
@@ -154,5 +160,58 @@ export class CartComponent implements OnInit {
       currentProduct.productPrice -
       currentProduct.productPrice * 0.01 * currentProduct.discountPercent
     );
+  }
+
+  // RAZOR PAY Methods
+
+  rzp1;
+  options;
+  order;
+
+  payFromRazorPay() {
+    this.razorpayService.generateOrderId(this.total*100).subscribe((res) => {
+      this.setOption(res);
+      // this.initRazorPay();
+    }, error => console.log(error)
+    );
+  }
+  initRazorPay() {
+    const rzp1 = new Razorpay(this.options);
+    rzp1.open();
+  }
+
+  setOption(data: Object) {
+    this.options = {
+      key: environment.publicRazorpayKey, // Enter the Key ID generated from the Dashboard
+      // amount: 12100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: 'INR',
+      name: 'Gift Shop',
+      description: 'Test Transaction',
+      image: 'https://i.imgur.com/OEzo9pz.png',
+      order_id: data['order_id'], //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      // callback_url: this.router.url,
+      handler: (response) => this.ngZone.run(() => this.updatePaymentInServer(response.razorpay_payment_id))
+        ,
+      prefill: {
+        name: 'Gift Shop',
+        email: 'gift.shop@gmail.com',
+        contact: '9999999999',
+      },
+      notes: {
+        address: 'Gift Shop office',
+      },
+      theme: {
+        color: '#3399cc',
+      },
+    };
+    this.initRazorPay();
+  }
+  updatePaymentInServer(razorId) {
+    const name = this.user['firstName'] + this.user['lastName'];
+    const amount = this.total;
+    this.razorpayService.updatePaymentInDb({ razorId, amount, name }).subscribe(res => {
+      console.log(res);
+      this.checkOutInServer(res)
+    });
   }
 }
