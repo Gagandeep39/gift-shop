@@ -251,7 +251,7 @@
             PROCEED TO PAY
           </button>
 
-          <button class="btn btn-outline-success font-weight-bold" id="rzp-button1" (click)="payFromRazorPay()">Pay with Razor Pay</button>
+          <button [disabled]="!total" class="btn btn-outline-success font-weight-bold" id="rzp-button1" (click)="payFromRazorPay()">Pay with Razor Pay</button>
       </div>
       
     </div>

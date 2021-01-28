@@ -125,8 +125,8 @@ export class CartComponent implements OnInit {
     };
     this.cartService.checkout(data).subscribe((res) => {
       console.log(res);
-      // this.router.navigate(['/products/delivery/' + res['orderId']])
-      this.router.navigateByUrl('/products')
+      // this.router.navigate([])
+      this.router.navigateByUrl('/products/delivery/' + res['orderId'])
     });
   }
 
