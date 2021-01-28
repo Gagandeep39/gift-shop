@@ -35,6 +35,8 @@ INSERT INTO product_category(category_id, category_name, category_description, c
 
 INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100002, 'Toys', 'an object for a child to play with', 'https://taiken.co/uploads/2019/05/Kawaii_Culture_001-1200x1047.jpg');
 
+INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100003, 'Apparel', 'Clothes for Men, Women and Child', 'https://static.fibre2fashion.com/Newsresource/images/251/apparel-11_262804.jpg');
+
 -- TODO Add 4 more category
 
 ALTER sequence category_id_sequence restart with 100007;
@@ -56,7 +58,21 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 
 INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100005, 'Action Figure', 200, 299, 'Toys for kids', 'https://www.staractionfigures.co.uk/user/products/large/yfghngfjhtrju.jpg', 'ENABLED', 100002, 30);
 
-INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100006, 'Action Figure', 200, 399, 'Toys for kids', 'https://www.meijer.com/content/dam/meijer/product/0063/05/0980/90/0063050980908_0_A1C1_1200.png', 'ENABLED', 100002, 30);
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100006, 'Action Figure - Power Ranger', 200, 399, 'Toys can be given as ifts to children on birthday', 'https://www.meijer.com/content/dam/meijer/product/0063/05/0980/90/0063050980908_0_A1C1_1200.png', 'DISABLED', 100002, 30);
+
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100007, 'Kids - Gift Clothing', 200, 499, 'Gift Clothing for Kids', 'https://www.landsend.com/article/top-clothing-gifts/images/feat-m.jpg', 'ENABLED', 100003, 30);
+
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100008, 'Girls Clothes', 200, 699, 'Apparels for Kids', 'https://www.dhresource.com/0x0/f2/albu/g7/M00/A9/FD/rBVaSls0oYiAGexEAADcL8c8LrA823.jpg', 'ENABLED', 100003, 30);
+
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100009, 'Apparel', 200, 899, 'Clothing wear', 'https://blog.bonfire.com/wp-content/uploads/2018/08/colorcombinations1-1.jpeg', 'ENABLED', 100003, 30);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100010, 'Teens - Gify Clothing', 200, 399, 'Apparels that can be given as gifts to your loved onces', 'https://assets.teenvogue.com/photos/55837480c3f29bdf1f2bfe81/master/w_700,h_467,c_limit/fashion-gift-guides-2014-12-clothes-gifts-00.jpg', 'ENABLED', 100003, 30);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100011, 'Gift Clothing', 200, 399, 'Apparels that can be given as gifts to your loved onces', 'https://assets.simpleviewinc.com/simpleview/image/fetch/c_fill,h_784,q_75,w_1050/https://assets.simpleviewinc.com/simpleview/image/upload/crm/knoxville/virginia-jane0-b099cffc5056a34_b099d18d-5056-a348-3aabf0e49069ae2f.jpg', 'DISABLED', 100003, 30);
+
 
 -- TODO Add 25 more items
 
