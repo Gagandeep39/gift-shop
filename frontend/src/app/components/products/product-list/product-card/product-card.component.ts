@@ -28,6 +28,8 @@ export class ProductCardComponent implements OnInit {
   productStatus;
   @Input()
   productQuantity;
+  @Input()
+  discountPercent = 50;
   @Output()
   addToCartEvent = new EventEmitter<string>();
 
@@ -41,5 +43,13 @@ export class ProductCardComponent implements OnInit {
 
   isProductAvailable(): boolean {
     return this.productStatus !== 'ENABLED' || this.productQuantity <= 0;
+  }
+
+  badgeColor() {
+    if (this.discountPercent <= 10) return '#FFCE03';
+    else if (this.discountPercent <= 20) return '#FD9A01';
+    else if (this.discountPercent <= 30) return '#FD6104';
+    else if (this.discountPercent <= 40) return '#FF2C05';
+    else return '#F00505';
   }
 }
