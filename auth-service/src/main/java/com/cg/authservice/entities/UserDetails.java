@@ -39,6 +39,7 @@ public class UserDetails {
   @Column(length = 40)
   private String lastName;
 
+  @Column(unique = true)
   private String emailId;
   @Column(length = 10)
   private String phoneNo;
