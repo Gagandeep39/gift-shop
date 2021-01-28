@@ -44,7 +44,7 @@ public class PaymentServiceImpl implements PaymentService {
   @Override
   public PaymentEntry saveRazorPayment(RazorDto dto) {
     PaymentEntry entry = new PaymentEntry();
-    entry.setAmount(BigDecimal.valueOf(dto.getAmount() / 100));
+    entry.setAmount(BigDecimal.valueOf(dto.getAmount()));
     entry.setName(dto.getName());
     entry.setGeneratedId(dto.getRazorId());
     return paymentRepository.save(entry);

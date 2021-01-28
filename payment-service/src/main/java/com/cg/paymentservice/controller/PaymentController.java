@@ -64,7 +64,7 @@ public class PaymentController {
 
   @PostMapping("/razorsuccess")
   public PaymentEntry saveRazorPayment(@RequestBody RazorDto dto) {
-    return null;
+    return paymentService.saveRazorPayment(dto);
   }
 
 }
