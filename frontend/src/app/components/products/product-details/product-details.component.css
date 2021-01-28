@@ -270,3 +270,17 @@ letter-spacing: 0.5px;
 .breadcrumb-item {
   cursor: pointer;
 }
+
+.badge {
+  vertical-align: middle;
+  /* white-space: nowrap; */
+  padding: 4px !important;
+  color: #ffffff;
+  background-color: #1f9db9;
+  border-radius: 9px;
+}
+.badge:hover {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}

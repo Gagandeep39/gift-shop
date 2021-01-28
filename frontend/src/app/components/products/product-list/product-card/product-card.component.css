@@ -171,3 +171,8 @@ hr {
   text-decoration: none;
   cursor: pointer;
 }
+
+.reduced {
+  text-decoration: line-through;
+  color: #7babb6;
+}

@@ -52,4 +52,9 @@ export class ProductCardComponent implements OnInit {
     else if (this.discountPercent <= 40) return '#FF2C05';
     else return '#F00505';
   }
+
+  reducedPrice() {
+    if (this.discountPercent === 0) return this.productPrice;
+    return this.productPrice - this.productPrice * 0.01 * this.discountPercent;
+  }
 }
