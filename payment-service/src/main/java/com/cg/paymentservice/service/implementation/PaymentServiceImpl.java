@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.cg.paymentservice.dto.RazorDto;
 import com.cg.paymentservice.entities.PaymentEntry;
 import com.cg.paymentservice.repositories.PaymentEntryRepository;
 import com.cg.paymentservice.service.PaymentService;
@@ -38,5 +39,14 @@ public class PaymentServiceImpl implements PaymentService {
     entry.setGeneratedId(charge.getId());
     paymentRepository.save(entry);
     return entry;
+  }
+
+  @Override
+  public PaymentEntry saveRazorPayment(RazorDto dto) {
+    PaymentEntry entry = new PaymentEntry();
+    entry.setAmount(BigDecimal.valueOf(dto.getAmount() / 100));
+    entry.setName(dto.getName());
+    entry.setGeneratedId(dto.getRazorId());
+    return paymentRepository.save(entry);
   }
 }
