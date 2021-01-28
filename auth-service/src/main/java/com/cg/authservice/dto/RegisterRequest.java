@@ -27,10 +27,10 @@ import lombok.NoArgsConstructor;
 public class RegisterRequest {
 
   @NotBlank
-  @Size(min = 5, max = 20)
+  @Size(min = 5, max = 50)
   private String username;
   @NotBlank
-  @Size(min = 5, max = 20)
+  @Size(min = 5, max = 50)
   @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}", message = "Plese enter a string password with upper case, lower case, special character")
   private String password;
   @NotBlank
