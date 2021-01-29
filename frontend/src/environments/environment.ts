@@ -15,6 +15,7 @@ export const environment = {
   mapQuestUrl: 'http://www.mapquestapi.com/directions/v2/route',
   publicStripeKey: 'pk_test_51I3zWOI8py6Rj5ufY6RnJ1zjPK930I2xwWW0XKPWFr6cp7mAvgM8q8aoAV5R0trqmGEEqSgrLY6xVhZRqTsgZJqE00zW2TqkZa',
   publicRazorpayKey: 'rzp_test_QHK5P7ne66SdWo',
+  googleClientId: '120787335948-g4r6bof29ub3vaaaiu7pc01jd5dalooq.apps.googleusercontent.com',
   from: '400072',
 };
 

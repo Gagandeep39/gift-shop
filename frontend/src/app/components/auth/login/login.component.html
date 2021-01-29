@@ -7,9 +7,17 @@
         <div class="col-6 user-form">
           <div class="p-5">
             <div class="text-center logo-container">
-              <img class="logo" [routerLink]="['/']" src="assets/images/gift-box.svg" />
-              <img class="title" [routerLink]="['/']" src="assets/images/logo-text.png" />
-              <hr>
+              <img
+                class="logo"
+                [routerLink]="['/']"
+                src="assets/images/gift-box.svg"
+              />
+              <img
+                class="title"
+                [routerLink]="['/']"
+                src="assets/images/logo-text.png"
+              />
+              <hr />
             </div>
             <form class="user" [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="form-group">
@@ -74,24 +82,56 @@
                   </div>
                 </div>
               </div>
-              <button
-                class="primary-btn btn-block"
-                type="submit"
-              >
+              <!-- <div class="social">
+                  <img
+                  class="social-icon"
+                    [src]="logo"
+                    (mouseover)="logo = '/assets/images/btn_google_pressed.svg'"
+                    (mouseout)="logo = '/assets/images/btn_google_normal.svg'"
+                    alt=""
+                  />
+                  <img 
+                  class="social-icon"
+                    [src]="logo"
+                    (mouseover)="logo = '/assets/images/btn_google_pressed.svg'"
+                    (mouseout)="logo = '/assets/images/btn_google_normal.svg'"
+                    alt=""
+                  />
+                  <img                  class="social-icon"
+                    [src]="logo"
+                    (mouseover)="logo = '/assets/images/btn_google_pressed.svg'"
+                    (mouseout)="logo = '/assets/images/btn_google_normal.svg'"
+                    alt=""
+                  />
+                </div> -->
+              <button class="primary-btn btn-block" type="submit">
                 <span
                   *ngIf="loadingService.loading"
                   class="spinner-border spinner-border-sm"
                 ></span>
                 Login
               </button>
-              <a
-                class="secondary-btn btn-block"
-                [routerLink]="['/register']"
+              <a class="secondary-btn btn-block" [routerLink]="['/register']"
                 >Register
               </a>
-              <!-- <hr /> -->
-              <br>
-              <br>
+              <br />
+              <br />
+
+              <div class="g-sign-in-button" id="googleBtn">
+                <div class="content-wrapper">
+                  <div class="logo-wrapper">
+                    <img
+                      class="actual-logo"
+                      src="https://developers.google.com/identity/images/g-logo.png"
+                    />
+                  </div>
+                  <span class="text-container">
+                    <span>Sign in with Google</span>
+                  </span>
+                </div>
+              </div>
+              <br />
+              <br />
             </form>
             <div class="text-center">
               <a class="actions" [routerLink]="['/forgotpassword']"
