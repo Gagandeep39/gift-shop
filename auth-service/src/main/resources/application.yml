@@ -15,3 +15,6 @@ eureka:
 jwt:
   secret: ${jwt_secret:thisisathirtycharacterlongstring}
   expiration: 3600000
+
+google:
+  CLIENT_ID: 120787335948-g4r6bof29ub3vaaaiu7pc01jd5dalooq.apps.googleusercontent.com
