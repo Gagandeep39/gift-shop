@@ -28,17 +28,18 @@ import { OrderHistoryComponent } from './components/products/orders/order-histor
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
+import { AuthAccessGuard } from './guards/auth-access.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { AccessDeniedComponent } from './shared/access-denied/access-denied.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'socialregister', component: SocialRegisterComponent },
-  { path: 'forgotpassword', component: RequestQuestionComponent },
-  { path: 'changepassword', component: ChangePasswordComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthAccessGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthAccessGuard] },
+  { path: 'socialregister', component: SocialRegisterComponent, canActivate: [AuthAccessGuard]  },
+  { path: 'forgotpassword', component: RequestQuestionComponent, canActivate: [AuthAccessGuard]  },
+  { path: 'changepassword', component: ChangePasswordComponent, canActivate: [AuthAccessGuard]  },
   {
     path: 'products',
     component: ProductsComponent,
