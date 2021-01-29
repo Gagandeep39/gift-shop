@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GoogleSignInRequest {
+public class SocialSignInRequest {
 
   @NotBlank
   private String token;
