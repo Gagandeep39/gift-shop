@@ -46,6 +46,7 @@ import { UpdateProductComponent } from './components/admin/update-product/update
 import { OrderDetailsComponent } from './components/products/orders/order-details/order-details.component';
 import { GlobalErrorModalComponent } from './shared/global-error-modal/global-error-modal.component';
 import { SocialRegisterComponent } from './components/auth/social-register/social-register.component';
+import { AccessDeniedModalComponent } from './shared/access-denied-modal/access-denied-modal.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { SocialRegisterComponent } from './components/auth/social-register/socia
     OrderDetailsComponent,
     GlobalErrorModalComponent,
     SocialRegisterComponent,
+    AccessDeniedModalComponent,
   ],
   imports: [
     BrowserModule,
