@@ -52,6 +52,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               "Error 500: Server couldn't process the request, Retry"
             );
             break;
+          default:
+            this.modalService.open(`Error ${error.status} Something went wrong while connecting to server`)
         }
       }
     } else {
