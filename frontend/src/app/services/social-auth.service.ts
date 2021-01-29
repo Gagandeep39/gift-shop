@@ -23,6 +23,10 @@ export class SocialAuthService {
     return this.http.post(`${this.authServiceUrl}/google`, data);
   }
 
+  validateFacebookTokenAndLogin(data) {
+    return this.http.post(`${this.authServiceUrl}/facebook`, data);
+  }
+
   socialSignUp(data) {
     return this.http.post(`${this.authServiceUrl}/signup`, data);
   }

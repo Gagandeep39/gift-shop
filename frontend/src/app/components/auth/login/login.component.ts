@@ -15,6 +15,7 @@ import { SocialAuthService } from 'src/app/services/social-auth.service';
 import { environment } from 'src/environments/environment';
 
 declare const gapi: any;
+declare const FB: any;
 
 @Component({
   selector: 'app-login',
@@ -93,36 +94,93 @@ export class LoginComponent implements OnInit {
     });
   }
   public attachSignin(element) {
-    this.auth2.attachClickHandler(
-      element,
-      {},
-      (googleUser) => this.ngZone.run(() =>{
-        console.log(googleUser);
-        this.loadingService.enableLoading();
-        this.socialAuthService
-          .validateGoogleTokenAndLogin({
-            token: googleUser.getAuthResponse().id_token,
-            email: googleUser.getBasicProfile().getEmail(),
-          })
-          .subscribe((res) => {
-            this.loadingService.disableLoading();
-            if (res['status'] !== 202)
-              this.router.navigateByUrl(this.returnUrl);
-            else {
-              this.router.navigate(['/socialregister'], {
-                state: { data: { emailId: googleUser.getBasicProfile().getEmail() } }
-              });
-            }
-          }).closed;
-      },
-      (error) => {
-        console.log(error);
-      }
-    ));
+    this.auth2.attachClickHandler(element, {}, (googleUser) =>
+      this.ngZone.run(
+        () => {
+          console.log(googleUser);
+          this.loadingService.enableLoading();
+          this.socialAuthService
+            .validateGoogleTokenAndLogin({
+              token: googleUser.getAuthResponse().id_token,
+              email: googleUser.getBasicProfile().getEmail(),
+            })
+            .subscribe((res) => {
+              this.loadingService.disableLoading();
+              if (res['status'] !== 202)
+                this.router.navigateByUrl(this.returnUrl);
+              else {
+                this.router.navigate(['/socialregister'], {
+                  state: {
+                    data: { emailId: googleUser.getBasicProfile().getEmail() },
+                  },
+                });
+              }
+            }).closed;
+        },
+        (error) => console.log(error)
+      )
+    );
   }
 
   ngAfterViewInit() {
     this.googleInit();
+    this.facebookInit();
+  }
+
+  facebookInit() {
+    (window as any).fbAsyncInit = function () {
+      FB.init({
+        appId: environment.facebookClientId,
+        cookie: true,
+        xfbml: true,
+        version: 'v3.1',
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'facebook-jssdk');
+  }
+
+  submitLogin() {
+    FB.login((response) =>
+      this.ngZone.run(() => {
+        if (response.authResponse) {
+          FB.api('/me', { fields: 'name, email' }, (res) => {
+            console.log(res);
+            console.log(response);
+
+            this.loadingService.enableLoading();
+            this.socialAuthService
+              .validateFacebookTokenAndLogin({
+                token: response.authResponse.accessToken,
+                email: res.email,
+              })
+              .subscribe((res) => {
+                this.loadingService.disableLoading();
+                if (res['status'] !== 202)
+                  this.router.navigateByUrl(this.returnUrl);
+                else {
+                  this.router.navigate(['/socialregister'], {
+                    state: {
+                      data: { emailId: response.email },
+                    },
+                  });
+                }
+              }).closed;
+          });
+        } else throw Error('Error Signing from facebook');
+      })
+    );
   }
 }
 
