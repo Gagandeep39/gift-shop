@@ -27,8 +27,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        // if (error?.error?.message !== 'FieldException') // Ignore for Validation error
-        this.handleErrorResponse(error);
+        if (error?.error?.message !== 'FieldException') // Ignore for Validation error
+          this.handleErrorResponse(error);
         return throwError(error);
       })
     );
