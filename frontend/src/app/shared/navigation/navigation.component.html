@@ -24,6 +24,9 @@
       <a class="nav-link menu-item" [routerLink]="[item.link]" > {{item.name}}</a>
     </li>
     <li class="nav-item px-2">
+      <a class="nav-link" *ngIf="isLoggedIn" [routerLink]="['/products/profile']">Profile</a>
+    </li>
+    <li class="nav-item px-2">
       <a class="nav-link" *ngIf="isLoggedIn" (click)="logOut()">Log Out</a>
     </li>
   </ul>
