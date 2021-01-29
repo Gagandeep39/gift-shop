@@ -82,28 +82,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="social">
-                  <img
-                  class="social-icon"
-                    [src]="logo"
-                    (mouseover)="logo = '/assets/images/btn_google_pressed.svg'"
-                    (mouseout)="logo = '/assets/images/btn_google_normal.svg'"
-                    alt=""
-                  />
-                  <img 
-                  class="social-icon"
-                    [src]="logo"
-                    (mouseover)="logo = '/assets/images/btn_google_pressed.svg'"
-                    (mouseout)="logo = '/assets/images/btn_google_normal.svg'"
-                    alt=""
-                  />
-                  <img                  class="social-icon"
-                    [src]="logo"
-                    (mouseover)="logo = '/assets/images/btn_google_pressed.svg'"
-                    (mouseout)="logo = '/assets/images/btn_google_normal.svg'"
-                    alt=""
-                  />
-                </div> -->
+              
               <button class="primary-btn btn-block" type="submit">
                 <span
                   *ngIf="loadingService.loading"
@@ -114,25 +93,22 @@
               <a class="secondary-btn btn-block" [routerLink]="['/register']"
                 >Register
               </a>
-              <br />
-              <br />
-
-              <div class="g-sign-in-button" id="googleBtn">
-                <div class="content-wrapper">
-                  <div class="logo-wrapper">
-                    <img
-                      class="actual-logo"
-                      src="https://developers.google.com/identity/images/g-logo.png"
-                    />
-                  </div>
-                  <span class="text-container">
-                    <span>Sign in with Google</span>
-                  </span>
-                </div>
+              <br>
+              <br>
+              <div class="social">
+                <img
+                  class="social-icon"
+                  src="/assets/images/btn_google_normal.svg"
+                  alt=""
+                  id="googleBtn"
+                />
+                <img
+                  class="social-icon icon-bar facebook"
+                  src="/assets/images/facebook.svg"
+                  alt=""
+                  (click)="submitLogin()"
+                />
               </div>
-
-              <button type="button" class="btn" (click)="submitLogin();">Login with facebook</button>
-              <br />
               <br />
             </form>
             <div class="text-center">
