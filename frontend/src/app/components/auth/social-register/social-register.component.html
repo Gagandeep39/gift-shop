@@ -9,6 +9,9 @@
             <div class="logo-container">
               <img [routerLink]="['/']" class="title" src="assets/images/logo-text.png" />
               <hr>
+              <h1 class="title-main">
+                You have to do this only Once.
+              </h1>
             </div>
             <!-- <div class="text-center">
               <img class="logo" src="assets/images/gift-box.svg" />
@@ -81,8 +84,8 @@
                         <label for="emailId"><strong>Email</strong><br /></label
                         ><input
                           class="form-control"
-                          type="text"
-                          placeholder="Email"
+                          type="email"
+                          readonly
                           name="emailId"
                           formControlName="emailId"
                           [ngClass]="{'is-invalid': submitted && userForm.get('emailId').invalid}"
@@ -176,66 +179,6 @@
                   </div>
                 </div>
                   <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <label for="password"><strong>Password</strong></label
-                        ><input
-                          type="password"
-                          class="form-control"
-                          placeholder="Enter Password"
-                          name="password"
-                          formControlName="password"
-                          [ngClass]="{'is-invalid': submitted && userForm.get('password').invalid}"
-                        />
-                        <div class="invalid-feedback" *ngIf="submitted && userForm.get('password').invalid">
-                          <div *ngIf="userForm.get('password').errors['required']">* Required</div>
-                          <div *ngIf="userForm.get('password').errors['serverValidationError']"> 
-                              {{userForm.controls['password'].errors.serverValidationError }} 
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="form-group">
-                        <label for="password2"
-                          ><strong>Re-enter Password</strong></label
-                        ><input
-                          type="password"
-                          class="form-control"
-                          placeholder="Re-enter Password"
-                          name="password2"
-                          formControlName="password2"
-                          [ngClass]="{'is-invalid': submitted && userForm.get('password2').invalid}"
-                        />
-                        <div class="invalid-feedback" *ngIf="submitted && userForm.get('password2').invalid">
-                          <div *ngIf="userForm.get('password2').errors['required']">* Required</div><div *ngIf="userForm.get('password2').errors['passwordMatchError']">Password not same</div>
-                          <div *ngIf="userForm.get('password2').errors['serverValidationError']"> 
-                              {{userForm.controls['password2'].errors.serverValidationError }} 
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <label for="username"><strong>Username</strong></label
-                        ><input
-                          type="text"
-                          class="form-control"
-                          placeholder="Enter Username"
-                          name="username"
-                          formControlName="username"
-                          [ngClass]="{'is-invalid': submitted && userForm.get('username').invalid}"
-                        />
-                        <div class="invalid-feedback" *ngIf="submitted && userForm.get('username').invalid">
-                          <div *ngIf="userForm.get('username').errors['required']">* Required</div>
-                          <div *ngIf="userForm.get('username').errors['serverValidationError']"> 
-                              {{userForm.controls['username'].errors.serverValidationError }} 
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                     <div class="col">
                       <div class="form-group">
                         <button class="primary-btn btn-block" type="submit">

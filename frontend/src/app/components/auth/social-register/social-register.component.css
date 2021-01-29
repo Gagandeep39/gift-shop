@@ -53,17 +53,21 @@
 }
 
 .title {
-  height: 60px;
-}
-
-.text-center {
+  height: 80px;
+  /* padding-left: 33%; */
   cursor: pointer;
+  transition: 0.2s;
 }
 
-.logo:focus,
-.title:focus {
+.title:hover, .title:focus {
   outline: none;
+  transform: scale(1.2)
 }
+
+.btn {
+  margin-top: 8px;
+}
+
 
 /* Buttons */
 .primary-btn,
@@ -82,7 +86,7 @@
   border-radius: 4px;
   transition: 0.2s;
   margin-right: 12px;
-  margin-top: 12px;
+  margin-top: 24px;
 }
 
 .primary-btn:hover {
@@ -101,50 +105,41 @@
   transform: scale(1.1);
 }
 
+
 .text-center:hover::after {
   width: 200px;
 }
 
-.logo-container hr,
-hr {
+.logo-container hr, hr {
   border-top: 3px solid #fb5a69;
   width: 20%;
   transition: 0.2s;
 }
 
-.logo-container:hover hr,
-hr:hover {
-  width: 60%;
+.logo-container:hover hr, hr:hover {
+  width: 40%;
+}
+.logo-container{
+  text-align: center;
 }
 
-.actions {
+.actions, label{
   color: #24b7d8;
   text-transform: uppercase;
 }
 
-
-.social {
-  display: flex;
-  justify-content: center;
+.text-center:hover hr{
+  width: 40%;
 }
 
-.social-icon {
-  transform: scale(1.2);
-  opacity: 0.9;
-  cursor: pointer;
+.alert{
+  margin: 2%;
 }
 
-.facebook {
-  width: auto;
-  padding: 12px;
-  border-radius: 2px;
-  margin: 2px;
-  background: #3B5998;
-  margin-left: 16px;
-  color: white;
-  transform: scale(1.2);
-}
-
-.social-icon:hover {
-  opacity: 0.5;
+.title-main {
+  font-weight: 600;
+  font-size: 200%;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-align: center;
 }

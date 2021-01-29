@@ -20,7 +20,8 @@
       </div>
     </li>
     <li class="nav-item px-2" *ngFor="let item of activeTabs">
-      <a class="nav-link menu-item" [routerLink]="[item.link]" > {{item.name}} </a>
+      <!-- <span class="cart-quantity">0</span>  -->
+      <a class="nav-link menu-item" [routerLink]="[item.link]" > {{item.name}}</a>
     </li>
     <li class="nav-item px-2">
       <a class="nav-link" *ngIf="isLoggedIn" (click)="logOut()">Log Out</a>

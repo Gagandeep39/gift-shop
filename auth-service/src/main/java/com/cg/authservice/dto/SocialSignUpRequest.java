@@ -1,8 +1,8 @@
 /**
  * @author Gagandeep Singh
  * @email singh.gagandeep3911@gmail.com
- * @create date 2021-01-19 23:15:58
- * @modify date 2021-01-19 23:15:58
+ * @create date 2021-01-29 12:48:18
+ * @modify date 2021-01-29 12:48:18
  * @desc [description]
  */
 package com.cg.authservice.dto;
@@ -10,7 +10,6 @@ package com.cg.authservice.dto;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.cg.authservice.entities.Address;
@@ -20,28 +19,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RegisterRequest {
+@Data
+public class SocialSignUpRequest {
 
-  @NotBlank
-  @Size(min = 5, max = 50)
-  private String username;
-  @NotBlank
-  @Size(min = 5, max = 50)
-  @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}", message = "Plese enter a string password with upper case, lower case, special character")
-  private String password;
   @NotBlank
   @Email
   private String emailId;
   @NotBlank
   @Size(min = 10, max = 10, message = "Length of phone number must be 10")
   private String phoneNo;
-  // @NotNull
-  // @Past
-  // private LocalDate dob;
   @Valid
   private Address address;
   @NotBlank

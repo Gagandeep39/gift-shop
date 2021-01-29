@@ -51,13 +51,21 @@ public class AuthServiceImpl implements AuthService {
 
   @Override
   public LoginResponse login(LoginRequest loginRequest) {
-    User user = findUserByCredentials(loginRequest.getUsername(), loginRequest.getPassword());
+    User user = findUserByUsernameOrEmailCredential(loginRequest.getUsername(), loginRequest.getPassword());
     return LoginResponse.builder()
       .userId(user.getUserId())
       .username(user.getUsername())
       .role(user.getRole())
       .token(jwtProvider.generateWithUsernameAndId(user.getUsername(), user.getUserId()))
       .build();
+  }
+
+  @Transactional(readOnly = true)
+  public User findUserByUsernameOrEmailCredential(String username, String password) {
+    UserDetails details = userDetailsRepository.findByUsernameOrEmail(username).orElseThrow(() -> new InvalidCredentialException("username", "User " + username + " doesn't exist"));
+    if (!passwordEncoder.matches(password, details.getUser().getPassword()))
+      throw new InvalidCredentialException("password", "Invalid Password");
+    return details.getUser();
   }
 
   @Transactional(readOnly = true)
@@ -101,6 +109,7 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public UserDetailsDto register(RegisterRequest registerRequest) {
     checkIfUsernameExists(registerRequest.getUsername());
+    checkIfEmailExists(registerRequest.getEmailId());
     registerRequest.setPassword(encodePassword(registerRequest.getPassword()));
     registerRequest.setAddress(addressRepository.save(registerRequest.getAddress()));
     UserDetails userDetails = userDetailsRepository.save(UserDetailsMapper.registerToUserDetails(registerRequest));
@@ -112,6 +121,12 @@ public class AuthServiceImpl implements AuthService {
     Cart cart  = new Cart();
     cart.setUserDetails(userDetails);
     return cartRepository.save(cart);
+  }
+
+  @Transactional(readOnly = true)
+  public boolean checkIfEmailExists(String email) {
+    if (!userDetailsRepository.existsByEmailId(email)) return false;
+    else throw new InvalidCredentialException("emailId", "Email already exists");
   }
 
   @Transactional(readOnly = true)

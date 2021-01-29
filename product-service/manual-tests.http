@@ -188,3 +188,9 @@ Content-Type: application/json
   "categoryDescription": "This is a dummy category description",
   "categoryImageUrl": "https://image.shutterstock.com/image-photo/colorful-tshirts-on-hang-sale-260nw-1041488371.jpg"
 }
+
+### Fetch by paging
+GET http://localhost:9200/products/pages
+
+### Fetch next page number
+GET http://localhost:9200/products/pages?pageNo=1

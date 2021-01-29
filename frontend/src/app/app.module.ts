@@ -44,6 +44,9 @@ import { CartConfirmModalComponent } from './shared/cart-confirm-modal/cart-conf
 import { OrderCancelModalComponent } from './shared/order-cancel-modal/order-cancel-modal.component';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { OrderDetailsComponent } from './components/products/orders/order-details/order-details.component';
+import { GlobalErrorModalComponent } from './shared/global-error-modal/global-error-modal.component';
+import { SocialRegisterComponent } from './components/auth/social-register/social-register.component';
+import { AccessDeniedModalComponent } from './shared/access-denied-modal/access-denied-modal.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { OrderDetailsComponent } from './components/products/orders/order-detail
     CartConfirmModalComponent,
     OrderCancelModalComponent,
     OrderDetailsComponent,
+    GlobalErrorModalComponent,
+    SocialRegisterComponent,
+    AccessDeniedModalComponent,
   ],
   imports: [
     BrowserModule,

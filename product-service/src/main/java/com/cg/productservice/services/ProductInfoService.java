@@ -13,6 +13,8 @@ import com.cg.productservice.dto.ProductInfoDto;
 import com.cg.productservice.dto.ProductInfoRequest;
 import com.cg.productservice.dto.StockDto;
 
+import org.springframework.data.domain.Page;
+
 public interface ProductInfoService {
 
   public List<ProductInfoDto> fetchAll();
@@ -34,5 +36,7 @@ public interface ProductInfoService {
   public ProductInfoDto add(ProductInfoRequest productInfoDto);
 
   public ProductInfoDto update(ProductInfoRequest productInfoDto);
+
+  Page<ProductInfoDto> fetchProductPages(Integer pageNo, Integer pageSize);
 
 }

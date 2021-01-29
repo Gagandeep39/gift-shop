@@ -15,6 +15,7 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
+import { SocialRegisterComponent } from './components/auth/social-register/social-register.component';
 import { AboutUsComponent } from './components/products/about-us/about-us.component';
 import { CartComponent } from './components/products/cart/cart.component';
 import { CartSummaryComponent } from './components/products/checkout/cart-summary/cart-summary.component';
@@ -27,16 +28,18 @@ import { OrderHistoryComponent } from './components/products/orders/order-histor
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
+import { AuthAccessGuard } from './guards/auth-access.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { AccessDeniedComponent } from './shared/access-denied/access-denied.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgotpassword', component: RequestQuestionComponent },
-  { path: 'changepassword', component: ChangePasswordComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthAccessGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthAccessGuard] },
+  { path: 'socialregister', component: SocialRegisterComponent, canActivate: [AuthAccessGuard]  },
+  { path: 'forgotpassword', component: RequestQuestionComponent, canActivate: [AuthAccessGuard]  },
+  { path: 'changepassword', component: ChangePasswordComponent, canActivate: [AuthAccessGuard]  },
   {
     path: 'products',
     component: ProductsComponent,
@@ -88,7 +91,7 @@ const routes: Routes = [
   { path: '404', component: NotFoundComponent },
   { path: '403', component: AccessDeniedComponent },
   { path: '', redirectTo: 'products', pathMatch: 'full' },
-  { path: '**', redirectTo: '404' },
+  { path: '**', redirectTo: 'products' },
 ];
 
 @NgModule({

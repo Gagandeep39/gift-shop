@@ -16,6 +16,9 @@ import com.cg.productservice.dto.ProductInfoRequest;
 import com.cg.productservice.dto.StockDto;
 import com.cg.productservice.services.ProductInfoService;
 
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -39,6 +43,12 @@ public class ProductController {
   @GetMapping
   public List<ProductInfoDto> fetchAllProducts() {
     return productInfoService.fetchAll();
+  }
+
+  @GetMapping("/pages")
+  public ResponseEntity<Page<ProductInfoDto>> fetchAllByPaging(@RequestParam(defaultValue = "0") Integer pageNo,
+  @RequestParam(defaultValue = "10") Integer pageSize) {
+    return ResponseEntity.status(HttpStatus.OK).body(productInfoService.fetchProductPages(pageNo, pageSize));
   }
 
   @GetMapping("/name/{name}")
@@ -85,5 +95,6 @@ public class ProductController {
   public ProductInfoDto update(@Valid @RequestBody ProductInfoRequest dto) {
     return productInfoService.update(dto);
   }
+
 
 }

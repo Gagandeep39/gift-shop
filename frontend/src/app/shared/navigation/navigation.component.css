@@ -97,3 +97,19 @@ ml-auto - Align right
   color: black;
   background: rgb(196, 196, 196);
 }
+
+
+/* .nav-link {
+  display: inline;
+  overflow: hidden;
+}
+
+.cart-quantity {
+  font-size: small;
+  background-color: red;
+  border-radius: 50%;
+  position: relative;
+  float: right;
+  width: 16px;
+  text-align: center;
+} */

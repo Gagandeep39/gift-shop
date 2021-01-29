@@ -127,3 +127,11 @@
   color: #24b7d8;
   text-transform: uppercase;
 }
+
+.text-center:hover hr{
+  width: 40%;
+}
+
+.alert{
+  margin: 2%;
+}

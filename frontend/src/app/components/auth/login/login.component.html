@@ -7,9 +7,17 @@
         <div class="col-6 user-form">
           <div class="p-5">
             <div class="text-center logo-container">
-              <img class="logo" [routerLink]="['/']" src="assets/images/gift-box.svg" />
-              <img class="title" [routerLink]="['/']" src="assets/images/logo-text.png" />
-              <hr>
+              <img
+                class="logo"
+                [routerLink]="['/']"
+                src="assets/images/gift-box.svg"
+              />
+              <img
+                class="title"
+                [routerLink]="['/']"
+                src="assets/images/logo-text.png"
+              />
+              <hr />
             </div>
             <form class="user" [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="form-group">
@@ -17,7 +25,7 @@
                   class="form-control form-control-user"
                   type="username"
                   formControlName="username"
-                  placeholder="Username"
+                  placeholder="Username or Email"
                   [ngClass]="{
                     'is-invalid': submitted && loginForm.get('username').invalid
                   }"
@@ -74,24 +82,34 @@
                   </div>
                 </div>
               </div>
-              <button
-                class="primary-btn btn-block"
-                type="submit"
-              >
+              
+              <button class="primary-btn btn-block" type="submit">
                 <span
                   *ngIf="loadingService.loading"
                   class="spinner-border spinner-border-sm"
                 ></span>
                 Login
               </button>
-              <a
-                class="secondary-btn btn-block"
-                [routerLink]="['/register']"
+              <a class="secondary-btn btn-block" [routerLink]="['/register']"
                 >Register
               </a>
-              <!-- <hr /> -->
               <br>
               <br>
+              <div class="social">
+                <img
+                  class="social-icon"
+                  src="/assets/images/btn_google_normal.svg"
+                  alt=""
+                  id="googleBtn"
+                />
+                <img
+                  class="social-icon icon-bar facebook"
+                  src="/assets/images/facebook.svg"
+                  alt=""
+                  (click)="submitLogin()"
+                />
+              </div>
+              <br />
             </form>
             <div class="text-center">
               <a class="actions" [routerLink]="['/forgotpassword']"

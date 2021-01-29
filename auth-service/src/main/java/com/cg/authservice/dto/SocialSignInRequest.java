@@ -1,27 +1,30 @@
 /**
  * @author Gagandeep Singh
  * @email singh.gagandeep3911@gmail.com
- * @create date 2021-01-09 05:21:16
- * @modify date 2021-01-09 05:21:16
+ * @create date 2021-01-29 10:54:45
+ * @modify date 2021-01-29 10:54:45
  * @desc [description]
  */
 package com.cg.authservice.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
+@Builder
+public class SocialSignInRequest {
+
   @NotBlank
-  @Size(min = 5, max = 50)
-  private String username;
+  private String token;
   @NotBlank
-  @Size(min = 5, max = 50)
-  private String password;
+  @Email
+  private String email;
+
 }

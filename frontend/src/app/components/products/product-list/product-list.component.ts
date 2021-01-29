@@ -5,6 +5,7 @@
  * @modify date 2021-01-24 01:57:04
  * @desc [description]
  */
+import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
@@ -26,6 +27,7 @@ export class ProductListComponent implements OnInit {
   productList: Product[] = [];
   activeCategory = null;
   productQuery = null;
+  page = 0;
 
   constructor(
     public loadingService: LoadingService,
@@ -35,7 +37,7 @@ export class ProductListComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private cartService: CartService,
-    private cartConfirmModal: CartConfirmModalService,
+    private cartConfirmModal: CartConfirmModalService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class ProductListComponent implements OnInit {
   }
 
   initProducts() {
-    this.fetchAll();
+    this.fetchAllByPage();
   }
 
   // Fetch from server
@@ -64,21 +66,21 @@ export class ProductListComponent implements OnInit {
     this.productQuery = null;
     this.productList = null;
     this.activeCategory = null;
-    this.fetchAll();
+    this.page = 0;
+    this.fetchAllByPage();
   }
 
   addToCart(itemId) {
     let item = {
       productId: itemId,
-      quantity: 1
-    }
+      quantity: 1,
+    };
     if (this.checkForAuthAndShowPopUp()) {
       this.loadingService.enableLoading();
-      this.cartService.addToCart(item)
-      .subscribe(res => {
+      this.cartService.addToCart(item).subscribe((res) => {
         this.cartConfirmModal.open();
         this.loadingService.disableLoading();
-      })
+      });
     }
   }
   checkForAuthAndShowPopUp() {
@@ -92,8 +94,10 @@ export class ProductListComponent implements OnInit {
     this.eventService.searchQueryChanged.subscribe((query) => {
       this.loadingService.enableLoading();
       // Fetch and unsubscribe
-      if (!query) this.fetchAll();
-      else
+      if (!query) {
+        this.page = 0;
+        this.fetchAllByPage();
+      } else
         this.productService.findByName(query).subscribe((res: Product[]) => {
           this.productQuery = query;
           this.activeCategory = null;
@@ -110,8 +114,10 @@ export class ProductListComponent implements OnInit {
       // Reset previous cateogry
       this.activeCategory = null;
       this.productQuery = null;
-      if (!category) this.fetchAll();
-      else
+      if (!category) {
+        this.page = 0;
+        this.fetchAllByPage();
+      } else
         this.productService
           .findByCategory(category)
           .subscribe((res: Product[]) => {
@@ -121,5 +127,30 @@ export class ProductListComponent implements OnInit {
             this.loadingService.disableLoading();
           }).closed;
     });
+  }
+
+  @HostListener('window:scroll', ['$event.target']) // for window scroll events
+  onScroll(event) {
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+      this.page++;
+      this.fetchAllByPage();
+    }
+  }
+
+  fetchAllByPage() {
+    this.loadingService.enableLoading();
+    this.productService
+      .fetchAllByPaging(this.page)
+      .subscribe((res: Product[]) => {
+        if (
+          this.productList &&
+          JSON.stringify(
+            this.productList.slice(Math.max(this.productList.length - 10, 0))
+          ) != JSON.stringify(res)
+        )
+          this.productList.push(...res);
+        else this.productList = res;
+        this.loadingService.disableLoading();
+      }).closed;
   }
 }

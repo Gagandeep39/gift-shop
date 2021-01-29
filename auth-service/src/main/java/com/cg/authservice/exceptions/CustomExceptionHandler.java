@@ -57,6 +57,17 @@ public class CustomExceptionHandler {
                     .build())).build());
     }
 
+    
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> registration(UserNotRegisteredException exception) {
+        return ResponseEntity
+            .status(HttpStatus.ACCEPTED)
+            .body(ErrorResponse.builder()
+                .status(HttpStatus.ACCEPTED.value())
+                .message(exception.getMessage())
+                .timeStamp(System.currentTimeMillis()).build());
+    }
+
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> catchAllException(Exception exception) {
         return ResponseEntity
