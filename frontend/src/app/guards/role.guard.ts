@@ -14,13 +14,17 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AccessDeniedModalService } from '../services/access-denied-modal.service';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoleGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private accessDeniedModal: AccessDeniedModalService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -37,16 +41,13 @@ export class RoleGuard implements CanActivate {
     if (this.authService.isAuthenticated()) {
       const userRole = this.authService.getRole();
       if (route.data.role && route.data.role.indexOf(userRole) === -1) {
-        this.router.navigate(['/403']);
+        // this.router.navigate(['/403']);
+        this.accessDeniedModal.open();
         return false;
       }
       return true;
     }
-
-    this.router.navigate(['/403']);
     return false;
   }
 
-  // TODO - Pass state.url to 403
-  // Add a redirect nutton on 403
 }
