@@ -13,16 +13,17 @@ import java.util.Collections;
 
 import com.cg.authservice.dto.GoogleSignInRequest;
 import com.cg.authservice.dto.LoginResponse;
+import com.cg.authservice.dto.RegisterRequest;
+import com.cg.authservice.dto.SocialSignUpRequest;
+import com.cg.authservice.dto.UserDetailsDto;
 import com.cg.authservice.entities.User;
-import com.cg.authservice.entities.UserDetails;
-import com.cg.authservice.exceptions.InvalidCredentialException;
 import com.cg.authservice.exceptions.UserNotRegisteredException;
 import com.cg.authservice.repositories.UserDetailsRepository;
 import com.cg.authservice.security.JwtProvider;
+import com.cg.authservice.services.AuthService;
 import com.cg.authservice.services.SocialSignInService;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.Value;
@@ -39,6 +40,9 @@ public class SocialSignInServiceImpl implements SocialSignInService {
   @Autowired
   private JwtProvider jwtProvider;
 
+  @Autowired
+  private AuthService authService;
+
   @Value("${google.CLIENT_ID}")
   private String CLIENT_ID;
 
@@ -47,8 +51,16 @@ public class SocialSignInServiceImpl implements SocialSignInService {
     validateToken(request);
     User user = detailsRepository.findByUsernameOrEmail(request.getEmail())
         .orElseThrow(() -> new UserNotRegisteredException("social", "Please register")).getUser();
-    return LoginResponse.builder().userId(user.getUserId()).username(user.getUsername()).role(user.getRole())
-        .token(jwtProvider.generateWithUsernameAndId(user.getUsername(), user.getUserId())).build();
+    return createResponseToken(user.getUserId(), user.getUsername(), user.getRole());
+  }
+
+  private LoginResponse createResponseToken(Long userId, String username, String role) {
+    return LoginResponse.builder()
+      .userId(userId)
+      .username(username)
+      .role(role)
+      .token(jwtProvider.generateWithUsernameAndId(username, userId))
+      .build();
   }
 
   private void validateToken(GoogleSignInRequest request) {
@@ -69,5 +81,25 @@ public class SocialSignInServiceImpl implements SocialSignInService {
     } catch (GeneralSecurityException | IOException e) {
       throw new UserNotRegisteredException("token", "Invalid OAuth2 token");
     }
+  }
+
+  @Override
+  public LoginResponse socialSignUp(SocialSignUpRequest request) {
+    UserDetailsDto details = authService.register(createUserObject(request));
+    return createResponseToken(details.getUserId(), details.getUsername(), details.getRole());
+  }
+
+  private RegisterRequest createUserObject(SocialSignUpRequest request) {
+    Long theRandomNum = (long) (Math.random()*Math.pow(10,10));
+    System.out.println(theRandomNum);
+    return RegisterRequest.builder()
+      .emailId(request.getEmailId())
+      .firstName(request.getFirstName())
+      .lastName(request.getLastName())
+      .phoneNo(request.getPhoneNo())
+      .address(request.getAddress())
+      .username(theRandomNum.toString())
+      .password(theRandomNum.toString())
+      .build();
   }
 }

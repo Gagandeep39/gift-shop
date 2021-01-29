@@ -10,8 +10,11 @@ package com.cg.authservice.controller;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import javax.validation.Valid;
+
 import com.cg.authservice.dto.GoogleSignInRequest;
 import com.cg.authservice.dto.LoginResponse;
+import com.cg.authservice.dto.SocialSignUpRequest;
 import com.cg.authservice.services.SocialSignInService;
 
 import org.springframework.http.HttpStatus;
@@ -31,9 +34,15 @@ public class SocialSignInController {
   private SocialSignInService signInService;
 
   @PostMapping("/google")
-  public ResponseEntity<LoginResponse> googleSignIn(@RequestBody GoogleSignInRequest request)
+  public ResponseEntity<LoginResponse> googleSignIn(@Valid @RequestBody GoogleSignInRequest request)
       throws GeneralSecurityException, IOException {
     return ResponseEntity.status(HttpStatus.OK).body(signInService.signInWithGoogle(request));
+  }
+
+  @PostMapping("/signup")
+  public ResponseEntity<LoginResponse> socialSignUp(@Valid @RequestBody SocialSignUpRequest request)
+      throws GeneralSecurityException, IOException {
+    return ResponseEntity.status(HttpStatus.OK).body(signInService.socialSignUp(request));
   }
 
 }
