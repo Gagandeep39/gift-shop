@@ -28,6 +28,7 @@ import { OrderHistoryComponent } from './components/products/orders/order-histor
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ViewProfileComponent } from './components/products/view-profile/view-profile.component';
 import { AuthAccessGuard } from './guards/auth-access.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
@@ -51,6 +52,7 @@ const routes: Routes = [
         component: OrderHistoryComponent,
         canActivate: [AuthGuard],
       },
+      { path: 'profile', component: ViewProfileComponent, canActivate: [AuthGuard] },
       {
         path: 'orders/:orderId',
         component: OrderDetailsComponent,
