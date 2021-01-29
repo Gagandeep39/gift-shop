@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
               this.router.navigateByUrl(this.returnUrl);
             else {
               this.router.navigate(['/socialregister'], {
-                queryParams: { emailId: googleUser.getBasicProfile().getEmail() },
+                state: { data: { emailId: googleUser.getBasicProfile().getEmail() } }
               });
             }
           }).closed;

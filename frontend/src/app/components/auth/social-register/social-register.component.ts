@@ -26,11 +26,11 @@ export class SocialRegisterComponent implements OnInit {
     private socialAuthService: SocialAuthService,
     public loadingService: LoadingService,
     private router: Router,
-    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.email = this.route.snapshot.queryParams['emailId'];
+    this.email = window.history.state?.data?.emailId
+    if (!this.email) this.router.navigateByUrl('/login')
     this.initForm();
   }
 
