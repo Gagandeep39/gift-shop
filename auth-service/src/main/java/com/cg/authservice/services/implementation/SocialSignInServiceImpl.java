@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 
-import com.cg.authservice.dto.GoogleSignInRequest;
 import com.cg.authservice.dto.LoginResponse;
 import com.cg.authservice.dto.RegisterRequest;
+import com.cg.authservice.dto.SocialSignInRequest;
 import com.cg.authservice.dto.SocialSignUpRequest;
 import com.cg.authservice.dto.UserDetailsDto;
 import com.cg.authservice.entities.User;
@@ -29,7 +29,10 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.Value;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class SocialSignInServiceImpl implements SocialSignInService {
@@ -46,12 +49,19 @@ public class SocialSignInServiceImpl implements SocialSignInService {
   @Value("${google.CLIENT_ID}")
   private String CLIENT_ID;
 
+  @Value("${facebook.TOKEN_VALIDATION_URL}")
+  private String facebookTokenValidation;
+
   @Override
-  public LoginResponse signInWithGoogle(GoogleSignInRequest request) {
+  public LoginResponse signInWithGoogle(SocialSignInRequest request) {
     validateToken(request);
-    User user = detailsRepository.findByUsernameOrEmail(request.getEmail())
-        .orElseThrow(() -> new UserNotRegisteredException("social", "Please register")).getUser();
+    User user = fetchUserByEmail(request);
     return createResponseToken(user.getUserId(), user.getUsername(), user.getRole());
+  }
+
+  private User fetchUserByEmail(SocialSignInRequest request) {
+    return detailsRepository.findByUsernameOrEmail(request.getEmail())
+      .orElseThrow(() -> new UserNotRegisteredException("social", "Please register")).getUser();
   }
 
   private LoginResponse createResponseToken(Long userId, String username, String role) {
@@ -63,7 +73,7 @@ public class SocialSignInServiceImpl implements SocialSignInService {
       .build();
   }
 
-  private void validateToken(GoogleSignInRequest request) {
+  private void validateToken(SocialSignInRequest request) {
     GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
         .setAudience(Collections.singletonList(CLIENT_ID)).build();
 
@@ -101,5 +111,19 @@ public class SocialSignInServiceImpl implements SocialSignInService {
       .username(theRandomNum.toString())
       .password(theRandomNum.toString())
       .build();
+  }
+
+  @Override
+  public LoginResponse signInWithFacebook(SocialSignInRequest request) {
+    validateFacebookToken(request);
+    User user = fetchUserByEmail(request);
+    return createResponseToken(user.getUserId(), user.getUsername(), user.getRole());
+  }
+
+  private void validateFacebookToken(SocialSignInRequest request) {
+    RestTemplate restTemplate = new RestTemplate();
+    ResponseEntity<Object> responseEntity = restTemplate.getForEntity("https://graph.facebook.com/me?access_token=" + request.getToken(), Object.class);
+    if (responseEntity.getStatusCode() != HttpStatus.OK)
+      throw new UserNotRegisteredException("token", "Invalid OAuth2 token");
   }
 }

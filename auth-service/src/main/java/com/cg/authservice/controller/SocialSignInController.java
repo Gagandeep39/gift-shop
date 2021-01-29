@@ -12,8 +12,8 @@ import java.security.GeneralSecurityException;
 
 import javax.validation.Valid;
 
-import com.cg.authservice.dto.GoogleSignInRequest;
 import com.cg.authservice.dto.LoginResponse;
+import com.cg.authservice.dto.SocialSignInRequest;
 import com.cg.authservice.dto.SocialSignUpRequest;
 import com.cg.authservice.services.SocialSignInService;
 
@@ -34,9 +34,15 @@ public class SocialSignInController {
   private SocialSignInService signInService;
 
   @PostMapping("/google")
-  public ResponseEntity<LoginResponse> googleSignIn(@Valid @RequestBody GoogleSignInRequest request)
+  public ResponseEntity<LoginResponse> googleSignIn(@Valid @RequestBody SocialSignInRequest request)
       throws GeneralSecurityException, IOException {
     return ResponseEntity.status(HttpStatus.OK).body(signInService.signInWithGoogle(request));
+  }
+
+  @PostMapping("/facebook")
+  public ResponseEntity<LoginResponse> facebookSignIn(@Valid @RequestBody SocialSignInRequest request)
+      throws GeneralSecurityException, IOException {
+    return ResponseEntity.status(HttpStatus.OK).body(signInService.signInWithFacebook(request));
   }
 
   @PostMapping("/signup")

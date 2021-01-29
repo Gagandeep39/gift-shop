@@ -7,13 +7,15 @@
  */
 package com.cg.authservice.services;
 
-import com.cg.authservice.dto.GoogleSignInRequest;
 import com.cg.authservice.dto.LoginResponse;
+import com.cg.authservice.dto.SocialSignInRequest;
 import com.cg.authservice.dto.SocialSignUpRequest;
 
 public interface SocialSignInService {
 
-  LoginResponse signInWithGoogle(GoogleSignInRequest request);
+  LoginResponse signInWithGoogle(SocialSignInRequest request);
+
+  LoginResponse signInWithFacebook(SocialSignInRequest request);
 
   LoginResponse socialSignUp(SocialSignUpRequest request);
 
