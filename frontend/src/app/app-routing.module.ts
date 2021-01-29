@@ -91,7 +91,7 @@ const routes: Routes = [
   { path: '404', component: NotFoundComponent },
   { path: '403', component: AccessDeniedComponent },
   { path: '', redirectTo: 'products', pathMatch: 'full' },
-  { path: '**', redirectTo: '404' },
+  { path: '**', redirectTo: 'products' },
 ];
 
 @NgModule({
