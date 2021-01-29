@@ -45,6 +45,7 @@ import { OrderCancelModalComponent } from './shared/order-cancel-modal/order-can
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { OrderDetailsComponent } from './components/products/orders/order-details/order-details.component';
 import { GlobalErrorModalComponent } from './shared/global-error-modal/global-error-modal.component';
+import { SocialRegisterComponent } from './components/auth/social-register/social-register.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { GlobalErrorModalComponent } from './shared/global-error-modal/global-er
     OrderCancelModalComponent,
     OrderDetailsComponent,
     GlobalErrorModalComponent,
+    SocialRegisterComponent,
   ],
   imports: [
     BrowserModule,

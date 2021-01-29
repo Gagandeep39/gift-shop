@@ -15,6 +15,7 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RequestQuestionComponent } from './components/auth/request-question/request-question.component';
+import { SocialRegisterComponent } from './components/auth/social-register/social-register.component';
 import { AboutUsComponent } from './components/products/about-us/about-us.component';
 import { CartComponent } from './components/products/cart/cart.component';
 import { CartSummaryComponent } from './components/products/checkout/cart-summary/cart-summary.component';
@@ -35,6 +36,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'socialregister', component: SocialRegisterComponent },
   { path: 'forgotpassword', component: RequestQuestionComponent },
   { path: 'changepassword', component: ChangePasswordComponent },
   {
