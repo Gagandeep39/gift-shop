@@ -51,7 +51,7 @@ import { ViewProfileComponent } from './components/products/view-profile/view-pr
 import { EditProfileComponent } from './components/products/edit-profile/edit-profile.component';
 import { ViewCategoriesComponent } from './components/admin/view-categories/view-categories.component';
 import { MaterialCustomModule } from './material-custom/material-custom.module';
-import { EditCategoryComponent } from './components/admin/edit-category/edit-category.component';
+import { UpdateCategoryComponent } from './components/admin/update-category/update-category.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +91,7 @@ import { EditCategoryComponent } from './components/admin/edit-category/edit-cat
     ViewProfileComponent,
     EditProfileComponent,
     ViewCategoriesComponent,
-    EditCategoryComponent,
+    UpdateCategoryComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { EditCategoryComponent } from './components/admin/edit-category/edit-category.component';
+import { UpdateCategoryComponent } from './components/admin/update-category/update-category.component';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { ViewCategoriesComponent } from './components/admin/view-categories/view-categories.component';
 import { ViewProductComponent } from './components/admin/view-product/view-product.component';
@@ -114,7 +114,7 @@ const routes: Routes = [
       { path: 'add', component: AddProductComponent },
       { path: 'view', component: ViewProductComponent },
       { path: 'categoryview', component: ViewCategoriesComponent },
-      { path: 'categoryedit/:categoryId', component: EditCategoryComponent },
+      { path: 'categoryedit/:categoryId', component: UpdateCategoryComponent },
       { path: '', redirectTo: 'view', pathMatch: 'full' },
       { path: 'update/:productId', component: UpdateProductComponent },
     ],
