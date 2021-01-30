@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category.model';
+import { UserDetailsEdit } from 'src/app/models/user-details-edit';
 import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { EventService } from 'src/app/services/event.service';
+import { ManageUserService } from 'src/app/services/manage-user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -13,10 +15,15 @@ import { EventService } from 'src/app/services/event.service';
 export class NavigationComponent implements OnInit {
   isLoggedIn: boolean;
   activeTabs = [];
+  userDetails: UserDetailsEdit;
+  profileTabs = [
+    { name: 'My Profile', link: '/products/profile' },
+    { name: 'Edit Profile', link: '/products/editprofile' },
+    { name: 'My Purchase', link: '/products/orders' },
+  ];
   userTabs = [
     { name: 'About', link: '/about' },
     { name: 'Cart', link: '/products/cart' },
-    { name: 'My Purchase', link: '/products/orders' },
   ];
   anonymousTab = [
     { name: 'About', link: '/about' },
@@ -24,11 +31,10 @@ export class NavigationComponent implements OnInit {
     { name: 'Register', link: '/register' },
   ];
   adminTabs = [
-    { name: 'About', link: '/about' },
-    { name: 'Add', link: '/admin/add' },
-    { name: 'View', link: '/admin/view' },
-    { name: 'Cart', link: '/products/cart' },
-    { name: 'My Purchase', link: '/products/orders' },
+    { name: 'Add Product', link: '/admin/add' },
+    { name: 'View Products', link: '/admin/view' },
+    { name: 'Add Category', link: '/admin/add' },
+    { name: 'View Categories', link: '/admin/view' },
   ];
   categories: Category[] = [];
   searchQuery = '';
@@ -38,6 +44,7 @@ export class NavigationComponent implements OnInit {
     private eventService: EventService,
     private categoryService: CategoryService,
     private router: Router,
+    private manageUserService: ManageUserService
   ) {}
   initializeApp() {
     // If user data is present and token not expired, emi event to update navi
@@ -50,9 +57,9 @@ export class NavigationComponent implements OnInit {
     else this.authService.logout();
   }
   initCategories() {
-    this.categoryService.fetchAllCategories().subscribe((res: Category[]) => {
-      this.categories = res;
-    });
+    this.categoryService
+      .fetchAllCategories()
+      .subscribe((res: Category[]) => (this.categories = res));
   }
 
   initializeNavItems() {
@@ -60,14 +67,18 @@ export class NavigationComponent implements OnInit {
       if (res === null) {
         this.isLoggedIn = false;
         this.activeTabs = this.anonymousTab;
-      } else if (res?.role === 'Admin') {
-        this.isLoggedIn = true;
-        this.activeTabs = this.adminTabs;
       } else {
         this.isLoggedIn = true;
         this.activeTabs = this.userTabs;
+        this.fetchUserData();
       }
     });
+  }
+
+  fetchUserData() {
+    this.manageUserService
+      .fetchLoggedInUserForEdit()
+      .subscribe((res: UserDetailsEdit) => (this.userDetails = res));
   }
 
   ngOnInit(): void {
@@ -92,6 +103,6 @@ export class NavigationComponent implements OnInit {
   }
 
   redirectHome() {
-    this.router.navigateByUrl('/')
+    this.router.navigateByUrl('/');
   }
 }
