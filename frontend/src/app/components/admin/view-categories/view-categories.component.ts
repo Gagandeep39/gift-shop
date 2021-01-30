@@ -23,6 +23,7 @@ export class ViewCategoriesComponent implements OnInit {
     'categoryId',
     'categoryName',
     'categoryDescription',
+    'edit',
   ];
 
   constructor(

@@ -124,7 +124,7 @@ tr {
 }
 
 tr:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -157,4 +157,8 @@ tr:hover {
   padding-left: 2%;
   outline: none;
   border-bottom: 2px solid rgb(202, 202, 202);
+}
+
+.category-edit {
+  cursor: pointer;
 }
