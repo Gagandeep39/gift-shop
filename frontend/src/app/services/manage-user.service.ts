@@ -32,4 +32,12 @@ export class ManageUserService {
   fetchById(id) {
     return this.http.get(`${this.authServiceUrl}/register/${id}`);
   }
+
+  fetchLoggedInUserForEdit() {
+    return this.http.get(`${this.authServiceUrl}/me`);
+  }
+
+  updateLoggedInUser(data) {
+    return this.http.get(`${this.authServiceUrl}/me`, data);
+  }
 }
