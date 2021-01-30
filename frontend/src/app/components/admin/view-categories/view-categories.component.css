@@ -111,7 +111,6 @@
 }
 
 table {
-  
   width: 100%;
 }
 
@@ -140,7 +139,6 @@ tr:hover {
   width: 100%;
   justify-content: left;
   display: flex;
-  flex-direction: column;
 }
 
 .search-hover {
@@ -149,7 +147,7 @@ tr:hover {
   transition: width 0.2s ease-in-out;
   background-image: url("/assets/images/search.svg");
   background-repeat: no-repeat;
-  background-position: 95% 50%;
+  background-position: 98% 50%;
   padding: 8px 20px 8px 8px;
   box-sizing: border-box;
   border: none;
@@ -161,4 +159,18 @@ tr:hover {
 
 .category-edit {
   cursor: pointer;
+}
+
+.category-add {
+  padding: 12px;
+  margin: 0 12px;
+  margin-top: 12px;
+  transform: scale(1.4);
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s;
+}
+
+.category-add:hover {
+  transform: scale(1.8);
 }
