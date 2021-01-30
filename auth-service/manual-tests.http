@@ -152,4 +152,27 @@ Content-Type: application/json
   "securityAnswer": "123456"
 }
 
+### Fetch logged in user details
+GET http://localhost:9100/me
+Authorization: Bearer [Fetch Token from login]
 
+### Updated logged in user details
+PUT http://localhost:9100/me
+Authorization: Bearer [Fetch Token from login]
+Content-Type: application/json
+
+{
+  "userId": 100001,
+  "emailId": "test@mail.com",
+  "phoneNo": "8419969059",
+  "address": {
+    "city": "Mumba",
+    "state": "Maharashta",
+    "area": "Chandivali",
+    "pincode": "400072"
+  },
+  "securityQuestion": "Is this a question?",
+  "securityAnswer": "123456",
+  "firstName": "Gagandeep",
+  "lastName": "Singh"
+}

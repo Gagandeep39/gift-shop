@@ -47,6 +47,8 @@ import { OrderDetailsComponent } from './components/products/orders/order-detail
 import { GlobalErrorModalComponent } from './shared/global-error-modal/global-error-modal.component';
 import { SocialRegisterComponent } from './components/auth/social-register/social-register.component';
 import { AccessDeniedModalComponent } from './shared/access-denied-modal/access-denied-modal.component';
+import { ViewProfileComponent } from './components/products/view-profile/view-profile.component';
+import { EditProfileComponent } from './components/products/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { AccessDeniedModalComponent } from './shared/access-denied-modal/access-
     GlobalErrorModalComponent,
     SocialRegisterComponent,
     AccessDeniedModalComponent,
+    ViewProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

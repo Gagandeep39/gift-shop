@@ -22,12 +22,14 @@ import { CartSummaryComponent } from './components/products/checkout/cart-summar
 import { CheckoutComponent } from './components/products/checkout/checkout.component';
 import { PaymentComponent } from './components/products/checkout/payment/payment.component';
 import { ShippingDetailsComponent } from './components/products/checkout/shipping-details/shipping-details.component';
+import { EditProfileComponent } from './components/products/edit-profile/edit-profile.component';
 import { DeliveryHistoryComponent } from './components/products/orders/delivery-history/delivery-history.component';
 import { OrderDetailsComponent } from './components/products/orders/order-details/order-details.component';
 import { OrderHistoryComponent } from './components/products/orders/order-history/order-history.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ViewProfileComponent } from './components/products/view-profile/view-profile.component';
 import { AuthAccessGuard } from './guards/auth-access.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
@@ -36,10 +38,26 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthAccessGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthAccessGuard] },
-  { path: 'socialregister', component: SocialRegisterComponent, canActivate: [AuthAccessGuard]  },
-  { path: 'forgotpassword', component: RequestQuestionComponent, canActivate: [AuthAccessGuard]  },
-  { path: 'changepassword', component: ChangePasswordComponent, canActivate: [AuthAccessGuard]  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [AuthAccessGuard],
+  },
+  {
+    path: 'socialregister',
+    component: SocialRegisterComponent,
+    canActivate: [AuthAccessGuard],
+  },
+  {
+    path: 'forgotpassword',
+    component: RequestQuestionComponent,
+    canActivate: [AuthAccessGuard],
+  },
+  {
+    path: 'changepassword',
+    component: ChangePasswordComponent,
+    canActivate: [AuthAccessGuard],
+  },
   {
     path: 'products',
     component: ProductsComponent,
@@ -49,6 +67,16 @@ const routes: Routes = [
       {
         path: 'orders',
         component: OrderHistoryComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'profile',
+        component: ViewProfileComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'editprofile',
+        component: EditProfileComponent,
         canActivate: [AuthGuard],
       },
       {

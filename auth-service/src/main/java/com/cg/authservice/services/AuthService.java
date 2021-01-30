@@ -32,4 +32,6 @@ public interface AuthService {
 
   UserDetailsDto fetchUserById(Long id);
 
+  UpdateRequest fetchUserDetailsForEdit();
+
 }
