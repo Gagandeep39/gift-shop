@@ -32,6 +32,7 @@ import com.cg.authservice.security.JwtProvider;
 import com.cg.authservice.services.AuthService;
 import com.cg.authservice.util.UserDetailsMapper;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -162,6 +163,23 @@ public class AuthServiceImpl implements AuthService {
         .findById(id)
         .orElseThrow(() -> new InvalidCredentialException("userId", "ID " + id + " doesn't exist"))
     );
+  }
+
+  @Override
+  public UpdateRequest fetchUserDetailsForEdit() {
+    Object auth = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String username = ((org.springframework.security.core.userdetails.UserDetails)auth).getUsername();
+    UserDetails detail = userDetailsRepository.findByUserUsername(username).orElseThrow(() -> new InvalidCredentialException("username", "user " + username + " doesn't exist"));
+    return UpdateRequest.builder()
+      .address(detail.getAddress())
+      .emailId(detail.getEmailId())
+      .firstName(detail.getFirstName())
+      .lastName(detail.getLastName())
+      .securityQuestion(detail.getSecurityQuestion())
+      .securityAnswer(detail.getSecurityAnswer())
+      .userId(detail.getUser().getUserId())
+      .phoneNo(detail.getPhoneNo())
+      .build();
   }
 
 }
