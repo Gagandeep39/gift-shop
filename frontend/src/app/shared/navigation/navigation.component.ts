@@ -34,7 +34,7 @@ export class NavigationComponent implements OnInit {
   adminTabs = [
     { name: 'Add Product', link: '/admin/add' },
     { name: 'View Products', link: '/admin/view' },
-    { name: 'Add Category', link: '/admin/add' },
+    { name: 'Add Category', link: '/admin/categoryadd' },
     { name: 'View Categories', link: '/admin/categoryview' },
   ];
   categories: Category[] = [];

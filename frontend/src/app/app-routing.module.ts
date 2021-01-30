@@ -7,6 +7,7 @@
  */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UpdateCategoryComponent } from './components/admin/update-category/update-category.component';
@@ -114,6 +115,7 @@ const routes: Routes = [
       { path: 'add', component: AddProductComponent },
       { path: 'view', component: ViewProductComponent },
       { path: 'categoryview', component: ViewCategoriesComponent },
+      { path: 'categoryadd', component: AddCategoryComponent },
       { path: 'categoryedit/:categoryId', component: UpdateCategoryComponent },
       { path: '', redirectTo: 'view', pathMatch: 'full' },
       { path: 'update/:productId', component: UpdateProductComponent },
