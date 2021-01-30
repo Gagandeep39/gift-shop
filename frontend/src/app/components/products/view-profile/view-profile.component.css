@@ -89,6 +89,9 @@
   font-size: 150%;
   width: 100%;
   transition: 0.2s;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4%;
 }
 
 .summary:hover {
@@ -115,9 +118,10 @@ hr {
 }
 
 .name {
+  font-weight: bold;
   color: #24b7d8;
   letter-spacing: 2px;
-  font-size: 250%;
+  font-size: 300%;
   margin: 8% 0;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
