@@ -50,6 +50,7 @@ import { AccessDeniedModalComponent } from './shared/access-denied-modal/access-
 import { ViewProfileComponent } from './components/products/view-profile/view-profile.component';
 import { EditProfileComponent } from './components/products/edit-profile/edit-profile.component';
 import { ViewCategoriesComponent } from './components/admin/view-categories/view-categories.component';
+import { MaterialCustomModule } from './material-custom/material-custom.module';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { ViewCategoriesComponent } from './components/admin/view-categories/view
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MaterialCustomModule,
   ],
   providers: [
     httpInterceptors, 
