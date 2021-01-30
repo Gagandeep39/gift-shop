@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
+import { ViewCategoriesComponent } from './components/admin/view-categories/view-categories.component';
 import { ViewProductComponent } from './components/admin/view-product/view-product.component';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -111,6 +112,7 @@ const routes: Routes = [
     children: [
       { path: 'add', component: AddProductComponent },
       { path: 'view', component: ViewProductComponent },
+      { path: 'categoryview', component: ViewCategoriesComponent },
       { path: '', redirectTo: 'view', pathMatch: 'full' },
       { path: 'update/:productId', component: UpdateProductComponent },
     ],

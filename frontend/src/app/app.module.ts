@@ -50,6 +50,7 @@ import { AccessDeniedModalComponent } from './shared/access-denied-modal/access-
 import { ViewProfileComponent } from './components/products/view-profile/view-profile.component';
 import { EditProfileComponent } from './components/products/edit-profile/edit-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ViewCategoriesComponent } from './components/admin/view-categories/view-categories.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AccessDeniedModalComponent,
     ViewProfileComponent,
     EditProfileComponent,
+    ViewCategoriesComponent,
   ],
   imports: [
     BrowserModule,
