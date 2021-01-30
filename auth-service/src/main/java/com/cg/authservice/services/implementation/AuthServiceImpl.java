@@ -139,6 +139,7 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public Map<String, String> updateUser(UpdateRequest updateRequest) {
     UserDetails details = userDetailsRepository.findById(updateRequest.getUserId()).orElseThrow(() -> new UserNotFoundException());
+    checkIfEmailExists(updateRequest.getEmailId());
     updateRequest.getAddress().setAddressId(details.getAddress().getAddressId());
     addressRepository.save(updateRequest.getAddress());
     userDetailsRepository.save(UserDetailsMapper.updateRequestToUserDetails(updateRequest));
