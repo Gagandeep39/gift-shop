@@ -49,6 +49,10 @@ import { SocialRegisterComponent } from './components/auth/social-register/socia
 import { AccessDeniedModalComponent } from './shared/access-denied-modal/access-denied-modal.component';
 import { ViewProfileComponent } from './components/products/view-profile/view-profile.component';
 import { EditProfileComponent } from './components/products/edit-profile/edit-profile.component';
+import { ViewCategoriesComponent } from './components/admin/view-categories/view-categories.component';
+import { MaterialCustomModule } from './material-custom/material-custom.module';
+import { UpdateCategoryComponent } from './components/admin/update-category/update-category.component';
+import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +91,9 @@ import { EditProfileComponent } from './components/products/edit-profile/edit-pr
     AccessDeniedModalComponent,
     ViewProfileComponent,
     EditProfileComponent,
+    ViewCategoriesComponent,
+    UpdateCategoryComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,9 +102,10 @@ import { EditProfileComponent } from './components/products/edit-profile/edit-pr
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MaterialCustomModule,
   ],
   providers: [
-    httpInterceptors,
+    httpInterceptors, 
     JwtHelperService,
   ],
   bootstrap: [AppComponent]

@@ -39,7 +39,7 @@
       </div>
     </li>
     <!-- Admin drop down -->
-    <li class="dropdown" *ngIf="isLoggedIn && userDetails?.role === 'Admin'">
+    <li class="dropdown" *ngIf="isLoggedIn && role === 'Admin'">
       <a
         class="nav-link dropdown-toggle"
         id="navbarDropdown"
@@ -78,7 +78,7 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        {{ userDetails?.firstName + " " + userDetails?.lastName }}
+        {{ name }}
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a

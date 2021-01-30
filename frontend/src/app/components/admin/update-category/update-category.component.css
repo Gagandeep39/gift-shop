@@ -23,8 +23,8 @@
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 2px 0 0 2px;
-  opacity: 0.9;
-  transition: opacity 0.2s;
+  opacity: 0.8;
+  transition: 0.5s;
 }
 
 .front-img:hover {
@@ -55,9 +55,10 @@
   font-size: xx-large;
 }
 
-.product-price {
+.product-id {
   letter-spacing: 1px;
   font-weight: 600;
+  color: #21a0bd;
 }
 
 
@@ -99,7 +100,6 @@
   font-size: 110%;
   font-weight: 550;
   color: #24b7d8;
-  text-transform: uppercase;
   /* text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.2); */
 }
 
@@ -141,7 +141,7 @@
 
 /* Cart and checkout buttons */
 /* Buttons */
-.cart-btn, .checkout-btn{
+.primary-btn, .secondary-btn{
   background: #24b7d8;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   color: white;
@@ -159,18 +159,18 @@
   margin-top: 12px;
 }
 
-.cart-btn:hover {
+.primary-btn:hover {
   background: white;
   color: #24b7d8;
   transform: scale(1.1);
 }
 
-.checkout-btn {
+.secondary-btn {
   background: #fb5a69;
 
 }
 
-.checkout-btn:hover {
+.secondary-btn:hover {
   background: white;
   color: #fb5a69;
   transform: scale(1.1);
@@ -270,22 +270,13 @@ letter-spacing: 0.5px;
 .breadcrumb-item {
   cursor: pointer;
 }
-
-.badge {
-  vertical-align: middle;
-  /* white-space: nowrap; */
-  padding: 4px !important;
-  color: #ffffff;
-  background-color: #1f9db9;
-  border-radius: 9px;
-}
-.badge:hover {
-  color: #ffffff;
-  text-decoration: none;
+.back-img {
+  margin: 4px;
+  padding-right: 8px;
+  transform: scale(1.6);
   cursor: pointer;
 }
 
-.reduced {
-  text-decoration: line-through;
-  color: #7babb6;
+input[type="radio"] {
+  background-color: #21a0bd;
 }

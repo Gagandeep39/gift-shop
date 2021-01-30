@@ -8,6 +8,7 @@
 import { HostListener } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { Item } from 'src/app/models/item.model';
 import { Product } from 'src/app/models/product.model';
 import { AuthModalService } from 'src/app/services/auth-modal.service';
@@ -141,16 +142,18 @@ export class ProductListComponent implements OnInit {
     this.loadingService.enableLoading();
     this.productService
       .fetchAllByPaging(this.page)
+      .pipe(take(1))
       .subscribe((res: Product[]) => {
-        if (
-          this.productList &&
-          JSON.stringify(
-            this.productList.slice(Math.max(this.productList.length - 10, 0))
-          ) != JSON.stringify(res)
-        )
-          this.productList.push(...res);
-        else this.productList = res;
+        if (!this.activeCategory && !this.productQuery) // Paging works when category and search are null
+          if (
+            this.productList &&
+            JSON.stringify(
+              this.productList.slice(Math.max(this.productList.length - 10, 0))
+            ) != JSON.stringify(res)
+          )
+            this.productList.push(...res);
+          else this.productList = res;
         this.loadingService.disableLoading();
-      }).closed;
+      });
   }
 }

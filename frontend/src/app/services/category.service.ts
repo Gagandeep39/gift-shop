@@ -11,15 +11,22 @@ import { environment } from 'src/environments/environment';
 import { Category } from '../models/category.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-
   categoryServiceUrl = `${environment.protocol}${environment.applicationUrl}/${environment.productService}/categories`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   fetchAllCategories() {
     return this.http.get(this.categoryServiceUrl);
+  }
+
+  updateCategory(data) {
+    return this.http.post(this.categoryServiceUrl, data);
+  }
+
+  fetchById(id) {
+    return this.http.get(`${this.categoryServiceUrl}/${id}`);
   }
 }

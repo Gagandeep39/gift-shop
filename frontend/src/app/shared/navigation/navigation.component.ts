@@ -15,7 +15,8 @@ import { ManageUserService } from 'src/app/services/manage-user.service';
 export class NavigationComponent implements OnInit {
   isLoggedIn: boolean;
   activeTabs = [];
-  userDetails: UserDetailsEdit;
+  role: string;
+  name: string;
   profileTabs = [
     { name: 'My Profile', link: '/products/profile' },
     { name: 'Edit Profile', link: '/products/editprofile' },
@@ -33,8 +34,8 @@ export class NavigationComponent implements OnInit {
   adminTabs = [
     { name: 'Add Product', link: '/admin/add' },
     { name: 'View Products', link: '/admin/view' },
-    { name: 'Add Category', link: '/admin/add' },
-    { name: 'View Categories', link: '/admin/view' },
+    { name: 'Add Category', link: '/admin/categoryadd' },
+    { name: 'View Categories', link: '/admin/categoryview' },
   ];
   categories: Category[] = [];
   searchQuery = '';
@@ -70,6 +71,7 @@ export class NavigationComponent implements OnInit {
       } else {
         this.isLoggedIn = true;
         this.activeTabs = this.userTabs;
+        this.role = res.role;
         this.fetchUserData();
       }
     });
@@ -78,7 +80,10 @@ export class NavigationComponent implements OnInit {
   fetchUserData() {
     this.manageUserService
       .fetchLoggedInUserForEdit()
-      .subscribe((res: UserDetailsEdit) => (this.userDetails = res));
+      .subscribe(
+        (res: UserDetailsEdit) =>
+          (this.name = res?.firstName + ' ' + res?.lastName)
+      );
   }
 
   ngOnInit(): void {
