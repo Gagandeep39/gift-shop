@@ -49,6 +49,7 @@ import { SocialRegisterComponent } from './components/auth/social-register/socia
 import { AccessDeniedModalComponent } from './shared/access-denied-modal/access-denied-modal.component';
 import { ViewProfileComponent } from './components/products/view-profile/view-profile.component';
 import { EditProfileComponent } from './components/products/edit-profile/edit-profile.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { EditProfileComponent } from './components/products/edit-profile/edit-pr
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
   ],
   providers: [
     httpInterceptors,
