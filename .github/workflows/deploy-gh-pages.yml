@@ -30,7 +30,7 @@ jobs:
           ng build --prod --base-href="/gift-shop/"
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
-        env:
+        with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: frontend/dist/frontend
