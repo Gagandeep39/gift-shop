@@ -66,3 +66,9 @@
   width: 3rem;
   margin-left: 24px;
 }
+
+.section-category-carausel {
+  /* height: 50vh;
+  overflow: hidden; */
+  width: 100%;
+}

@@ -53,6 +53,7 @@ import { ViewCategoriesComponent } from './components/admin/view-categories/view
 import { MaterialCustomModule } from './material-custom/material-custom.module';
 import { UpdateCategoryComponent } from './components/admin/update-category/update-category.component';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
+import { CategoryCarauselComponent } from './components/products/product-list/category-carausel/category-carausel.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { AddCategoryComponent } from './components/admin/add-category/add-catego
     ViewCategoriesComponent,
     UpdateCategoryComponent,
     AddCategoryComponent,
+    CategoryCarauselComponent,
   ],
   imports: [
     BrowserModule,

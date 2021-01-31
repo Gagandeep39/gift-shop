@@ -54,3 +54,5 @@ INSERT INTO product_in_order (product_in_order_id, cart_id, order_id, product_id
 
 ALTER sequence product_order_id_sequence restart with 100010;
 
+-- Delivery history table
+INSERT INTO delivery_history (delivery_id, order_id, updated_on, order_status) VALUES (100001, 100001, 1612112552, 'NEW');
