@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product
+  template:
+    metadata:
+      labels:
+        app: product
+    spec:
+      containers:
+        - name: product
+          image: gagandeep39/gift-shop-product-service
+          resources:
+            limits:
+              memory: '300Mi'
+              cpu: '250m'
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+            - name: eureka.client.serviceurl.defaultzone
+              value: http://discovery-server:8761/eureka
+            - name: spring.datasource.url
+              value: jdbc:h2:tcp://database-service:9550/~/test
+            - name: eureka.instance.preferIpAddress
+              value: 'true'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product
+  ports:
+    - name: product-srv-clusterip-port
+      protocol: TCP
+      port: 9200
+      targetPort: 9200

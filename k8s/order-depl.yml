@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order
+          image: gagandeep39/gift-shop-order-service
+          resources:
+            limits:
+              memory: '300Mi'
+              cpu: '250m'
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
+            - name: eureka.client.serviceurl.defaultzone
+              value: http://discovery-server:8761/eureka
+            - name: spring.datasource.url
+              value: jdbc:h2:tcp://database-service:9550/~/test
+            - name: eureka.instance.preferIpAddress
+              value: 'true'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: order
+  ports:
+    - name: order-srv-clusterip-port
+      protocol: TCP
+      port: 9400
+      targetPort: 9400

@@ -4,6 +4,7 @@
   "author": {
     "name": "Gagandeep Singh"
   },
+  "homepage": "https://gagandeep39.github.io/gift-shop",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

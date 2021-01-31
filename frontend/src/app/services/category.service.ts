@@ -23,6 +23,10 @@ export class CategoryService {
   }
 
   updateCategory(data) {
+    return this.http.put(this.categoryServiceUrl, data);
+  }
+
+  createCategory(data) {
     return this.http.post(this.categoryServiceUrl, data);
   }
 
