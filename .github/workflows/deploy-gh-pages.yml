@@ -34,3 +34,4 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: frontend/dist/frontend
+          CLEAN: true
