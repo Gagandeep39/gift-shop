@@ -3,7 +3,7 @@ name: Create production build and deploy to gh-pages
 on:
   push:
     branches:
-      - dev
+      - '**'
     paths:
       - 'frontend/**'
 
