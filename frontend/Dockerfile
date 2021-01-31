@@ -1,4 +1,5 @@
 # If build is already created
+
 # FROM nginx:alpine
 # RUN rm -rf /usr/share/nginx/html/*
 # COPY /dist/frontend /usr/share/nginx/html
