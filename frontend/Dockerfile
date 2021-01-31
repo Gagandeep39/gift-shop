@@ -6,7 +6,7 @@
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
 # EXPOSE 80
 
-# ultistage build
+# Multistage build
 FROM node:14 As builder
 WORKDIR /app
 COPY package.json package-lock.json ./
