@@ -1,4 +1,4 @@
-# If build is already created
+# Single stage - If build is already created
 
 # FROM nginx:alpine
 # RUN rm -rf /usr/share/nginx/html/*
