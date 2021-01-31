@@ -1,4 +1,7 @@
 <div class="parent">
+  <div class="section-category-carausel" *ngIf="(!this.activeCategory && !this.productQuery)">
+    <app-category-carausel></app-category-carausel>
+  </div>
   <!-- Displyed when no category is selected -->
   <div class="category" *ngIf="!activeCategory && !productQuery">
     All Products
