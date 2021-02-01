@@ -201,7 +201,7 @@ export class CartComponent implements OnInit {
         address: 'Gift Shop office',
       },
       theme: {
-        color: '#3399cc',
+        color: '#21a0bd',
       },
     };
     this.initRazorPay();
