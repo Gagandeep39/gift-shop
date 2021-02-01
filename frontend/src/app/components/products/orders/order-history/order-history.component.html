@@ -37,6 +37,7 @@
               <!-- <th scope="col" style="color: #566787">Payment Id</th>
               <th scope="col" style="color: #566787">User Id</th> -->
               <th scope="col" style="color: #566787">Action</th>
+              <th scope="col" style="color: #566787">Delivery</th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +56,7 @@
               <!-- <td>{{ orders.paymentId }}</td>
               <td>{{ orders.userId }}</td> -->
               <td><button (click)="onSave(orders.orderId)">Details</button></td>
-              <td><button [routerLink]="['/products/delivery', orders.orderId]" >Details</button></td>
+              <td><button [routerLink]="['/products/delivery', orders.orderId]" >Delivery</button></td>
             </tr>
           </tbody>
         </table>
