@@ -7,7 +7,7 @@
     <div
       [ngClass]="i == 0 ? 'active' : ''"
       class="carousel-item"
-      data-interval="10000"
+      data-interval="2000"
       [attr.data-slide-to]="i + 1"
       *ngFor="let category of categories; let i = index"
       (click)="triggerCategoryChange(category.categoryName)"
