@@ -194,3 +194,13 @@ GET http://localhost:9200/products/pages
 
 ### Fetch next page number
 GET http://localhost:9200/products/pages?pageNo=1
+
+### Sort By name
+GET http://localhost:9200/products/pages?pageNo=0&sortBy=productName
+
+
+### Sort By name
+GET http://localhost:9200/products/pages?pageNo=0&sortBy=productPrice
+
+### Sort By Category
+GET http://localhost:9200/products/pages?pageNo=0&sortBy=productCategory_categoryName

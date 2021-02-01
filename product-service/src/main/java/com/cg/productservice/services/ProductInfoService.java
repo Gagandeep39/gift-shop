@@ -37,6 +37,6 @@ public interface ProductInfoService {
 
   public ProductInfoDto update(ProductInfoRequest productInfoDto);
 
-  Page<ProductInfoDto> fetchProductPages(Integer pageNo, Integer pageSize);
+  Page<ProductInfoDto> fetchProductPages(Integer pageNo, Integer pageSize, String sortBy);
 
 }
