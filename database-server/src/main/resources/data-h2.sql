@@ -119,6 +119,14 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 
 INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100030, 'Chocolates & Flowers', 5000, 5, 'Best Valentines Gift for your loved one', 'https://www.wallpaperup.com/uploads/wallpapers/2014/03/08/291225/d49965f94a16271a8ce02b8ad1d88325-700.jpg', 'ENABLED', 100005, 40);
 
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100031, 'Cookies', 5000, 5, 'Tasty Home baked Cookies', 'https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg', 'ENABLED', 100004, 40);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100032, 'Festive Chocolates', 5000, 5, 'Best Valentines Gift for your loved one', 'https://rewardbloggers.com/assets/upload/1568360443.jpg', 'ENABLED', 100004, 40);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100033, 'Wallet', 1000, 20, 'Pen and Wallet with a box', 'https://static.connect2india.com/c2icd/product_resources/images/corporate-gifts-set.jpg', 'ENABLED', 100006, 60);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100034, 'Diary', 2000, 20, 'Note taking Diary with a gift box', 'https://ds393qgzrxwzn.cloudfront.net/resize/m600x500/cat1/img/images/0/nn2u4pFpiF.jpg', 'ENABLED', 100006, 60);
+
 -- TODO Add 25 more items
 
 ALTER sequence product_id_sequence restart with 100026;
