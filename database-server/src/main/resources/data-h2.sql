@@ -37,9 +37,17 @@ INSERT INTO product_category(category_id, category_name, category_description, c
 
 INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100003, 'Apparel', 'Clothes for Men, Women and Child', 'https://static.fibre2fashion.com/Newsresource/images/251/apparel-11_262804.jpg');
 
--- TODO Add 4 more category
+INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100004, 'Chocolates & Cookies', 'Shop online our delicious selection of chocolate and cookie gifts', 'https://previews.123rf.com/images/scorpionka/scorpionka1604/scorpionka160400062/57151971-many-diffrent-chocolates-and-cookies.jpg');
 
-ALTER sequence category_id_sequence restart with 100007;
+INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100005, 'Flowers', 'Buy/Send Flowers to your loved ones from the best Florist', 'https://miro.medium.com/max/3840/1*m5j79jCBbX0GSbTp8VbXeg.jpeg');
+
+INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100006, 'Corporate Gifts', 'Order The Best Corporate Gifts from Gift Shop', 'https://pegasusevents.in/wp-content/uploads/2019/06/best-corporate-gifting-solutions-in-delhi-4.jpg');
+
+INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100007, 'Watches', 'Choose from new collection of Watches Online in Gift Store', 'https://media.gq.com/photos/5d93b28c3304070008faa5a0/16:9/pass/watches.jpg');
+
+INSERT INTO product_category(category_id, category_name, category_description, category_image_url) VALUES (100008, 'Cakes', 'Send Cake online from best cake shop in India', 'https://www.biggerbolderbaking.com/wp-content/uploads/2016/02/BBB113-Vanilla-Celebration-Cake-FINAL.jpg');
+
+ALTER sequence category_id_sequence restart with 100009;
 
 INSERT INTO cart VALUES (100001);
 INSERT INTO cart VALUES (100002);
