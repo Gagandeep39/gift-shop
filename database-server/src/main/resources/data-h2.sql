@@ -81,6 +81,23 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 
 INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100011, 'Gift Clothing', 200, 399, 'Apparels that can be given as gifts to your loved onces', 'https://assets.simpleviewinc.com/simpleview/image/fetch/c_fill,h_784,q_75,w_1050/https://assets.simpleviewinc.com/simpleview/image/upload/crm/knoxville/virginia-jane0-b099cffc5056a34_b099d18d-5056-a348-3aabf0e49069ae2f.jpg', 'DISABLED', 100003, 30);
 
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100012, 'Vanilla Cake', 900, 5, 'Tasty Vanilla Cake', 'https://www.thespruceeats.com/thmb/lPBHmMNr71B6No0KzwCiczhMHSg=/2048x1152/smart/filters:no_upscale()/fluffy-homemade-vanilla-cake-995187_18_preview-5afddc4c8023b900369a9cbd.jpeg', 'ENABLED', 100008, 50);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100013, 'Strawberry Cake', 900, 4, 'Cake created from pure farm harvested strawberries', 'https://i.ytimg.com/vi/6Zx7dm0Y1sk/maxresdefault.jpg', 'ENABLED', 100008, 50);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100014, 'Butter Cream Cake', 1200, 10, 'Vanialla and Butter Cream', 'https://www.bakefromscratch.com/wp-content/uploads/2020/02/Heilala-Cake-Web-696x557.jpg', 'ENABLED', 100008, 50);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100015, 'Vanilla and Chocolate', 1800, 5, 'Chocolate cake with Vanilla Essence', 'https://i1.wp.com/sugarspiceslife.com/wp-content/uploads/2018/06/Vanilla-Cake-with-Chocolate-Buttercream.jpg?resize=1024%2C683&ssl=1', 'ENABLED', 100008, 50);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100016, 'White Strawberry Cake', 2200, 5, 'Large White strawberry Cake', 'https://naturallysweetkitchen.com/wp-content/uploads/2018/06/white-chocolate-raspberry-ripple-cake-1-min.jpg', 'ENABLED', 100008, 50);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100017, 'Chocolate Cake', 1200, 5, 'Famaliarity of Kitkats and Gems', 'https://1.bp.blogspot.com/-zZb0fDgZ_wI/XQh1UczYp0I/AAAAAAABE7c/qpGYi0dOUps4TmMSOdVKD89ggicIyZ2iACKgBGAs/s1600/DSC_0058%2B%25282%2529.JPG', 'ENABLED', 100008, 50);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100018, 'Black Forest', 900, 5, 'Taste the Simplicity', 'https://i2.wp.com/www.dessertsrequired.com/wp-content/uploads/2013/02/IMG_0572.jpg', 'ENABLED', 100008, 50);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100019, 'Vanilla', 700, 5, 'Vanilla with Chocolate Syrub', 'https://farm8.staticflickr.com/7147/6664976631_42336e70f2_o.jpg', 'ENABLED', 100008, 50);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100020, 'Sponge Cake', 800, 5, 'Chocolate Sponge Cake', 'https://www.twosisterscrafting.com/wp-content/uploads/2016/03/the-best-chocolate-buttercream-frosting-pinnable5-720x405.jpg', 'ENABLED', 100008, 50);
 
 -- TODO Add 25 more items
 
