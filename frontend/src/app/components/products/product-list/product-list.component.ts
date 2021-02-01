@@ -42,6 +42,7 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.page = 0;
     this.initProducts();
     this.subscribeToCategories();
     this.subscribeToSearchQuery();
@@ -96,8 +97,8 @@ export class ProductListComponent implements OnInit {
       this.loadingService.enableLoading();
       // Fetch and unsubscribe
       if (!query) {
-        this.page = 0;
-        this.fetchAllByPage();
+        // this.page = 0;
+        // this.fetchAllByPage();
       } else
         this.productService.findByName(query).subscribe((res: Product[]) => {
           this.productQuery = query;
@@ -116,8 +117,8 @@ export class ProductListComponent implements OnInit {
       this.activeCategory = null;
       this.productQuery = null;
       if (!category) {
-        this.page = 0;
-        this.fetchAllByPage();
+        // this.page = 0;
+        // this.fetchAllByPage();
       } else
         this.productService
           .findByCategory(category)
