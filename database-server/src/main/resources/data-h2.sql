@@ -99,6 +99,16 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 
 INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100020, 'Sponge Cake', 800, 5, 'Chocolate Sponge Cake', 'https://www.twosisterscrafting.com/wp-content/uploads/2016/03/the-best-chocolate-buttercream-frosting-pinnable5-720x405.jpg', 'ENABLED', 100008, 50);
 
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100021, 'Mens Watch', 1200, 5, 'Classic Mens Watch', 'https://www.swissarma.ch/wp-content/uploads/2016/11/A-Lange-Sohne-Richard-Lange-Perpetual-Calendar-Terraluna-180.026-A1-3.jpg', 'ENABLED', 100007, 10);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100022, 'Womens Watch', 1200, 5, 'Pink Womens Watch', 'https://www.twosisterscrafting.com/wp-content/uploads/2016/03/the-best-chocolate-buttercream-frosting-pinnable5-720x405.jpg', 'ENABLED', 100007, 10);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100023, 'Kids Watch', 800, 5, 'Stylish Kids watches', 'https://www.scarymommy.com/wp-content/uploads/2020/06/Kids_5_watch.jpg', 'ENABLED', 100007, 10);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100024, 'Gold Watch', 3000, 5, 'Stylish Gold watch', 'https://timeandtidewatches.com/wp-content/uploads/2018/09/Tudor-BB-SG-champagne-5.jpg', 'DISABLED', 100007, 10);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100025, 'Wall Clock', 5000, 5, 'Colorful Peacock wall clock', 'https://images-na.ssl-images-amazon.com/images/I/81c6OsyJeIL._SL1500_.jpg', 'ENABLED', 100007, 10);
+
 -- TODO Add 25 more items
 
 ALTER sequence product_id_sequence restart with 100026;
