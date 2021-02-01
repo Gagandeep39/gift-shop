@@ -122,18 +122,23 @@ export class ProductListComponent implements OnInit {
       } else
         this.productService
           .findByCategory(category)
+          .pipe(take(1))
           .subscribe((res: Product[]) => {
             this.productQuery = null;
             this.activeCategory = category;
             this.productList = res;
             this.loadingService.disableLoading();
-          }).closed;
+          });
     });
   }
 
   @HostListener('window:scroll', ['$event.target']) // for window scroll events
   onScroll(event) {
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+    if (
+      window.innerHeight + window.scrollY >= document.body.scrollHeight &&
+      !this.activeCategory &&
+      !this.productQuery
+    ) {
       this.page++;
       this.fetchAllByPage();
     }
@@ -145,13 +150,14 @@ export class ProductListComponent implements OnInit {
       .fetchAllByPaging(this.page)
       .pipe(take(1))
       .subscribe((res: Product[]) => {
-        if (!this.activeCategory && !this.productQuery) // Paging works when category and search are null
+        if (!this.activeCategory && !this.productQuery)
           if (
             this.productList &&
             JSON.stringify(
               this.productList.slice(Math.max(this.productList.length - 10, 0))
             ) != JSON.stringify(res)
           )
+            // Paging works when category and search are null
             this.productList.push(...res);
           else this.productList = res;
         this.loadingService.disableLoading();
