@@ -47,8 +47,8 @@ public class ProductController {
 
   @GetMapping("/pages")
   public ResponseEntity<Page<ProductInfoDto>> fetchAllByPaging(@RequestParam(defaultValue = "0") Integer pageNo,
-  @RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "productId") String sortBy) {
-    return ResponseEntity.status(HttpStatus.OK).body(productInfoService.fetchProductPages(pageNo, pageSize, sortBy));
+  @RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "productId") String sortBy, @RequestParam(defaultValue = "ASC") String direction) {
+    return ResponseEntity.status(HttpStatus.OK).body(productInfoService.fetchProductPages(pageNo, pageSize, sortBy, direction));
   }
 
   @GetMapping("/name/{name}")

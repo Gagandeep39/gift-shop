@@ -204,3 +204,7 @@ GET http://localhost:9200/products/pages?pageNo=0&sortBy=productPrice
 
 ### Sort By Category
 GET http://localhost:9200/products/pages?pageNo=0&sortBy=productCategory_categoryName
+
+
+### Sort By name
+GET http://localhost:9200/products/pages?pageNo=0&sortBy=productName&direction=DESC

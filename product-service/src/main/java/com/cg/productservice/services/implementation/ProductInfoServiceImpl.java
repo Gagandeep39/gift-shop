@@ -27,6 +27,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -119,8 +120,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	}
 
 	@Override
-	public Page<ProductInfoDto> fetchProductPages(Integer pageNo, Integer pageSize, String sortBy) {
-		Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+	public Page<ProductInfoDto> fetchProductPages(Integer pageNo, Integer pageSize, String sortBy, String direction) {
+		Direction sortDirection = Sort.Direction.ASC;
+		if (direction.equalsIgnoreCase("DESC")) sortDirection = Sort.Direction.DESC;
+		Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortDirection, sortBy));
 		Page<ProductInfoDto> pagedResult = productInfoRepository.findAll(paging).map(p -> ProductMapper.EntityToDto(p));
 		return pagedResult;
 	}
