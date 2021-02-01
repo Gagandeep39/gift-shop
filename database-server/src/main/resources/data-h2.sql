@@ -109,6 +109,16 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 
 INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100025, 'Wall Clock', 5000, 5, 'Colorful Peacock wall clock', 'https://images-na.ssl-images-amazon.com/images/I/81c6OsyJeIL._SL1500_.jpg', 'ENABLED', 100007, 10);
 
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100026, 'Wedding Flower', 9000, 5, 'Traditional Wedding Bouquet', 'https://i.ytimg.com/vi/I6atZta4U_o/maxresdefault.jpg', 'ENABLED', 100005, 40);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100027, 'Wedding Bouquet', 5000, 5, 'Colorful Wedding Bouquet', 'https://previews.123rf.com/images/kapu/kapu1405/kapu140500111/28171147-wedding-flower-bouquet.jpg', 'ENABLED', 100005, 40);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100028, 'Small Bouquet', 5000, 0, 'Light shade wedding Bouquet', 'https://cdn.shopify.com/s/files/1/0616/8037/files/the-best-wedding-flowers-by-wellington-florists-in-New-Zealand_480x480.jpg?v=1552188217', 'ENABLED', 100005, 40);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100029, 'Rose Bouquet', 5000, 5, 'Rose basket Shaped Boquet', 'https://previews.123rf.com/images/gorlovkv/gorlovkv1802/gorlovkv180200067/95969210-beautiful-bouquet-of-red-roses-iin-form-of-heart-flowers-in-wicker-basket-flower-market-or-shop-flor.jpg', 'ENABLED', 100005, 40);
+
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100030, 'Chocolates & Flowers', 5000, 5, 'Best Valentines Gift for your loved one', 'https://www.wallpaperup.com/uploads/wallpapers/2014/03/08/291225/d49965f94a16271a8ce02b8ad1d88325-700.jpg', 'ENABLED', 100005, 40);
+
 -- TODO Add 25 more items
 
 ALTER sequence product_id_sequence restart with 100026;
