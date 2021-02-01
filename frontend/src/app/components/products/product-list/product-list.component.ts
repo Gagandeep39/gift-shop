@@ -29,6 +29,18 @@ export class ProductListComponent implements OnInit {
   activeCategory = null;
   productQuery = null;
   page = 0;
+  sortByTypes = [
+    { name: 'Name ASC', sortBy: 'productName', direction: 'ASC' },
+    { name: 'Name DESC', sortBy: 'productName', direction: 'DESC' },
+    { name: 'Category ASC', sortBy: 'productCategory_categoryName', direction: 'ASC' },
+    { name: 'Category DESC', sortBy: 'productCategory_categoryName', direction: 'DESC' },
+    { name: 'Price High - Low', sortBy: 'productPrice', direction: 'DESC' },
+    { name: 'Price Low - High', sortBy: 'productPrice', direction: 'ASC' },
+    { name: 'Discount High - Low', sortBy: 'discountPercent', direction: 'DESC' },
+    { name: 'Discount Low - High', sortBy: 'discountPercent', direction: 'ASC' },
+  ];
+  activeSortType = this.sortByTypes[0];
+  sortTypeChanged;
 
   constructor(
     public loadingService: LoadingService,
@@ -63,6 +75,7 @@ export class ProductListComponent implements OnInit {
 
   // Reset all search queries
   resetAll() {
+    this.activeSortType = this.sortByTypes[0];
     this.eventService.categoryChanged.next(null);
     this.eventService.searchQueryChanged.next(null);
     this.productQuery = null;
@@ -147,7 +160,7 @@ export class ProductListComponent implements OnInit {
   fetchAllByPage() {
     this.loadingService.enableLoading();
     this.productService
-      .fetchAllByPaging(this.page)
+      .fetchAllByPaging(this.page, this.activeSortType.sortBy, this.activeSortType.direction)
       .pipe(take(1))
       .subscribe((res: Product[]) => {
         if (!this.activeCategory && !this.productQuery)
@@ -155,12 +168,23 @@ export class ProductListComponent implements OnInit {
             this.productList &&
             JSON.stringify(
               this.productList.slice(Math.max(this.productList.length - 10, 0))
-            ) != JSON.stringify(res)
+            ) != JSON.stringify(res) &&
+            !this.sortTypeChanged
           )
             // Paging works when category and search are null
             this.productList.push(...res);
-          else this.productList = res;
+          else {
+            this.sortTypeChanged = undefined;
+            this.productList = res;
+          }
         this.loadingService.disableLoading();
       });
+  }
+
+  onChangeSorting(item) {
+    this.sortTypeChanged = 1;
+    this.activeSortType = item;
+    this.page = 0;
+    this.fetchAllByPage();
   }
 }

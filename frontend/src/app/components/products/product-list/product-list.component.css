@@ -72,3 +72,12 @@
   overflow: hidden; */
   width: 100%;
 }
+
+.dropdown, .dropdown-toggle {
+  float: right;
+  background: transparent;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: bold;
+}
