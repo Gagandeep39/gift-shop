@@ -1,0 +1,119 @@
+version: '3.8'
+services:
+  # Gateway
+  gateway-server:
+    container_name: gateway-server
+    image: gagandeep39/gift-shop-gateway-server
+    ports:
+      - '9000:9000'
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka
+      - management.endpoints.web.exposure.include=*
+      # - eureka.instance.preferIpAddress=true
+      - SPRING_PROFILES_ACTIVE=dev
+      - spring.datasource.url=jdbc:h2:tcp://database-server:9550/~/test
+      - ribbon.ReadTimeout=60000
+      - zuul.host.connect-timeout-millis=60000
+      - zuul.host.socket-timeout-millis=60000
+      - zuul.sensitiveHeaders=
+      - zuul.ignored-headers=Access-Control-Allow-Credentials,Access-Control-Allow-Origins
+    depends_on:
+      - discovery-server
+      - database-server
+  # Discover Server
+  discovery-server:
+    container_name: discovery-server
+    image: gagandeep39/gift-shop-discovery-server
+    ports:
+      - '8761:8761'
+    environment:
+      - eureka.instance.lease-renewal-interval-in-seconds=30
+      - eureka.instance.lease-expiration-duration-in-seconds=90
+  # Auh Service
+  auth-service:
+    # container_name: auth-service
+    image: gagandeep39/gift-shop-auth-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+      - SPRING_PROFILES_ACTIVE=dev
+      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+      - eureka.instance.preferIpAddress=true
+    restart: always
+    ports: 
+      - "9100:9100"
+    depends_on:
+      - discovery-server
+      - database-server
+  # Product Service
+  product-service:
+    # container_name: product-service
+    image: gagandeep39/gift-shop-product-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+      - SPRING_PROFILES_ACTIVE=dev
+      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+      - eureka.instance.preferIpAddress=true
+    restart: always
+    ports: 
+      - "9200:9200"
+    depends_on:
+      - discovery-server
+      - database-server
+  # Cart Service
+  cart-service:
+    # container_name: product-service
+    image: gagandeep39/gift-shop-product-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+      - SPRING_PROFILES_ACTIVE=dev
+      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+      - eureka.instance.preferIpAddress=true
+    restart: always
+    ports: 
+      - "9300:9300"
+    depends_on:
+      - discovery-server
+      - database-server
+  # Order Service
+  order-service:
+    # container_name: order-service
+    image: gagandeep39/gift-shop-order-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+      - SPRING_PROFILES_ACTIVE=dev
+      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+      - eureka.instance.preferIpAddress=true
+    restart: always
+    ports: 
+      - "9400:9400"
+    depends_on:
+      - discovery-server
+      - database-server
+  # Payment Service
+  payment-service:
+    # container_name: payment-service
+    image: gagandeep39/gift-shop-payment-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+      - SPRING_PROFILES_ACTIVE=dev
+      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+      - eureka.instance.preferIpAddress=true
+    restart: always
+    ports: 
+      - "9600:9600"
+    depends_on:
+      - discovery-server
+      - database-server
+  # Database server
+  database-server:
+    container_name: database-server
+    image: gagandeep39/gift-shop-database-server
+    restart: always
+    depends_on:
+      - discovery-server
+    ports: 
+      - "9500:9500"
+      - "9550:9550"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:~/test
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka
