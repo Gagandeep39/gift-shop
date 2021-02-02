@@ -61,8 +61,8 @@ services:
       - database-server
   # Cart Service
   cart-service:
-    # container_name: product-service
-    image: gagandeep39/gift-shop-product-service
+    # container_name: cart-service
+    image: gagandeep39/gift-shop-cart-service
     environment:
       - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
       - SPRING_PROFILES_ACTIVE=dev
