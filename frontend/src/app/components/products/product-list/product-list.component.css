@@ -80,4 +80,9 @@
   text-transform: uppercase;
   font-size: large;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.dropdown-item {
+  padding: 12px 12px ;
 }
