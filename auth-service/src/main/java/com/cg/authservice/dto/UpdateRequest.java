@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.cg.authservice.entities.Address;
@@ -33,6 +34,7 @@ public class UpdateRequest {
   private String emailId;
   @NotBlank
   @Size(min = 10, max = 10, message = "Length of phone number must be 10")
+  @Pattern(regexp = "(0|91)?[7-9][0-9]{9}", message = "Number should start with 7-9")
   private String phoneNo;
   // @Past
   // private LocalDate dob;
