@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: database
-          image: gagandeep39/gift-shop-database-service
+          image: gagandeep39/gift-shop-database-server
           resources:
             limits:
               memory: '300Mi'
