@@ -101,7 +101,7 @@ INSERT INTO product_info (product_id, product_name, product_price, product_stock
 
 INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100021, 'Mens Watch', 1200, 5, 'Classic Mens Watch', 'https://www.swissarma.ch/wp-content/uploads/2016/11/A-Lange-Sohne-Richard-Lange-Perpetual-Calendar-Terraluna-180.026-A1-3.jpg', 'ENABLED', 100007, 10);
 
-INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100022, 'Womens Watch', 1200, 5, 'Pink Womens Watch', 'https://www.twosisterscrafting.com/wp-content/uploads/2016/03/the-best-chocolate-buttercream-frosting-pinnable5-720x405.jpg', 'ENABLED', 100007, 10);
+INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100022, 'Pink Watch', 1200, 5, 'Pink Watch', 'https://staticimg.titan.co.in/Sonata/Catalog/8976SL14_1.jpg', 'ENABLED', 100007, 10);
 
 INSERT INTO product_info (product_id, product_name, product_price, product_stock, product_description, product_icon, product_status, product_category, discount_percent) VALUES (100023, 'Kids Watch', 800, 5, 'Stylish Kids watches', 'https://www.scarymommy.com/wp-content/uploads/2020/06/Kids_5_watch.jpg', 'ENABLED', 100007, 10);
 
