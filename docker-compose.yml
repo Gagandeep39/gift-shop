@@ -16,7 +16,7 @@ services:
       - zuul.host.connect-timeout-millis=60000
       - zuul.host.socket-timeout-millis=60000
       - zuul.sensitiveHeaders=
-      - zuul.ignored-headers=Access-Control-Allow-Credentials,Access-Control-Allow-Origins
+      - zuul.ignored-headers=Access-Control-Allow-Credentials,Access-Control-Allow-Origin
     depends_on:
       - discovery-server
       - database-server
@@ -60,50 +60,50 @@ services:
       - discovery-server
       - database-server
   # Cart Service
-  cart-service:
-    # container_name: cart-service
-    image: gagandeep39/gift-shop-cart-service
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
-      - SPRING_PROFILES_ACTIVE=dev
-      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
-      - eureka.instance.preferIpAddress=true
-    restart: always
-    ports: 
-      - "9300:9300"
-    depends_on:
-      - discovery-server
-      - database-server
-  # Order Service
-  order-service:
-    # container_name: order-service
-    image: gagandeep39/gift-shop-order-service
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
-      - SPRING_PROFILES_ACTIVE=dev
-      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
-      - eureka.instance.preferIpAddress=true
-    restart: always
-    ports: 
-      - "9400:9400"
-    depends_on:
-      - discovery-server
-      - database-server
-  # Payment Service
-  payment-service:
-    # container_name: payment-service
-    image: gagandeep39/gift-shop-payment-service
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
-      - SPRING_PROFILES_ACTIVE=dev
-      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
-      - eureka.instance.preferIpAddress=true
-    restart: always
-    ports: 
-      - "9600:9600"
-    depends_on:
-      - discovery-server
-      - database-server
+  # cart-service:
+  #   # container_name: cart-service
+  #   image: gagandeep39/gift-shop-cart-service
+  #   environment:
+  #     - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+  #     - SPRING_PROFILES_ACTIVE=dev
+  #     - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+  #     - eureka.instance.preferIpAddress=true
+  #   restart: always
+  #   ports: 
+  #     - "9300:9300"
+  #   depends_on:
+  #     - discovery-server
+  #     - database-server
+  # # Order Service
+  # order-service:
+  #   # container_name: order-service
+  #   image: gagandeep39/gift-shop-order-service
+  #   environment:
+  #     - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+  #     - SPRING_PROFILES_ACTIVE=dev
+  #     - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+  #     - eureka.instance.preferIpAddress=true
+  #   restart: always
+  #   ports: 
+  #     - "9400:9400"
+  #   depends_on:
+  #     - discovery-server
+  #     - database-server
+  # # Payment Service
+  # payment-service:
+  #   # container_name: payment-service
+  #   image: gagandeep39/gift-shop-payment-service
+  #   environment:
+  #     - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+  #     - SPRING_PROFILES_ACTIVE=dev
+  #     - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+  #     - eureka.instance.preferIpAddress=true
+  #   restart: always
+  #   ports: 
+  #     - "9600:9600"
+  #   depends_on:
+  #     - discovery-server
+  #     - database-server
   # Database server
   database-server:
     container_name: database-server
