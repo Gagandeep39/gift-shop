@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductService {
   productServiceUrl = `${environment.protocol}${environment.applicationUrl}/${environment.productService}/products`;
+  // productServiceUrl = 'http://localhost:9200/products';
 
   constructor(private http: HttpClient) {}
 
