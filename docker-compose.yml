@@ -20,6 +20,11 @@ services:
     depends_on:
       - discovery-server
       - database-server
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
   # Discover Server
   discovery-server:
     container_name: discovery-server
@@ -29,6 +34,11 @@ services:
     environment:
       - eureka.instance.lease-renewal-interval-in-seconds=30
       - eureka.instance.lease-expiration-duration-in-seconds=90
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
   # Auh Service
   auth-service:
     # container_name: auth-service
@@ -44,6 +54,11 @@ services:
     depends_on:
       - discovery-server
       - database-server
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
   # Product Service
   product-service:
     # container_name: product-service
@@ -59,51 +74,71 @@ services:
     depends_on:
       - discovery-server
       - database-server
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
   # Cart Service
-  # cart-service:
-  #   # container_name: cart-service
-  #   image: gagandeep39/gift-shop-cart-service
-  #   environment:
-  #     - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
-  #     - SPRING_PROFILES_ACTIVE=dev
-  #     - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
-  #     - eureka.instance.preferIpAddress=true
-  #   restart: always
-  #   ports: 
-  #     - "9300:9300"
-  #   depends_on:
-  #     - discovery-server
-  #     - database-server
-  # # Order Service
-  # order-service:
-  #   # container_name: order-service
-  #   image: gagandeep39/gift-shop-order-service
-  #   environment:
-  #     - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
-  #     - SPRING_PROFILES_ACTIVE=dev
-  #     - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
-  #     - eureka.instance.preferIpAddress=true
-  #   restart: always
-  #   ports: 
-  #     - "9400:9400"
-  #   depends_on:
-  #     - discovery-server
-  #     - database-server
-  # # Payment Service
-  # payment-service:
-  #   # container_name: payment-service
-  #   image: gagandeep39/gift-shop-payment-service
-  #   environment:
-  #     - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
-  #     - SPRING_PROFILES_ACTIVE=dev
-  #     - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
-  #     - eureka.instance.preferIpAddress=true
-  #   restart: always
-  #   ports: 
-  #     - "9600:9600"
-  #   depends_on:
-  #     - discovery-server
-  #     - database-server
+  cart-service:
+    # container_name: cart-service
+    image: gagandeep39/gift-shop-cart-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+      - SPRING_PROFILES_ACTIVE=dev
+      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+      - eureka.instance.preferIpAddress=true
+    restart: always
+    ports: 
+      - "9300:9300"
+    depends_on:
+      - discovery-server
+      - database-server
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
+  # Order Service
+  order-service:
+    # container_name: order-service
+    image: gagandeep39/gift-shop-order-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+      - SPRING_PROFILES_ACTIVE=dev
+      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+      - eureka.instance.preferIpAddress=true
+    restart: always
+    ports: 
+      - "9400:9400"
+    depends_on:
+      - discovery-server
+      - database-server
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
+  # Payment Service
+  payment-service:
+    # container_name: payment-service
+    image: gagandeep39/gift-shop-payment-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:tcp://database-server:9550/~/test
+      - SPRING_PROFILES_ACTIVE=dev
+      - eureka.client.serviceurl.defaultzone=http://discovery-server:8761/eureka
+      - eureka.instance.preferIpAddress=true
+    restart: always
+    ports: 
+      - "9600:9600"
+    depends_on:
+      - discovery-server
+      - database-server
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
   # Database server
   database-server:
     container_name: database-server
@@ -117,3 +152,8 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:h2:~/test
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
