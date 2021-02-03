@@ -20,10 +20,11 @@ services:
     depends_on:
       - discovery-server
       - database-server
+    restart: always
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '0.25'
           memory: 500M
   # Discover Server
   discovery-server:
@@ -34,10 +35,11 @@ services:
     environment:
       - eureka.instance.lease-renewal-interval-in-seconds=30
       - eureka.instance.lease-expiration-duration-in-seconds=90
+    restart: always
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '0.25'
           memory: 500M
   # Auh Service
   auth-service:
@@ -57,7 +59,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '0.25'
           memory: 500M
   # Product Service
   product-service:
@@ -77,7 +79,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '0.25'
           memory: 500M
   # Cart Service
   cart-service:
@@ -97,7 +99,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '0.25'
           memory: 500M
   # Order Service
   order-service:
@@ -117,7 +119,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '0.25'
           memory: 500M
   # Payment Service
   payment-service:
@@ -137,7 +139,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '0.25'
           memory: 500M
   # Database server
   database-server:
@@ -155,5 +157,5 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
+          cpus: '0.25'
           memory: 500M
