@@ -167,7 +167,7 @@ export class ProductListComponent implements OnInit {
     this.loadingService.enableLoading();
     this.productService
       .fetchAllByPaging(this.page, this.activeSortType.sortBy, this.activeSortType.direction)
-      .pipe(take(1))
+      // .pipe(take(1))
       .subscribe((res: Product[]) => {
         console.log(this.page);
         
