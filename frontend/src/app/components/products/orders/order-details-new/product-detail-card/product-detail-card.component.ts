@@ -35,6 +35,6 @@ export class ProductDetailCardComponent implements OnInit {
   discountPrice(): number {
     return this.discountPercent <= 0
       ? this.productPrice
-      : this.productPrice * 0.01 * this.discountPercent;
+      : this.productPrice - this.productPrice * 0.01 * this.discountPercent;
   }
 }
