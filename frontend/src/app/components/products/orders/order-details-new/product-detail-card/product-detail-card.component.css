@@ -66,6 +66,9 @@
   max-width: 300px;
 }
 
+.product-data {
+}
+
 .product-quantity {
   display: flex;
   flex-direction: column;
@@ -94,5 +97,4 @@
 
 .detail {
   transform: scale(1.2);
-  margin-left: 5%;
 }
