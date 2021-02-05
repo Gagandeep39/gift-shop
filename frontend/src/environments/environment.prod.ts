@@ -8,7 +8,7 @@
 export const environment = {
   production: true,
   protocol: 'http://',
-  applicationUrl: '124.155.248.47',
+  applicationUrl: '124.155.248.90:9000',
   authService: 'auth-service',
   productService: 'product-service',
   orderService: 'order-service',
