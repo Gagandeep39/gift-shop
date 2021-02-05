@@ -28,6 +28,7 @@ export class ViewProductNewComponent implements OnInit {
     'productStatus',
     'productPrice',
     'discountPercent',
+    'updatedPrice',
     'edit',
   ];
 
@@ -74,5 +75,12 @@ export class ViewProductNewComponent implements OnInit {
           this.fetchAllProducts();
         },
       });
+  }
+
+  calculateUpdatedPrice(element) {
+    return (
+      element.productPrice -
+      element.productPrice * 0.01 * element.discountPercent
+    );
   }
 }
