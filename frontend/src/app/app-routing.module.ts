@@ -7,6 +7,7 @@
  */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddCategoryNewComponent } from './components/admin/add-category-new/add-category-new.component';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 import { AddProductNewComponent } from './components/admin/add-product-new/add-product-new.component';
 import { AddProductComponent } from './components/admin/add-product/add-product.component';
@@ -118,7 +119,7 @@ const routes: Routes = [
       { path: 'add', component: AddProductNewComponent },
       { path: 'view', component: ViewProductNewComponent },
       { path: 'categoryview', component: ViewCategoriesComponent },
-      { path: 'categoryadd', component: AddCategoryComponent },
+      { path: 'categoryadd', component: AddCategoryNewComponent },
       { path: 'categoryedit/:categoryId', component: UpdateCategoryComponent },
       { path: '', redirectTo: 'view', pathMatch: 'full' },
       { path: 'update/:productId', component: UpdateProductComponent },
