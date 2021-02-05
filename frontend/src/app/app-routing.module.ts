@@ -13,6 +13,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UpdateCategoryComponent } from './components/admin/update-category/update-category.component';
 import { UpdateProductComponent } from './components/admin/update-product/update-product.component';
 import { ViewCategoriesComponent } from './components/admin/view-categories/view-categories.component';
+import { ViewProductNewComponent } from './components/admin/view-product-new/view-product-new.component';
 import { ViewProductComponent } from './components/admin/view-product/view-product.component';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -114,7 +115,7 @@ const routes: Routes = [
     data: { role: 'Admin' },
     children: [
       { path: 'add', component: AddProductComponent },
-      { path: 'view', component: ViewProductComponent },
+      { path: 'view', component: ViewProductNewComponent },
       { path: 'categoryview', component: ViewCategoriesComponent },
       { path: 'categoryadd', component: AddCategoryComponent },
       { path: 'categoryedit/:categoryId', component: UpdateCategoryComponent },

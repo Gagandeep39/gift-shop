@@ -56,6 +56,8 @@ import { AddCategoryComponent } from './components/admin/add-category/add-catego
 import { CategoryCarauselComponent } from './components/products/product-list/category-carausel/category-carausel.component';
 import { OrderDetailsNewComponent } from './components/products/orders/order-details-new/order-details-new.component';
 import { ProductDetailCardComponent } from './components/products/orders/order-details-new/product-detail-card/product-detail-card.component';
+import { ViewProductNewComponent } from './components/admin/view-product-new/view-product-new.component';
+import { UpdateStatusModalComponent } from './shared/update-status-modal/update-status-modal.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { ProductDetailCardComponent } from './components/products/orders/order-d
     AddCategoryComponent,
     CategoryCarauselComponent,
     OrderDetailsNewComponent,
-    ProductDetailCardComponent
+    ProductDetailCardComponent,
+    ViewProductNewComponent,
+    UpdateStatusModalComponent
   ],
   imports: [
     BrowserModule,
