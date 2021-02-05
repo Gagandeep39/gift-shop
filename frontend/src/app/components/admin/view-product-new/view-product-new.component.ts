@@ -70,9 +70,11 @@ export class ViewProductNewComponent implements OnInit {
       .watch()
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.dataSource.data = null;
-          this.fetchAllProducts();
+        next: (res) => {
+          if (res === 'close') {
+            this.dataSource.data = null;
+            this.fetchAllProducts();
+          }
         },
       });
   }
