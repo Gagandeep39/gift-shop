@@ -60,6 +60,7 @@ import { ViewProductNewComponent } from './components/admin/view-product-new/vie
 import { UpdateStatusModalComponent } from './shared/update-status-modal/update-status-modal.component';
 import { AddProductNewComponent } from './components/admin/add-product-new/add-product-new.component';
 import { FormSubmitModalComponent } from './shared/form-submit-modal/form-submit-modal.component';
+import { AddCategoryNewComponent } from './components/admin/add-category-new/add-category-new.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { FormSubmitModalComponent } from './shared/form-submit-modal/form-submit
     UpdateStatusModalComponent,
     AddProductNewComponent,
     FormSubmitModalComponent,
+    AddCategoryNewComponent,
   ],
   imports: [
     BrowserModule,
