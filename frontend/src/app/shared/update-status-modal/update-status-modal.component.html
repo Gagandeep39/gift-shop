@@ -2,6 +2,7 @@
   <section [class.open]="display === 'open'">
     <div (click)="$event.stopPropagation()">
       <h1>Updte Status</h1>
+      <p>Product ID: {{ product?.productId }}</p>
       <p>Current Status: {{ product?.productStatus }}</p>
       <div class="form-group">
         <select class="form-control" [(ngModel)]="currentStatus">
