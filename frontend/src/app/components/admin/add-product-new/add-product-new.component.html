@@ -120,6 +120,9 @@
                   <div *ngIf="updateProductForm.get('discountPercent').errors['required']">
                     * Required
                   </div>
+                  <div *ngIf="updateProductForm.get('discountPercent').errors['pattern']">
+                    Enter  anumber between 1-99
+                  </div>
                   <div
                     *ngIf="
                       updateProductForm.get('discountPercent').errors['serverValidationError']
@@ -241,7 +244,7 @@
                   <div *ngFor="let status of statuses | keyvalue" class="custom-control custom-radio">
                     <input
                       [ngClass]="{'is-invalid':submitted && updateProductForm.get('productStatus').invalid}"
-                      [value]="status"
+                      [value]="status.key"
                       class="custom-control-input"
                       formControlName="productStatus"
                       [id]="status.key"

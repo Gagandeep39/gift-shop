@@ -14,6 +14,7 @@ import { Category } from 'src/app/models/category.model';
 import { ProductStatus } from 'src/app/models/product-status.model';
 import { Product } from 'src/app/models/product.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { FormSubmitModalService } from 'src/app/services/form-submit-modal.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -37,17 +38,19 @@ export class AddProductNewComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private formModal: FormSubmitModalService,
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.populateData();
   }
   initForm() {
     this.updateProductForm = new FormGroup({
       productName: new FormControl('', [Validators.required]),
       productPrice: new FormControl('', [Validators.required]),
-      discountPercent: new FormControl('', [Validators.required]),
+      discountPercent: new FormControl('', [Validators.required, Validators.pattern('^([1-9][0-9]{0,1})$')]),
       productStock: new FormControl('', [Validators.required]),
       productDescription: new FormControl('', [Validators.required]),
       productIcon: new FormControl('', [Validators.required]),
@@ -66,6 +69,8 @@ export class AddProductNewComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.updateProductForm.value);
+    
     this.submitted = true;
     if (this.updateProductForm.valid)
       this.submitData(this.updateProductForm.value);
@@ -75,11 +80,11 @@ export class AddProductNewComponent implements OnInit {
     this.productService.addProduct(formData).subscribe(
       (response) => {
         this.loadingService.disableLoading();
-        this.message =
-          'Successfully updated product with ID ' + response['productId'];
-        setTimeout(() => {
-          this.router.navigateByUrl('/admin/view');
-        }, 3000);
+        this.formModal.open('Successfully updated product with ID ' + response['productId'], '/admin/view')
+        // this.message = 'Successfully updated product with ID ' + response['productId'];
+        // setTimeout(() => {
+        //   this.router.navigateByUrl('/admin/view');
+        // }, 3000);
       },
       (error) => {
         this.loadingService.disableLoading();
