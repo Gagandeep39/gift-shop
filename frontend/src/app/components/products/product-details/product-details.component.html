@@ -73,14 +73,14 @@
               </p>
             </div>
             <div class="cart-buttons">
-              <button class="cart-btn" (click)="addNewItem(product.productId)">
+              <button class="primary-btn" (click)="addNewItem(product.productId)">
                 <span
                   *ngIf="loadingService.loading"
                   class="spinner-border spinner-border-sm"
                 ></span>
                 Add to Cart
               </button>
-              <button class="cart-btn" [routerLink]="['/products/cart']">
+              <button class="secondary-btn" [routerLink]="['/products/cart']">
                 View Cart
               </button>
             </div>
