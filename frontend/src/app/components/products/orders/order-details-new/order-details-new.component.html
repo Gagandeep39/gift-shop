@@ -121,6 +121,7 @@
     <br />
     <div class="actions">
       <button class="back-btn" (click)="goBack()">Back</button>
+      <button class="secondary-btn" [routerLink]="['/products/delivery', orderId]">Delivery History</button>
       <button
         class="cancel-btn"
         (click)="cancelOrder()"
