@@ -171,3 +171,14 @@
 .router {
   /* background: red; */
 }
+
+
+.section-empty {
+  text-align: center;
+  font-size: x-large;
+  margin: 24px 10%;
+  font-weight: 300;
+  letter-spacing: 2px;
+  line-height: 30px;
+  text-transform: capitalize;
+}

@@ -33,6 +33,11 @@
       class="product-delete"
       src="/assets/images/delete.svg"
       alt=""
+      *ngIf="loadingState?.productId !== productId"
     />
+    <span
+      *ngIf="loadingState.loading && loadingState.productId === productId"
+      class="spinner-border"
+    ></span>
   </div>
 </div>

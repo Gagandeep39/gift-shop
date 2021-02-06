@@ -29,6 +29,8 @@ export class CartItemCardComponent implements OnInit {
   discountPercent;
   @Output()
   removeItemEvent = new EventEmitter<number>();
+  @Input()
+  loadingState;
 
   constructor() {}
 
@@ -43,4 +45,5 @@ export class CartItemCardComponent implements OnInit {
   deleteProduct() {
     this.removeItemEvent.emit(this.productId);
   }
+
 }

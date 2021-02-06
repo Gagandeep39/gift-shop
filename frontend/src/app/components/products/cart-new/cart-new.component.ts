@@ -24,6 +24,10 @@ export class CartNewComponent implements OnInit {
   cart: Cart;
   totalBeforeDiscount: number;
   totalAfterDiscount: number;
+  loadingState = {
+    loading: false,
+    productId: null
+  };
 
   constructor(
     private location: Location,
@@ -77,7 +81,10 @@ export class CartNewComponent implements OnInit {
   }
 
   removeItem(productId: number) {
-    this.loadingService.enableLoading();
+    this.loadingState = {
+      productId: productId,
+      loading: true,
+    };
     this.cartService
       .removeItemFromCart(productId)
       .pipe(take(1))
@@ -85,7 +92,10 @@ export class CartNewComponent implements OnInit {
         next: () => {
           this.fetchCart();
         },
-        complete: () => this.loadingService.disableLoading(),
+        complete: () => this.loadingState = {
+          loading: false,
+          productId: null,
+        },
       });
   }
 }
