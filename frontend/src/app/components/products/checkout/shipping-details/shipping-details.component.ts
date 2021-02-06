@@ -5,6 +5,7 @@
  * @modify date 2021-02-06 14:41:20
  * @desc [description]
  */
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -31,7 +32,8 @@ export class ShippingDetailsComponent implements OnInit {
     private geolocationService: GeolocationService,
     private authService: AuthService,
     public loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -138,5 +140,9 @@ export class ShippingDetailsComponent implements OnInit {
 
   resetToDefault() {
     this.populateFormFields(this.address);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
