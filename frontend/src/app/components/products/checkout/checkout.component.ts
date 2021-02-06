@@ -27,6 +27,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   activeStages = [];
   routeSubscription: Subscription;
+  title = 'Shipping Details';
 
   constructor(
     private location: Location,
@@ -53,11 +54,18 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       .subscribe((val) => this.updateFlow(val['urlAfterRedirects']));
   }
   updateFlow(url) {
-    if (url.includes('/shipping')) this.activeStages = this.stages.slice(0, 2);
-    else if (url.includes('/payment'))
+    if (url.includes('/shipping')) {
+      this.activeStages = this.stages.slice(0, 1);
+      this.title = this.stages[0].title;
+    }
+    else if (url.includes('/payment')){
       this.activeStages = this.stages.slice(0, 2);
-    else if (url.includes('/success'))
+      this.title = this.stages[1].title;
+    }
+    else if (url.includes('/success')){
       this.activeStages = this.stages.slice(0, 3);
+      this.title = this.stages[2].title;
+    }
   }
 
   getActiveStages() {
