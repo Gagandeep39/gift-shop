@@ -62,6 +62,8 @@ import { AddProductNewComponent } from './components/admin/add-product-new/add-p
 import { FormSubmitModalComponent } from './shared/form-submit-modal/form-submit-modal.component';
 import { AddCategoryNewComponent } from './components/admin/add-category-new/add-category-new.component';
 import { PaymentSuccessComponent } from './components/products/checkout/payment-success/payment-success.component';
+import { CartNewComponent } from './components/products/cart-new/cart-new.component';
+import { CartItemCardComponent } from './components/products/cart-new/cart-item-card/cart-item-card.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,8 @@ import { PaymentSuccessComponent } from './components/products/checkout/payment-
     FormSubmitModalComponent,
     AddCategoryNewComponent,
     PaymentSuccessComponent,
+    CartNewComponent,
+    CartItemCardComponent,
   ],
   imports: [
     BrowserModule,
