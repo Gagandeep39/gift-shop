@@ -21,18 +21,9 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./order-details-new.component.css'],
 })
 export class OrderDetailsNewComponent implements OnInit {
-  // deliveryCharge: 120
-  // discountedAmount: 840
-  // finalPrice: 960
-  // orderAmount: 4000
-  // orderId: 100001
-  // orderStatus: "DELIVERED"
-  // paymentId: 100001
-  // paymentType: "ONLINE"
-  // products: [{…}]
-  // userId: 100001
   orderDetails;
   deliveryHistory: DeliveryHistory[];
+  orderId;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,9 +35,9 @@ export class OrderDetailsNewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params['orderId']);
-    this.fetchOrderDetails(100001);
-    this.fetchDeliveryDetails(100001);
+    this.orderId = this.route.snapshot.params['orderId'];
+    this.fetchOrderDetails(this.orderId);
+    this.fetchDeliveryDetails(this.orderId);
   }
 
   fetchDeliveryDetails(id) {
@@ -105,7 +96,8 @@ export class OrderDetailsNewComponent implements OnInit {
 
   checkIfCancellable() {
     return (
-      this.deliveryHistory?.slice(-1)[0]?.orderStatus !== 'DELIVERED' && this.deliveryHistory?.slice(-1)[0]?.orderStatus !== 'CANCELLED'
+      this.deliveryHistory?.slice(-1)[0]?.orderStatus !== 'DELIVERED' &&
+      this.deliveryHistory?.slice(-1)[0]?.orderStatus !== 'CANCELLED'
     );
   }
 }
