@@ -61,6 +61,7 @@ import { UpdateStatusModalComponent } from './shared/update-status-modal/update-
 import { AddProductNewComponent } from './components/admin/add-product-new/add-product-new.component';
 import { FormSubmitModalComponent } from './shared/form-submit-modal/form-submit-modal.component';
 import { AddCategoryNewComponent } from './components/admin/add-category-new/add-category-new.component';
+import { PaymentSuccessComponent } from './components/products/checkout/payment-success/payment-success.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { AddCategoryNewComponent } from './components/admin/add-category-new/add
     AddProductNewComponent,
     FormSubmitModalComponent,
     AddCategoryNewComponent,
+    PaymentSuccessComponent,
   ],
   imports: [
     BrowserModule,

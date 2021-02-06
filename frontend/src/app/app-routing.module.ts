@@ -26,6 +26,7 @@ import { AboutUsComponent } from './components/products/about-us/about-us.compon
 import { CartComponent } from './components/products/cart/cart.component';
 import { CartSummaryComponent } from './components/products/checkout/cart-summary/cart-summary.component';
 import { CheckoutComponent } from './components/products/checkout/checkout.component';
+import { PaymentSuccessComponent } from './components/products/checkout/payment-success/payment-success.component';
 import { PaymentComponent } from './components/products/checkout/payment/payment.component';
 import { ShippingDetailsComponent } from './components/products/checkout/shipping-details/shipping-details.component';
 import { EditProfileComponent } from './components/products/edit-profile/edit-profile.component';
@@ -105,6 +106,7 @@ const routes: Routes = [
           { path: 'summary', component: CartSummaryComponent },
           { path: 'shipping', component: ShippingDetailsComponent },
           { path: 'payment', component: PaymentComponent },
+          { path: 'success/:orderId', component: PaymentSuccessComponent },
           { path: '', redirectTo: 'shipping', pathMatch: 'full' }
         ],
       },
