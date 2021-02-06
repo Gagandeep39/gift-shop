@@ -49,3 +49,10 @@ input[type=number] {
   color: #fb5a69;
   transform: scale(1.1);
 }
+
+.primary-btn[disabled],
+.secondary-btn[disabled] {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
