@@ -105,6 +105,7 @@ const routes: Routes = [
           { path: 'summary', component: CartSummaryComponent },
           { path: 'shipping', component: ShippingDetailsComponent },
           { path: 'payment', component: PaymentComponent },
+          { path: '', redirectTo: 'shipping', pathMatch: 'full' }
         ],
       },
       { path: ':productId', component: ProductDetailsComponent },
