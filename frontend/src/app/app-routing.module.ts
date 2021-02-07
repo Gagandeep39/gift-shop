@@ -34,6 +34,7 @@ import { EditProfileComponent } from './components/products/edit-profile/edit-pr
 import { DeliveryHistoryComponent } from './components/products/orders/delivery-history/delivery-history.component';
 import { OrderDetailsNewComponent } from './components/products/orders/order-details-new/order-details-new.component';
 import { OrderDetailsComponent } from './components/products/orders/order-details/order-details.component';
+import { OrderHistoryNewComponent } from './components/products/orders/order-history-new/order-history-new.component';
 import { OrderHistoryComponent } from './components/products/orders/order-history/order-history.component';
 import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
 import { ProductListComponent } from './components/products/product-list/product-list.component';
@@ -75,7 +76,7 @@ const routes: Routes = [
       { path: 'cart', component: CartNewComponent, canActivate: [AuthGuard] },
       {
         path: 'orders',
-        component: OrderHistoryComponent,
+        component: OrderHistoryNewComponent,
         canActivate: [AuthGuard],
       },
       {

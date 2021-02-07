@@ -64,6 +64,7 @@ import { AddCategoryNewComponent } from './components/admin/add-category-new/add
 import { PaymentSuccessComponent } from './components/products/checkout/payment-success/payment-success.component';
 import { CartNewComponent } from './components/products/cart-new/cart-new.component';
 import { CartItemCardComponent } from './components/products/cart-new/cart-item-card/cart-item-card.component';
+import { OrderHistoryNewComponent } from './components/products/orders/order-history-new/order-history-new.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { CartItemCardComponent } from './components/products/cart-new/cart-item-
     PaymentSuccessComponent,
     CartNewComponent,
     CartItemCardComponent,
+    OrderHistoryNewComponent,
   ],
   imports: [
     BrowserModule,
