@@ -72,7 +72,13 @@ export class ShippingDetailsComponent implements OnInit {
       this.error = null;
       console.log(res['route'].distance);
       this.calculateDeliveryCharge(res['route'].distance);
+      this.redirectIfFormValidAndSubmitted();
     }
+  }
+
+  redirectIfFormValidAndSubmitted() {
+    if (this.addressForm.valid && this.error === null && this.submitted)
+      this.navigateToPayment(this.addressForm);
   }
 
   populateFormFields(address) {
@@ -120,9 +126,8 @@ export class ShippingDetailsComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log(this.addressForm.value);
+    // Form submitted after handling server response
     this.calculateDistance();
-    if (this.addressForm.valid && this.error === null)
-      this.navigateToPayment(this.addressForm);
   }
   navigateToPayment(addressForm: FormGroup) {
     this.router.navigate(['/products/checkout/payment'], {
