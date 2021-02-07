@@ -55,7 +55,7 @@
               <td>{{ orders.paymentType }}</td>
               <!-- <td>{{ orders.paymentId }}</td>
               <td>{{ orders.userId }}</td> -->
-              <td><button (click)="onSave(orders.orderId)">Details</button></td>
+              <td><button [routerLink]="['/products/orders', orders.orderId]" >Details</button></td>
               <td><button [routerLink]="['/products/delivery', orders.orderId]" >Delivery</button></td>
             </tr>
           </tbody>
