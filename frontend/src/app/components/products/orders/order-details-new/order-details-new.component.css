@@ -87,13 +87,15 @@
 /* .separator {
   text-align: center;
 } */
-.logo-container hr, .logs-heading hr {
+.logo-container hr,
+.logs-heading hr {
   width: 10%;
   border-top: 3px solid #fb5a69;
   transition: 0.2s;
 }
 
-.logo-container:hover hr, .logs-heading:hover hr {
+.logo-container:hover hr,
+.logs-heading:hover hr {
   width: 20%;
 }
 .back-btn,
@@ -188,14 +190,12 @@
   font-weight: bold;
 }
 
-
 .item > img {
   transform: scale(1.2);
   margin-bottom: 2px;
   cursor: pointer;
   outline: none;
 }
-
 
 .name {
   font-weight: bold;
@@ -213,6 +213,11 @@ section {
   /* margin-top: 24px; */
 }
 
+.row {
+  padding-left: 5%;
+  width: 100%;
+}
+
 section::before {
   display: block;
   height: 2px;
@@ -224,6 +229,6 @@ section::before {
   margin-left: 10%;
 }
 
-section:hover::before  {
+section:hover::before {
   width: 200px;
 }

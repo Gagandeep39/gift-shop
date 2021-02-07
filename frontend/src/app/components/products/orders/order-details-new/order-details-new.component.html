@@ -10,45 +10,47 @@
         <hr />
         <h1 class="title-main">Purchase History</h1>
       </div>
-      <section>
-        <p class="summary">
-          Order #<span class="item"> {{ orderDetails?.orderId }} </span>
-        </p>
-        <p class="summary">
-          Current Status
-          <span class="item">
-            Delivered
-            <img
-              src="/assets/images/info.svg"
-              alt=""
-              [routerLink]="['/products/delivery', orderDetails?.orderId]"
-            />
-          </span>
-        </p>
-        <p class="summary">
-          Updated On
-          <span class="item">
-            {{ formattedDate(deliveryHistory?.slice(-1)[0]?.updatedOn) }}
-          </span>
-        </p>
-      </section>
-      <section>
-        <!-- Name -->
-        <p class="summary">
-          Name
-          <span class="item"> {{ orderDetails?.buyerName }} </span>
-        </p>
-        <!-- Phone -->
-        <p class="summary">
-          Phone No.
-          <span class="item"> {{ orderDetails?.buyerPhone }} </span>
-        </p>
-        <!-- Email -->
-        <p class="summary">
-          Email
-          <span class="item"> {{ orderDetails?.buyerEmail }} </span>
-        </p>
-      </section>
+      <div class="row">
+        <section class="col">
+          <p class="summary">
+            Order #<span class="item"> {{ orderDetails?.orderId }} </span>
+          </p>
+          <p class="summary">
+            Current Status
+            <span class="item">
+              {{ orderDetails?.orderStatus }}
+              <img
+                src="/assets/images/info.svg"
+                alt=""
+                [routerLink]="['/products/delivery', orderDetails?.orderId]"
+              />
+            </span>
+          </p>
+          <p class="summary">
+            Updated On
+            <span class="item">
+              {{ formattedDate(deliveryHistory?.slice(-1)[0]?.updatedOn) }}
+            </span>
+          </p>
+        </section>
+        <section class="col">
+          <!-- Name -->
+          <p class="summary">
+            Name
+            <span class="item"> {{ orderDetails?.buyerName }} </span>
+          </p>
+          <!-- Phone -->
+          <p class="summary">
+            Phone No.
+            <span class="item"> {{ orderDetails?.buyerPhone }} </span>
+          </p>
+          <!-- Email -->
+          <p class="summary">
+            Email
+            <span class="item"> {{ orderDetails?.buyerEmail }} </span>
+          </p>
+        </section>
+      </div>
       <!-- Address -->
       <section>
         <!-- Street -->
@@ -121,7 +123,12 @@
     <br />
     <div class="actions">
       <button class="back-btn" (click)="goBack()">Back</button>
-      <button class="secondary-btn" [routerLink]="['/products/delivery', orderId]">Delivery History</button>
+      <button
+        class="secondary-btn"
+        [routerLink]="['/products/delivery', orderId]"
+      >
+        Delivery History
+      </button>
       <button
         class="cancel-btn"
         (click)="cancelOrder()"
@@ -136,3 +143,4 @@
     </div>
   </div>
 </div>
+<app-order-cancel-modal></app-order-cancel-modal>

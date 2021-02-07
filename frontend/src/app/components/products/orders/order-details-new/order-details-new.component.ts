@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { DeliveryHistory } from 'src/app/models/delivery-history.model';
+import { Order } from 'src/app/models/order.model';
 import { DeliveryHistoryService } from 'src/app/services/delivery-history.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { OrderCancelModalService } from 'src/app/services/order-cancel-modal.service';
@@ -21,7 +22,7 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./order-details-new.component.css'],
 })
 export class OrderDetailsNewComponent implements OnInit {
-  orderDetails;
+  orderDetails: Order;
   deliveryHistory: DeliveryHistory[];
   orderId;
 
@@ -57,7 +58,7 @@ export class OrderDetailsNewComponent implements OnInit {
           return res;
         })
       )
-      .subscribe((res) => (this.orderDetails = res));
+      .subscribe((res: Order) => (this.orderDetails = res));
   }
 
   goBack() {
@@ -84,11 +85,11 @@ export class OrderDetailsNewComponent implements OnInit {
       else
         this.orderService
           .updateOrderStatus({
-            orderId: this.orderDetails?.orderId,
+            orderId: +this.orderDetails?.orderId,
             status: 'CANCELLED',
           })
           .subscribe((res) => {
-            console.log(res);
+            this.fetchOrderDetails(this.orderDetails?.orderId);
             this.fetchDeliveryDetails(this.orderDetails?.orderId);
           });
     });
