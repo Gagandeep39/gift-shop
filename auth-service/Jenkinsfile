@@ -47,7 +47,7 @@ pipeline =  {
             // docker.withRegistry('https://index.docker.io/v1/', 'docker') {
             // docker.build("gagandeep39/gift-shop-auth-service:${VERSION}", '.').push()
             // docker.build("gagandeep39/auth-service:latest", '.').push()
-            }
+            // }
         }
     }
     stage ('Deploy on this Server') {
