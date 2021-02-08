@@ -32,6 +32,7 @@ pipeline =  {
             bat './mvnw test'
         }
     }
+    // Required for code coverage
     stage('Static Analysis') {
         dir ('auth-service') {
             bat './mvnw verify'
