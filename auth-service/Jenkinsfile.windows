@@ -37,6 +37,12 @@ pipeline =  {
             bat './mvnw verify'
         }
     }
+    stage('Sonar Scanner Coverage') {
+        dir ('auth-service') {
+            SONAR = credentials('sonar')
+            bat './mvnw sonar:sonar -Dsonar.login=4ee34d2a24304683e6ce868791b3be5003f1985d -Dsonar.host.url=http://ip172-18-0-24-c0gkfv36hnp000djb9bg-9000.direct.labs.play-with-docker.com/'
+        }
+    }
     stage ('Package Stage') {
         dir('auth-service') {
             bat './mvnw clean package'
@@ -44,7 +50,7 @@ pipeline =  {
     }
     stage ('Build/Publish') {
         dir ('auth-service') {
-            bat "'echo Publish step, not yet Implemented!! <3 :D"'
+            bat 'echo "Publish step, not yet Implemented!! <3 :D"'
         }
     }
     stage ('Deploy on this Server') {
