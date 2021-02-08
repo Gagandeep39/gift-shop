@@ -8,6 +8,7 @@
     - [Cart](#cart)
     - [Orders](#orders)
     - [Admin](#admin)
+  - [Configure Jenkins](#configure-jenkins)
 
 ## Steps to Start Application Locally
 
@@ -52,3 +53,14 @@
 ![Add Product](./screenshots/add_product.png)
 ![View Category](./screenshots/admin_category.png)
 ![View Products](./screenshots/admin_product.png)
+
+## Configure Jenkins
+
+1. Navigate to jenkins > Manage jenkins > In-process Script Approval
+2. Install Manage-pipeline-utility
+3. Create new Project
+   1. New Project
+   2. Select Git
+   3. Set path as service-name/Jenkinsfile
+   4. Select multistage pipeline
+   5. Save
