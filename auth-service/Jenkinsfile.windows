@@ -5,14 +5,16 @@
  * @modify date 2021-02-08 19:33:44
  * @desc [description]
  */
+//  Launch SONAR using docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
 pipeline =  {
     stage('Checkout') {
+        SERVICE = 'auth-service'
         // bat 'if exist auth-service rmdir /s /q auth-service'
         // bat 'dir'
-        bat 'xcopy /E D:\\Workspaces\\vscode_workspace\\gift-shop\\auth-service /i auth-service /Y'
+        bat "xcopy /E D:\\Workspaces\\vscode_workspace\\gift-shop\\${SERVICE} /i ${SERVICE} /Y"
     }
     stage('Preparation') {
-        dir('auth-service') {
+        dir(SERVICE) {
             
         bat 'dir'
             pom = readMavenPom file: 'pom.xml'
@@ -23,39 +25,41 @@ pipeline =  {
         }
     }
     stage ('Compile Stage') {
-        dir('auth-service') {
+        dir(SERVICE) {
             bat './mvnw clean compile'
         }
     } 
     stage ('Testing Stage') {
-        dir('auth-service') {
+        dir(SERVICE) {
             bat './mvnw test'
         }
     }
     // Required for code coverage
     stage('Static Analysis') {
-        dir ('auth-service') {
+        dir (SERVICE) {
             bat './mvnw verify'
         }
     }
     stage('Sonar Scanner Coverage') {
-        dir ('auth-service') {
-            SONAR = credentials('sonar')
-            bat './mvnw sonar:sonar -Dsonar.login=4ee34d2a24304683e6ce868791b3be5003f1985d -Dsonar.host.url=http://ip172-18-0-24-c0gkfv36hnp000djb9bg-9000.direct.labs.play-with-docker.com/'
+        dir (SERVICE) {
+            withCredentials([string(credentialsId: 'sonarToken', variable: 'sonarLogin')]) { 
+                sonarUrl = 'http://ip172-18-0-39-c0gp1536hnp000djbmm0-9000.direct.labs.play-with-docker.com/'
+                bat "./mvnw sonar:sonar -Dsonar.login=${sonarLogin} -Dsonar.host.url=${sonarUrl}"
+            }
         }
     }
     stage ('Package Stage') {
-        dir('auth-service') {
+        dir(SERVICE) {
             bat './mvnw clean package'
         }
     }
     stage ('Build/Publish') {
-        dir ('auth-service') {
-            bat 'echo "Publish step, not yet Implemented!! <3 :D"'
+        dir (SERVICE) {
+            // bat "nohup java -jar ./target/auth-service-0.0.1-SNAPSHOT.jar --spring.profiles.active=test"
         }
     }
     stage ('Deploy on this Server') {
-        dir ('auth-service') {
+        dir (SERVICE) {
             bat 'echo "Deployment step, not yet Implemented!! <3 :D"'
         }
     }
