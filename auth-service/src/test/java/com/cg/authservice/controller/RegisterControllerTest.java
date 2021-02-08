@@ -128,7 +128,7 @@ public class RegisterControllerTest {
     address.setCity("Mumbai");
     address.setState("Maharashtra");
     address.setPincode("400072");
-    UpdateRequest updateRequest = UpdateRequest.builder().userId(100001L).emailId("test@mail.com").phoneNo("9988776655")
+    UpdateRequest updateRequest = UpdateRequest.builder().userId(100001L).emailId("test7@mail.com").phoneNo("9988776655")
         .address(address)
         .firstName("Gagandeep").lastName("Singh").securityQuestion("New question").securityAnswer("answer").build();
         System.out.println(updateRequest.toString());
@@ -186,7 +186,7 @@ public class RegisterControllerTest {
       .lastName("Singh")
       .phoneNo("9988776655")
       .username("gaganqweerr")
-      .password("123456")
+      .password("P@ssword32")
       .build();
   }
 
