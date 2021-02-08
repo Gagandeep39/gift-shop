@@ -9,6 +9,10 @@
     - [Orders](#orders)
     - [Admin](#admin)
   - [Configure Jenkins](#configure-jenkins)
+    - [Run using commandprompt](#run-using-commandprompt)
+  - [Docker local](#docker-local)
+  - [Todays discussion](#todays-discussion)
+  - [Add sonar and jacoco](#add-sonar-and-jacoco)
 
 ## Steps to Start Application Locally
 
@@ -57,10 +61,55 @@
 ## Configure Jenkins
 
 1. Navigate to jenkins > Manage jenkins > In-process Script Approval
-2. Install Manage-pipeline-utility
+2. Install Pipeline Utility Steps plugins
 3. Create new Project
    1. New Project
    2. Select Git
    3. Set path as service-name/Jenkinsfile
    4. Select multistage pipeline
    5. Save
+
+### Run using commandprompt
+
+- `"C:\Program Files\Java\jdk1.8.0_212\bin\java" -jar jenkins.war`
+- Set Step 3.2 path as `file://D:/Workspaces/vscode_workspace/gift-shop` for local git
+
+## Docker local
+
+- `-v //d/Workspaces/vscode_workspace/gift-shop:/app`
+- Requires accs to parent OS for deployment
+
+## Todays discussion
+
+- JaCoCo for Static code coverage in Sonary Qube
+
+## Add sonar and jacoco
+
+```xml
+<!-- JCOCO -->
+<plugin>
+	<groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.8.6</version>
+	<executions>
+		<execution>
+			<goals>
+				<goal>prepare-agent</goal>
+			</goals>
+		</execution>
+		<execution>
+			<id>report</id>
+			<phase>prepare-package</phase>
+			<goals>
+				<goal>report</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+
+<plugin>
+	<groupId>org.sonarsource.scanner.maven</groupId>
+	<artifactId>sonar-maven-plugin</artifactId>
+	<version>3.7.0.1746</version>
+</plugin>
+```
