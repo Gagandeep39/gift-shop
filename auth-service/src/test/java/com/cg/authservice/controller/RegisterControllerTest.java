@@ -181,7 +181,7 @@ public class RegisterControllerTest {
     return RegisterRequest.builder()
       .address(createAddress())
       // .dob(LocalDate.of(1999, 5, 14))
-      .emailId("test@mail.com")
+      .emailId("test9@mail.com")
       .firstName("gagandeep")
       .lastName("Singh")
       .phoneNo("9988776655")
