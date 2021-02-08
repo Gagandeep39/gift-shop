@@ -1,0 +1,83 @@
+/**
+ * @author Gagandeep Singh
+ * @email singh.gagandeep3911@gmail.com
+ * @create date 2021-02-08 19:33:44
+ * @modify date 2021-02-08 19:33:44
+ * @desc [description]
+ */
+pipeline =  {
+    stage('Checkout') {
+        // bat 'if exist auth-service rmdir /s /q auth-service'
+        // bat 'dir'
+        bat 'xcopy /E D:\\Workspaces\\vscode_workspace\\gift-shop\\auth-service /i auth-service /Y'
+    }
+    stage('Preparation') {
+        dir('auth-service') {
+            
+        bat 'dir'
+            pom = readMavenPom file: 'pom.xml'
+            bat 'echo pom.version'
+            IMAGE = pom.artifactId
+            VERSION = pom.version
+            // bat 'chmod +x mvnw'
+        }
+    }
+    stage ('Compile Stage') {
+        dir('auth-service') {
+            bat './mvnw clean compile'
+        }
+    } 
+    stage ('Testing Stage') {
+        dir('auth-service') {
+            bat './mvnw test'
+        }
+    }
+    stage('Static Analysis') {
+        dir ('auth-service') {
+            bat './mvnw verify'
+        }
+    }
+    stage ('Package Stage') {
+        dir('auth-service') {
+            bat './mvnw clean package'
+        }
+    }
+    stage ('Build/Publish') {
+        dir ('auth-service') {
+            bat "'echo Publish step, not yet Implemented!! <3 :D"'
+        }
+    }
+    stage ('Deploy on this Server') {
+        dir ('auth-service') {
+            bat 'echo "Deployment step, not yet Implemented!! <3 :D"'
+        }
+    }
+}
+
+postFailure = {
+    def to = emailextrecipients([
+        [$class: 'CulpritsRecipientProvider'],
+        [$class: 'DevelopersRecipientProvider'],
+        [$class: 'RequesterRecipientProvider']
+    ])
+
+    currentBuild.result = 'FAILURE'
+    // set variables
+    def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} ${currentBuild.result}"
+    def content = '${JELLY_SCRIPT,template="html"}'
+    // send email
+    if (to != null && !to.isEmpty()) {
+        emailext(body: content, mimeType: 'text/html',
+                replyTo: '$DEFAULT_REPLYTO', subject: subject,
+                to: to, attachLog: true )
+    }
+}
+
+node {
+    try {
+        pipeline()
+    }
+    catch (e) {
+        postFailure()
+    }
+}
