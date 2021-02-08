@@ -29,8 +29,12 @@ pipeline =  {
     }
     stage('Sonar Scanner') {
         dir ('auth-service') {
-            SONAR = credentials('sonar')
-            sh './mvnw sonar:sonar -Dsonar.login=${sonarLogin} -Dsonar.host.url=http://sonarqube:9000'
+            sh 'echo Sonar Quality check, not yet Implemented!! <3 :D'
+            // SONAR = credentials('sonar')
+            // sh './mvnw sonar:sonar -Dsonar.login=${sonarLogin} -Dsonar.host.url=http://sonarqube:9000'
+
+            // ------------------------------------------------------------------------
+
             // def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
             // withCredentials([string(credentialsId: 'sonar', variable: 'sonarLogin')]) {
             // sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectName=auth-service -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=GS -Dsonar.sources=src/main/ -Dsonar.tests=src/test/ -Dsonar.language=java -Dsonar.java.binaries=."
@@ -39,15 +43,16 @@ pipeline =  {
     }
     stage ('Build/Publish') {
         dir ('auth-service') {
-            docker.withRegistry('https://index.docker.io/v1/', 'docker') {
-            docker.build("gagandeep39/gift-shop-auth-service:${VERSION}", '.').push()
+            sh 'echo Publish step, not yet Implemented!! <3 :D'
+            // docker.withRegistry('https://index.docker.io/v1/', 'docker') {
+            // docker.build("gagandeep39/gift-shop-auth-service:${VERSION}", '.').push()
             // docker.build("gagandeep39/auth-service:latest", '.').push()
             }
         }
     }
     stage ('Deploy on this Server') {
         dir ('auth-service') {
-          sh 'echo Deployment step, not yet Implemented!! <3 :D'
+            sh 'echo Deployment step, not yet Implemented!! <3 :D'
             // sh 'echo ${VERSION}'
             // sh 'docker stop auth-service || echo Container is not on'
             // sh 'docker container rm -f auth-service || echo Container doesnt exists'
