@@ -35,9 +35,17 @@ pipeline =  {
         }
     }
     // Required for code coverage
-    stage('Static Analysis') {
+    stage('Jacoco Static Analysis') {
         dir (SERVICE) {
-            bat './mvnw verify'
+            //*** Codeanalysis with Maven plugin
+            step([$class: 'JacocoPublisher', 
+                execPattern: 'target/*.exec',
+                classPattern: 'target/classes',
+                sourcePattern: 'src/main/java',
+                exclusionPattern: 'src/test*'
+            ])
+            //*** Direct code analysis
+            // bat './mvnw verify'
         }
     }
     stage('Sonar Scanner Coverage') {
