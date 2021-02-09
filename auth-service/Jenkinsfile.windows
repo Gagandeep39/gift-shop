@@ -42,7 +42,9 @@ pipeline =  {
     }
     stage('Sonar Scanner Coverage') {
         dir (SERVICE) {
-            withCredentials([string(credentialsId: 'sonarToken', variable: 'sonarLogin')]) { 
+            withCredentials([string(credentialsId: 'sonarToken', variable: 'sonarLogin')]) {
+                //  sonarLogin = credentials('sonarToken')
+                // sonarLogin = "0cf6d50605c395cf20f770ca347f5c53e201296c"
                 sonarUrl = 'http://ip172-18-0-39-c0gp1536hnp000djbmm0-9000.direct.labs.play-with-docker.com/'
                 bat "./mvnw sonar:sonar -Dsonar.login=${sonarLogin} -Dsonar.host.url=${sonarUrl}"
             }
