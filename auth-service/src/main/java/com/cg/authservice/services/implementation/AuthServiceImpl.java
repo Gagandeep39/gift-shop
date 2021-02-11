@@ -61,7 +61,6 @@ public class AuthServiceImpl implements AuthService {
       .build();
   }
 
-  @Transactional(readOnly = true)
   public User findUserByUsernameOrEmailCredential(String username, String password) {
     UserDetails details = userDetailsRepository.findByUsernameOrEmail(username).orElseThrow(() -> new InvalidCredentialException("username", "User " + username + " doesn't exist"));
     if (!passwordEncoder.matches(password, details.getUser().getPassword()))
@@ -124,13 +123,11 @@ public class AuthServiceImpl implements AuthService {
     return cartRepository.save(cart);
   }
 
-  @Transactional(readOnly = true)
   public boolean checkIfEmailExists(String email) {
     if (!userDetailsRepository.existsByEmailId(email)) return false;
     else throw new InvalidCredentialException("emailId", "Email already exists");
   }
 
-  @Transactional(readOnly = true)
   public boolean checkIfUsernameExists(String username) {
     if (!userRepository.existsByUsername(username)) return false;
     else throw new InvalidCredentialException("username", "Username already exists");
