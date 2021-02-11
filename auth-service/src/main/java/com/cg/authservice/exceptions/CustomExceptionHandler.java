@@ -27,11 +27,11 @@ public class CustomExceptionHandler {
         List<FieldErrorResponse> response = new ArrayList<>();
         ex.getBindingResult()
             .getAllErrors()
-            .forEach(error -> {
+            .forEach(error -> 
                 response.add(FieldErrorResponse.builder()
                     .field(((FieldError) error).getField())
-                    .message(error.getDefaultMessage()).build());
-        });
+                    .message(error.getDefaultMessage()).build())
+            );
 
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)

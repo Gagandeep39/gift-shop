@@ -82,8 +82,7 @@ public class SocialSignInServiceImpl implements SocialSignInService {
     try {
       idToken = verifier.verify(request.getToken());
       if (idToken != null) {
-        // Payload payload = idToken.getPayload();
-        // String userId = payload.getSubject();
+        // Required
       } else {
         System.out.println("Invalid ID token.");
         // Do NOT throw exception ele it will always fail in token validation
@@ -102,7 +101,6 @@ public class SocialSignInServiceImpl implements SocialSignInService {
 
   private RegisterRequest createUserObject(SocialSignUpRequest request) {
     Long theRandomNum = (long) (new SecureRandom().nextDouble()*Math.pow(10,10));
-    System.out.println(theRandomNum);
     return RegisterRequest.builder()
       .emailId(request.getEmailId())
       .firstName(request.getFirstName())

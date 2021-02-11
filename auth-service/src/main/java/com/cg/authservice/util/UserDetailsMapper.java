@@ -8,6 +8,8 @@ import com.cg.authservice.entities.UserDetails;
 
 public class UserDetailsMapper {
 
+  private UserDetailsMapper() {}
+
   public static UserDetails registerToUserDetails(RegisterRequest registerRequest) {
     User user = User.builder()
       .username(registerRequest.getUsername())

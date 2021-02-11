@@ -21,6 +21,7 @@ public class CustomLogger {
 
   @Pointcut("execution(* com.cg.*.*.*.*(..)))")
   public void everyWhere() {
+    // Package where loggin will be performed
   }
 
   @Before("everyWhere()")

@@ -40,9 +40,6 @@ public class RegisterRequest {
   @Size(min = 10, max = 10, message = "Length of phone number must be 10")
   @Pattern(regexp = "(0|91)?[7-9][0-9]{9}", message = "Number should start with 7-9")
   private String phoneNo;
-  // @NotNull
-  // @Past
-  // private LocalDate dob;
   @Valid
   private Address address;
   @NotBlank

@@ -11,7 +11,6 @@ package com.cg.authservice.config;
 import com.cg.authservice.security.CustomAuthenticationEntryPoint;
 import com.cg.authservice.security.JwtAuthorizationFilter;
 import com.cg.authservice.security.JwtProvider;
-import com.cg.authservice.services.AuthService;
 import com.cg.authservice.services.implementation.JwtUserDetailsServiceImpl;
 
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
   private JwtUserDetailsServiceImpl userDetailsService;
   private BCryptPasswordEncoder passwordEncoder;
   private JwtProvider jwtProvider;
-  private AuthService authService;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
