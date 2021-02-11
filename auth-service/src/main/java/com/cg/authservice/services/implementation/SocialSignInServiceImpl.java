@@ -9,6 +9,7 @@ package com.cg.authservice.services.implementation;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.security.SecureRandom;
 import java.util.Collections;
 
 import com.cg.authservice.dto.LoginResponse;
@@ -100,7 +101,7 @@ public class SocialSignInServiceImpl implements SocialSignInService {
   }
 
   private RegisterRequest createUserObject(SocialSignUpRequest request) {
-    Long theRandomNum = (long) (Math.random()*Math.pow(10,10));
+    Long theRandomNum = (long) (new SecureRandom().nextDouble()*Math.pow(10,10));
     System.out.println(theRandomNum);
     return RegisterRequest.builder()
       .emailId(request.getEmailId())
