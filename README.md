@@ -1,18 +1,19 @@
 # Gift Shop
 
 - [Gift Shop](#gift-shop)
-  - [Steps to Start Application Locally](#steps-to-start-application-locally)
-  - [Screenshots](#screenshots)
-    - [Auth](#auth)
-    - [Home](#home)
-    - [Cart](#cart)
-    - [Orders](#orders)
-    - [Admin](#admin)
-  - [Configure Jenkins](#configure-jenkins)
-    - [Run using commandprompt](#run-using-commandprompt)
-  - [Docker local](#docker-local)
-  - [Todays discussion](#todays-discussion)
-  - [Add sonar and jacoco](#add-sonar-and-jacoco)
+	- [Steps to Start Application Locally](#steps-to-start-application-locally)
+	- [Screenshots](#screenshots)
+		- [Auth](#auth)
+		- [Home](#home)
+		- [Cart](#cart)
+		- [Orders](#orders)
+		- [Admin](#admin)
+	- [Configure Jenkins](#configure-jenkins)
+		- [Run using commandprompt](#run-using-commandprompt)
+	- [Docker local](#docker-local)
+	- [Todays discussion](#todays-discussion)
+	- [Add sonar and jacoco](#add-sonar-and-jacoco)
+	- [Email Support](#email-support)
 
 ## Steps to Start Application Locally
 
@@ -113,3 +114,7 @@
 	<version>3.7.0.1746</version>
 </plugin>
 ```
+
+## Email Support
+
+- Make sure to add username, password, smtp in both email an extended email
